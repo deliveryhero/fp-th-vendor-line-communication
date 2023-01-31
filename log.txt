@@ -1,0 +1,112 @@
+
+2023-01-31 13:21:31,045 This service is instrumented using OpenTelemetry. OpenTelemetry could not be imported; please add opentelemetry-api and opentelemetry-instrumentation packages in order to get BigQuery Tracing data.
+2023-01-31 13:21:31,045 Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+2023-01-31 13:21:31,045 Making request: POST https://oauth2.googleapis.com/token
+2023-01-31 13:21:31,062 Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2023-01-31 13:21:31,255 https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2023-01-31 13:21:31,256 Starting new HTTPS connection (1): bigquery.googleapis.com:443
+2023-01-31 13:21:32,036 https://bigquery.googleapis.com:443 "POST /bigquery/v2/projects/di-th-auto/jobs?prettyPrint=false HTTP/1.1" 200 None
+2023-01-31 13:21:32,528 https://bigquery.googleapis.com:443 "GET /bigquery/v2/projects/di-th-auto/queries/1923ce11-6734-496a-837c-d35d6aa1f863?maxResults=0&location=US&prettyPrint=false HTTP/1.1" 200 None
+2023-01-31 13:21:33,385 Started reading table 'di-th-auto._8f17c965aa4b00768e090da00e611d6e994f47e8.anonf3fe4f83327ba61b974e0eb9f779815881813e0e803b0caf8dc29e46df5e14c8' with BQ Storage API session 'projects/di-th-auto/locations/us/sessions/CAISDGcycEtTTVNWT3BQNhoCb2oaAm92'.
+2023-01-31 13:21:34,295 Starting new HTTPS connection (1): api.line.me:443
+2023-01-31 13:21:34,569 https://api.line.me:443 "POST /v2/bot/user/U2b9495e231b925da2ed4163beeef6dad/richmenu/richmenu-55b2f4bf95dfb0c75d39f109075e4690 HTTP/1.1" 200 2
+2023-01-31 13:21:34,576 Starting new HTTPS connection (1): api.line.me:443
+2023-01-31 13:21:34,748 https://api.line.me:443 "POST /v2/bot/user/U2b9495e231b925da2ed4163beeef6dad/richmenu/richmenu-55b2f4bf95dfb0c75d39f109075e4690 HTTP/1.1" 200 2
+2023-01-31 13:21:35,141 https://bigquery.googleapis.com:443 "POST /bigquery/v2/projects/foodpanda-th-bigquery/datasets/pandata_th_external/tables/line_communication_logs/insertAll?prettyPrint=false HTTP/1.1" 200 None
+2023-01-31 13:21:35,142 []
+2023-01-31 13:24:23,661 NumExpr defaulting to 8 threads.
+2023-01-31 13:24:24,395 This service is instrumented using OpenTelemetry. OpenTelemetry could not be imported; please add opentelemetry-api and opentelemetry-instrumentation packages in order to get BigQuery Tracing data.
+2023-01-31 13:24:24,395 Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+2023-01-31 13:24:24,402 Making request: POST https://oauth2.googleapis.com/token
+2023-01-31 13:24:24,405 Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2023-01-31 13:24:24,571 https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2023-01-31 13:24:24,577 Starting new HTTPS connection (1): bigquery.googleapis.com:443
+2023-01-31 13:24:25,576 https://bigquery.googleapis.com:443 "POST /bigquery/v2/projects/di-th-auto/jobs?prettyPrint=false HTTP/1.1" 200 None
+2023-01-31 13:24:26,034 https://bigquery.googleapis.com:443 "GET /bigquery/v2/projects/di-th-auto/queries/be6ffb5c-4e8e-4f0f-bc26-22ecdb234c74?maxResults=0&location=US&prettyPrint=false HTTP/1.1" 200 None
+2023-01-31 13:24:26,942 Started reading table 'di-th-auto._8f17c965aa4b00768e090da00e611d6e994f47e8.anonf3fe4f83327ba61b974e0eb9f779815881813e0e803b0caf8dc29e46df5e14c8' with BQ Storage API session 'projects/di-th-auto/locations/us/sessions/CAISDGJKWHZxN0g2bUpTMRoCb2oaAm92'.
+2023-01-31 13:24:27,773 Starting new HTTPS connection (1): api.line.me:443
+2023-01-31 13:24:28,490 https://api.line.me:443 "POST /v2/bot/user/U2b9495e231b925da2ed4163beeef6dad/richmenu/richmenu-55b2f4bf95dfb0c75d39f109075e4690 HTTP/1.1" 200 2
+2023-01-31 13:24:28,507 Starting new HTTPS connection (1): api.line.me:443
+2023-01-31 13:24:28,791 https://api.line.me:443 "POST /v2/bot/user/U2b9495e231b925da2ed4163beeef6dad/richmenu/richmenu-55b2f4bf95dfb0c75d39f109075e4690 HTTP/1.1" 200 2
+2023-01-31 13:24:29,219 https://bigquery.googleapis.com:443 "POST /bigquery/v2/projects/foodpanda-th-bigquery/datasets/pandata_th_external/tables/line_communication_logs/insertAll?prettyPrint=false HTTP/1.1" 200 None
+2023-01-31 13:24:29,220 []
+2023-01-31 13:26:44,351 NumExpr defaulting to 8 threads.
+2023-01-31 13:26:45,013 This service is instrumented using OpenTelemetry. OpenTelemetry could not be imported; please add opentelemetry-api and opentelemetry-instrumentation packages in order to get BigQuery Tracing data.
+2023-01-31 13:26:45,014 Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+2023-01-31 13:26:45,017 Making request: POST https://oauth2.googleapis.com/token
+2023-01-31 13:26:45,017 Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2023-01-31 13:26:45,244 https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2023-01-31 13:26:45,249 Starting new HTTPS connection (1): bigquery.googleapis.com:443
+2023-01-31 13:26:45,983 https://bigquery.googleapis.com:443 "POST /bigquery/v2/projects/di-th-auto/jobs?prettyPrint=false HTTP/1.1" 200 None
+2023-01-31 13:26:46,462 https://bigquery.googleapis.com:443 "GET /bigquery/v2/projects/di-th-auto/queries/1244cf77-c036-4d85-a939-b4ae50fbe2bb?maxResults=0&location=US&prettyPrint=false HTTP/1.1" 200 None
+2023-01-31 13:26:47,475 Started reading table 'di-th-auto._8f17c965aa4b00768e090da00e611d6e994f47e8.anonf3fe4f83327ba61b974e0eb9f779815881813e0e803b0caf8dc29e46df5e14c8' with BQ Storage API session 'projects/di-th-auto/locations/us/sessions/CAISDFAwdWMzUGlHWTJlNRoCb2oaAm92'.
+2023-01-31 13:26:48,415 Starting new HTTPS connection (1): api.line.me:443
+2023-01-31 13:26:48,755 https://api.line.me:443 "POST /v2/bot/user/U2b9495e231b925da2ed4163beeef6dad/richmenu/richmenu-55b2f4bf95dfb0c75d39f109075e4690 HTTP/1.1" 200 2
+2023-01-31 13:26:48,768 Starting new HTTPS connection (1): api.line.me:443
+2023-01-31 13:26:49,020 https://api.line.me:443 "POST /v2/bot/user/U2b9495e231b925da2ed4163beeef6dad/richmenu/richmenu-55b2f4bf95dfb0c75d39f109075e4690 HTTP/1.1" 200 2
+2023-01-31 13:26:49,414 https://bigquery.googleapis.com:443 "POST /bigquery/v2/projects/foodpanda-th-bigquery/datasets/pandata_th_external/tables/line_communication_logs/insertAll?prettyPrint=false HTTP/1.1" 200 None
+2023-01-31 13:26:49,417 [{'index': 0, 'errors': [{'reason': 'invalid', 'location': 'msg_content', 'debugInfo': '', 'message': 'Conversion from bool to std::string is unsupported.'}]}, {'index': 1, 'errors': [{'reason': 'invalid', 'location': 'msg_content', 'debugInfo': '', 'message': 'Conversion from bool to std::string is unsupported.'}]}]
+2023-01-31 13:27:31,709 NumExpr defaulting to 8 threads.
+2023-01-31 13:27:32,422 This service is instrumented using OpenTelemetry. OpenTelemetry could not be imported; please add opentelemetry-api and opentelemetry-instrumentation packages in order to get BigQuery Tracing data.
+2023-01-31 13:27:32,422 Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+2023-01-31 13:27:32,423 Making request: POST https://oauth2.googleapis.com/token
+2023-01-31 13:27:32,433 Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2023-01-31 13:27:32,652 https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2023-01-31 13:27:32,653 Starting new HTTPS connection (1): bigquery.googleapis.com:443
+2023-01-31 13:27:33,385 https://bigquery.googleapis.com:443 "POST /bigquery/v2/projects/di-th-auto/jobs?prettyPrint=false HTTP/1.1" 200 None
+2023-01-31 13:27:33,828 https://bigquery.googleapis.com:443 "GET /bigquery/v2/projects/di-th-auto/queries/5e648fd4-1a85-4516-9c64-c68fd3b39e67?maxResults=0&location=US&prettyPrint=false HTTP/1.1" 200 None
+2023-01-31 13:27:34,760 Started reading table 'di-th-auto._8f17c965aa4b00768e090da00e611d6e994f47e8.anonf3fe4f83327ba61b974e0eb9f779815881813e0e803b0caf8dc29e46df5e14c8' with BQ Storage API session 'projects/di-th-auto/locations/us/sessions/CAISDHVUb1BnVDFPOS1tWBoCb2oaAm92'.
+2023-01-31 13:27:35,717 Starting new HTTPS connection (1): api.line.me:443
+2023-01-31 13:27:36,650 https://api.line.me:443 "POST /v2/bot/user/U2b9495e231b925da2ed4163beeef6dad/richmenu/richmenu-55b2f4bf95dfb0c75d39f109075e4690 HTTP/1.1" 200 2
+2023-01-31 13:27:36,657 Starting new HTTPS connection (1): api.line.me:443
+2023-01-31 13:27:36,830 https://api.line.me:443 "POST /v2/bot/user/U2b9495e231b925da2ed4163beeef6dad/richmenu/richmenu-55b2f4bf95dfb0c75d39f109075e4690 HTTP/1.1" 200 2
+2023-01-31 13:27:37,285 https://bigquery.googleapis.com:443 "POST /bigquery/v2/projects/foodpanda-th-bigquery/datasets/pandata_th_external/tables/line_communication_logs/insertAll?prettyPrint=false HTTP/1.1" 200 None
+2023-01-31 13:27:37,290 []
+2023-01-31 14:02:05,826 NumExpr defaulting to 8 threads.
+2023-01-31 14:02:06,487 This service is instrumented using OpenTelemetry. OpenTelemetry could not be imported; please add opentelemetry-api and opentelemetry-instrumentation packages in order to get BigQuery Tracing data.
+2023-01-31 14:02:06,488 Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+2023-01-31 14:02:06,491 Making request: POST https://oauth2.googleapis.com/token
+2023-01-31 14:02:06,498 Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2023-01-31 14:02:06,729 https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2023-01-31 14:02:06,739 Starting new HTTPS connection (1): bigquery.googleapis.com:443
+2023-01-31 14:02:07,476 https://bigquery.googleapis.com:443 "POST /bigquery/v2/projects/di-th-auto/jobs?prettyPrint=false HTTP/1.1" 200 None
+2023-01-31 14:02:07,929 https://bigquery.googleapis.com:443 "GET /bigquery/v2/projects/di-th-auto/queries/dac56482-6ac8-4191-835c-0dbb14ed984b?maxResults=0&location=US&prettyPrint=false HTTP/1.1" 200 None
+2023-01-31 14:02:08,959 Started reading table 'di-th-auto._8f17c965aa4b00768e090da00e611d6e994f47e8.anonf3fe4f83327ba61b974e0eb9f779815881813e0e803b0caf8dc29e46df5e14c8' with BQ Storage API session 'projects/di-th-auto/locations/us/sessions/CAISDE40dlJkNmhEX0NWbBoCb2oaAm92'.
+2023-01-31 14:02:09,908 Starting new HTTPS connection (1): api.line.me:443
+2023-01-31 14:02:10,268 https://api.line.me:443 "POST /v2/bot/user/U2b9495e231b925da2ed4163beeef6dad/richmenu/richmenu-55b2f4bf95dfb0c75d39f109075e4690 HTTP/1.1" 200 2
+2023-01-31 14:02:10,285 Starting new HTTPS connection (1): api.line.me:443
+2023-01-31 14:02:10,575 https://api.line.me:443 "POST /v2/bot/user/U2b9495e231b925da2ed4163beeef6dad/richmenu/richmenu-55b2f4bf95dfb0c75d39f109075e4690 HTTP/1.1" 200 2
+2023-01-31 14:02:11,051 https://bigquery.googleapis.com:443 "POST /bigquery/v2/projects/foodpanda-th-bigquery/datasets/pandata_th_external/tables/line_communication_logs/insertAll?prettyPrint=false HTTP/1.1" 200 None
+2023-01-31 14:02:11,052 []
+2023-01-31 14:57:07,115 NumExpr defaulting to 8 threads.
+2023-01-31 14:57:09,026 This service is instrumented using OpenTelemetry. OpenTelemetry could not be imported; please add opentelemetry-api and opentelemetry-instrumentation packages in order to get BigQuery Tracing data.
+2023-01-31 14:57:09,027 Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+2023-01-31 14:57:09,027 Making request: POST https://oauth2.googleapis.com/token
+2023-01-31 14:57:09,027 Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2023-01-31 14:57:09,224 https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2023-01-31 14:57:09,228 Starting new HTTPS connection (1): bigquery.googleapis.com:443
+2023-01-31 14:57:09,968 https://bigquery.googleapis.com:443 "POST /bigquery/v2/projects/di-th-auto/jobs?prettyPrint=false HTTP/1.1" 200 None
+2023-01-31 14:57:10,464 https://bigquery.googleapis.com:443 "GET /bigquery/v2/projects/di-th-auto/queries/8ba9d106-2ff9-4a10-84b2-4125c45e0b32?maxResults=0&location=US&prettyPrint=false HTTP/1.1" 200 None
+2023-01-31 14:57:11,447 Started reading table 'di-th-auto._8f17c965aa4b00768e090da00e611d6e994f47e8.anonf3fe4f83327ba61b974e0eb9f779815881813e0e803b0caf8dc29e46df5e14c8' with BQ Storage API session 'projects/di-th-auto/locations/us/sessions/CAISDGhxN0xiblNpQVJzdhoCb2oaAm92'.
+2023-01-31 14:57:12,456 Starting new HTTPS connection (1): api.line.me:443
+2023-01-31 14:57:13,093 https://api.line.me:443 "POST /v2/bot/user/U2b9495e231b925da2ed4163beeef6dad/richmenu/richmenu-55b2f4bf95dfb0c75d39f109075e4690 HTTP/1.1" 200 2
+2023-01-31 14:57:13,106 Starting new HTTPS connection (1): api.line.me:443
+2023-01-31 14:57:13,362 https://api.line.me:443 "POST /v2/bot/user/U2b9495e231b925da2ed4163beeef6dad/richmenu/richmenu-55b2f4bf95dfb0c75d39f109075e4690 HTTP/1.1" 200 2
+2023-01-31 14:57:13,809 https://bigquery.googleapis.com:443 "POST /bigquery/v2/projects/foodpanda-th-bigquery/datasets/pandata_th_external/tables/line_communication_logs/insertAll?prettyPrint=false HTTP/1.1" 200 None
+2023-01-31 14:57:13,810 []
+2023-01-31 15:04:30,069 NumExpr defaulting to 8 threads.
+2023-01-31 15:04:31,809 This service is instrumented using OpenTelemetry. OpenTelemetry could not be imported; please add opentelemetry-api and opentelemetry-instrumentation packages in order to get BigQuery Tracing data.
+2023-01-31 15:04:31,811 Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+2023-01-31 15:04:31,817 Making request: POST https://oauth2.googleapis.com/token
+2023-01-31 15:04:31,824 Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2023-01-31 15:04:32,086 https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2023-01-31 15:04:32,087 Starting new HTTPS connection (1): bigquery.googleapis.com:443
+2023-01-31 15:04:33,040 https://bigquery.googleapis.com:443 "POST /bigquery/v2/projects/di-th-auto/jobs?prettyPrint=false HTTP/1.1" 200 None
+2023-01-31 15:04:33,493 https://bigquery.googleapis.com:443 "GET /bigquery/v2/projects/di-th-auto/queries/26a8a94b-8cc8-4918-9047-716e7e524500?maxResults=0&location=US&prettyPrint=false HTTP/1.1" 200 None
+2023-01-31 15:04:34,409 Started reading table 'di-th-auto._8f17c965aa4b00768e090da00e611d6e994f47e8.anonf3fe4f83327ba61b974e0eb9f779815881813e0e803b0caf8dc29e46df5e14c8' with BQ Storage API session 'projects/di-th-auto/locations/us/sessions/CAISDGRhRzA4UXQ5NGVhZxoCb2oaAm92'.
+2023-01-31 15:04:35,367 Starting new HTTPS connection (1): api.line.me:443
+2023-01-31 15:04:35,856 https://api.line.me:443 "POST /v2/bot/user/U2b9495e231b925da2ed4163beeef6dad/richmenu/richmenu-55b2f4bf95dfb0c75d39f109075e4690 HTTP/1.1" 200 2
+2023-01-31 15:04:35,862 Starting new HTTPS connection (1): api.line.me:443
+2023-01-31 15:04:36,107 https://api.line.me:443 "POST /v2/bot/user/U2b9495e231b925da2ed4163beeef6dad/richmenu/richmenu-55b2f4bf95dfb0c75d39f109075e4690 HTTP/1.1" 200 2
+2023-01-31 15:04:36,494 https://bigquery.googleapis.com:443 "POST /bigquery/v2/projects/foodpanda-th-bigquery/datasets/pandata_th_external/tables/line_communication_logs/insertAll?prettyPrint=false HTTP/1.1" 200 None
+2023-01-31 15:04:36,495 []
