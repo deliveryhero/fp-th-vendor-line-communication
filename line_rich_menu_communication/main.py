@@ -66,6 +66,7 @@ if Live == True:
       line_data.Date DESC
     ) = 1
     ORDER BY line_data.Date
+    LIMIT 5
     """
 
 
