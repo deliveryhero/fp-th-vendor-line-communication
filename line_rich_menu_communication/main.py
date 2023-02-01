@@ -22,7 +22,6 @@ logs_table_id = "foodpanda-th-bigquery.pandata_th_external.line_communication_lo
 Live = False
 url = "https://api.line.me/v2/bot/user/user_id_variable/richmenu/richmenu-55b2f4bf95dfb0c75d39f109075e4690"
 json = {}
-secrete_id = "projects/234879409305/secrets/line_messaging_api_key"
 token = get_secret_data()
 headers = {'Authorization': "Bearer {" + token + "}"}
 now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -33,14 +32,7 @@ if Live == False:
       line_data.VendorCode AS vendor_code,
       line_data.LineUserID AS line_user_id,
     FROM {query_table} AS line_data
-    -- WHERE line_data.LineUserID IN ("U0276f51ba4f3f5f0e275ebcdbbc11b6d", "U592e83eced3872c667f8dbe4e7277b8a", "U5f25d7890e933d09ef30f8bcf98b8043")
-    WHERE line_data.LineUserID IN ("U2b9495e231b925da2ed4163beeef6dad")
-    QUALIFY ROW_NUMBER() OVER (
-      PARTITION BY
-      line_data.VendorCode
-      ORDER BY
-      line_data.Date DESC
-    ) = 1
+    WHERE line_data.LineUserID IN ("U5f25d7890e933d09ef30f8bcf98b8043")
     ORDER BY Date
     """
 
@@ -59,21 +51,13 @@ if Live == True:
         AND NOT vendor_data.is_private
         AND NOT vendor_data.is_test
      -- AND EXTRACT(DATE FROM Date) = CURRENT_DATE - 1
-    QUALIFY ROW_NUMBER() OVER (
-        PARTITION BY
-            line_data.VendorCode
-        ORDER BY
-            line_data.Date DESC
-        ) = 1
     ORDER BY Date
     """
 
 
 dataframe = query_BQ_table(query)
 print(dataframe)
-
 user_id_list = dataframe["line_user_id"].tolist()
-print(user_id_list)
 
 reponse_code_list, url_list = send_request_line_api(url, headers, json, user_id_list)
 dataframe["return_response"] = reponse_code_list
