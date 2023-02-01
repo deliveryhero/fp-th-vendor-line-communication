@@ -19,7 +19,7 @@ verification_table = "fulfillment-dwh-production.pandata_report.country_TH_gener
 logs_table_id = "foodpanda-th-bigquery.pandata_th_external.line_communication_logs"
 
 # Basic configuration parameters
-Live = False
+Live = True
 url = "https://api.line.me/v2/bot/user/user_id_variable/richmenu/richmenu-55b2f4bf95dfb0c75d39f109075e4690"
 json = {}
 token = get_secret_data()
@@ -32,15 +32,22 @@ if Live == False:
       line_data.VendorCode AS vendor_code,
       line_data.LineUserID AS line_user_id,
     FROM {query_table} AS line_data
-    WHERE line_data.LineUserID IN ("U5f25d7890e933d09ef30f8bcf98b8043")
-    ORDER BY Date
+    WHERE line_data.LineUserID IN ("U2b9495e231b925da2ed4163beeef6dad")
+    QUALIFY ROW_NUMBER() OVER (
+      PARTITION BY
+      line_data.LineUserID,
+      line_data.VendorCode
+      ORDER BY
+      line_data.Date DESC
+    ) = 1
+    ORDER BY line_data.Date
     """
 
 if Live == True:
     query = f"""
     SELECT 
-      line_data.VendorCode,
-      line_data.LineUserID
+      vendor_data.vendor_code AS vendor_code,
+      line_data.LineUserID AS line_user_id
     FROM {query_table} AS line_data
     INNER JOIN {verification_table} AS vendor_data
             ON lower(line_data.VendorCode) = lower(vendor_data.vendor_code)
@@ -51,7 +58,14 @@ if Live == True:
         AND NOT vendor_data.is_private
         AND NOT vendor_data.is_test
      -- AND EXTRACT(DATE FROM Date) = CURRENT_DATE - 1
-    ORDER BY Date
+    QUALIFY ROW_NUMBER() OVER (
+      PARTITION BY
+      line_data.LineUserID,
+      line_data.VendorCode
+      ORDER BY
+      line_data.Date DESC
+    ) = 1
+    ORDER BY line_data.Date
     """
 
 

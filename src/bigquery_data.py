@@ -13,8 +13,8 @@ client = bigquery.Client(credentials=credentials, project=credentials.project_id
 job_config = bigquery.LoadJobConfig(write_disposition="WRITE_APPEND")
 
 def query_BQ_table(query):
-    job_config = bigquery.QueryJobConfig()
-    return client.query(query, job_config=job_config).to_dataframe()
+    job_config_query = bigquery.QueryJobConfig()
+    return client.query(query, job_config=job_config_query).to_dataframe()
 
 def record_line_communication_logs(table_id, rows_to_insert):
     status = client.insert_rows_json(table_id, rows_to_insert)
