@@ -10,13 +10,14 @@ sys.path.insert(0, parentdir + '/src')
 from bigquery_data import query_BQ_table, record_line_communication_logs
 from send_line_message import send_request_line_api
 from get_secrete_token import get_secret_data
-import datetime
+import datetime, pytz
+
 
 
 # Basic configuration tables
 query_table = "foodpanda-th-bigquery.pandata_th.vendor_experience_line_liff_user_data_backup"
 verification_table = "fulfillment-dwh-production.pandata_report.country_TH_general_pd_vendors"
-logs_table_id = "foodpanda-th-bigquery.pandata_th_external.line_communication_logs"
+logs_table_id = "foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live"
 
 # Basic configuration parameters
 Live = True
@@ -24,7 +25,8 @@ url = "https://api.line.me/v2/bot/user/user_id_variable/richmenu/richmenu-55b2f4
 json = {}
 token = get_secret_data()
 headers = {'Authorization': "Bearer {" + token + "}"}
-now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+tz = pytz.timezone('Asia/Bangkok')
+now = datetime.datetime.now(tz).strftime("%Y-%m-%d %H:%M:%S")
 
 if Live == False:
     query = f"""
@@ -66,12 +68,10 @@ if Live == True:
       line_data.Date DESC
     ) = 1
     ORDER BY line_data.Date
-    LIMIT 5
     """
 
 
 dataframe = query_BQ_table(query)
-print(dataframe)
 user_id_list = dataframe["line_user_id"].tolist()
 
 reponse_code_list, url_list = send_request_line_api(url, headers, json, user_id_list)
