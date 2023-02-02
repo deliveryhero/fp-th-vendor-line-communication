@@ -70,11 +70,17 @@ if Live == True:
     ORDER BY line_data.Date
     """
 
+try: 
+  dataframe = query_BQ_table(query)
+  user_id_list = dataframe["line_user_id"].tolist()
+except BaseException as e:
+    logging.info('Failed to get data: ' + str(e))
 
-dataframe = query_BQ_table(query)
-user_id_list = dataframe["line_user_id"].tolist()
+try:
+  reponse_code_list, url_list = send_request_line_api(url, headers, json, user_id_list)
+except BaseException as e:
+    logging.info('Failed send API request: ' + str(e))
 
-reponse_code_list, url_list = send_request_line_api(url, headers, json, user_id_list)
 dataframe["return_response"] = reponse_code_list
 dataframe["msg_sent_date_time"] = now
 dataframe["template_id_if_any"] = "richmenu-55b2f4bf95dfb0c75d39f109075e4690"
@@ -82,6 +88,9 @@ dataframe["msg_url"] = url_list
 dataframe["msg_content"] = "NA"
 df_records = dataframe.to_dict('records')
 
-status = record_line_communication_logs(logs_table_id, df_records)
+try:
+  status = record_line_communication_logs(logs_table_id, df_records)
+except BaseException as e:
+    logging.info('Failed to record logs: ' + str(e))
 
 logging.info(status)
