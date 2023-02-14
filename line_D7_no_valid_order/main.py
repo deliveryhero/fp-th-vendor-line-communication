@@ -161,6 +161,7 @@ if Live == False:
     FROM `fulfillment-dwh-staging.pandata_report.country_TH_vendor_experience_Line_D7_no_valid_order`  AS vendor_data
     INNER JOIN foodpanda-th-bigquery.pandata_th.vendor_experience_line_liff_user_data_backup AS line_data
             ON lower(line_data.VendorCode) = lower(vendor_data.vendor_code)
+    LIMIT 1
     """
 
 if Live == True:
