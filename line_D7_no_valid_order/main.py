@@ -15,8 +15,8 @@ import datetime, pytz
 
 
 # Basic configuration tables
-query_table = "foodpanda-th-bigquery.pandata_th.vendor_experience_line_liff_user_data_backup"
-verification_table = "fulfillment-dwh-production.pandata_report.country_TH_general_pd_vendors"
+query_table = "fulfillment-dwh-staging.pandata_report.country_TH_vendor_experience_Line_D7_no_valid_order"
+line_data  = "foodpanda-th-bigquery.pandata_th.vendor_experience_line_liff_user_data_backup"
 logs_table_id = "foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live"
 
 # Basic configuration parameters
@@ -158,8 +158,8 @@ if Live == False:
     SELECT 
         vendor_data.vendor_code AS vendor_code,
         'U2b9495e231b925da2ed4163beeef6dad' AS line_user_id,
-    FROM `fulfillment-dwh-staging.pandata_report.country_TH_vendor_experience_Line_D7_no_valid_order`  AS vendor_data
-    INNER JOIN foodpanda-th-bigquery.pandata_th.vendor_experience_line_liff_user_data_backup AS line_data
+    FROM {query_table}  AS vendor_data
+    INNER JOIN {line_data} AS line_data
             ON lower(line_data.VendorCode) = lower(vendor_data.vendor_code)
     LIMIT 1
     """
@@ -169,8 +169,8 @@ if Live == True:
     SELECT 
         vendor_data.vendor_code AS vendor_code,
         line_data.LineUserID AS line_user_id,
-    FROM `fulfillment-dwh-staging.pandata_report.country_TH_vendor_experience_Line_D7_no_valid_order`  AS vendor_data
-    INNER JOIN foodpanda-th-bigquery.pandata_th.vendor_experience_line_liff_user_data_backup AS line_data
+    FROM {query_table}  AS vendor_data
+    INNER JOIN {line_data} AS line_data
             ON lower(line_data.VendorCode) = lower(vendor_data.vendor_code)
     """
 
