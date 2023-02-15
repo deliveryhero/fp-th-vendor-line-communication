@@ -15,7 +15,7 @@ import datetime, pytz
 
 
 # Basic configuration tables
-query_table = "fulfillment-dwh-staging.pandata_report.country_TH_vendor_experience_Line_D7_no_valid_order"
+query_table = "fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_Line_D7_no_valid_order"
 line_data  = "foodpanda-th-bigquery.pandata_th.vendor_experience_line_liff_user_data_backup"
 logs_table_id = "foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live"
 
