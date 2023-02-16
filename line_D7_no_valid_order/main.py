@@ -20,7 +20,7 @@ line_data  = "foodpanda-th-bigquery.pandata_th.vendor_experience_line_liff_user_
 logs_table_id = "foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live"
 
 # Basic configuration parameters
-Live = False
+Live = True
 url = "https://api.line.me/v2/bot/message/push"
 json_data = {
     "to": "lineuserid",
@@ -167,7 +167,7 @@ if Live == False:
 
 if Live == True:
     query = f"""
-    SELECT 
+    SELECT DISTINCT
         vendor_data.vendor_code AS vendor_code,
         line_data.LineUserID AS line_user_id,
     FROM {query_table}  AS vendor_data
