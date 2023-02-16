@@ -1,6 +1,6 @@
 json_object = """
 {
-    "to": "{lineuserid}",
+    "to": "{LineUserID}",
     "messages": [
         {
             "type": "flex",
@@ -44,7 +44,7 @@ json_object = """
         "size": "md",
         "align": "start",
         "gravity": "top",
-        "wrap": True,
+        "wrap": true,
         "contents": [
           {
             "type": "span",
@@ -90,7 +90,7 @@ json_object = """
       {
         "type": "text",
         "text": "คะแนนร้านค้ายอดเยี่ยมคือ {ihs_score} / 5 คะแนน",
-        "wrap": True,
+        "wrap": true,
         "offsetTop": "10px",
         "contents": [
           {
@@ -137,7 +137,7 @@ json_object = """
                 "color": "#FF2B85",
                 "align": "center",
                 "gravity": "center",
-                "wrap": False,
+                "wrap": false,
                 "offsetTop": "15px",
                 "contents": []
               },
@@ -147,7 +147,7 @@ json_object = """
                 "weight": "regular",
                 "size": "xxs",
                 "align": "center",
-                "wrap": True,
+                "wrap": true,
                 "offsetTop": "20px",
                 "contents": []
               },
@@ -157,7 +157,7 @@ json_object = """
                 "weight": "regular",
                 "size": "xxs",
                 "align": "center",
-                "wrap": True,
+                "wrap": true,
                 "offsetTop": "20px",
                 "contents": []
               }
@@ -213,7 +213,7 @@ json_object = """
                 "size": "xxs",
                 "align": "center",
                 "gravity": "center",
-                "wrap": True,
+                "wrap": true,
                 "offsetTop": "20px",
                 "contents": []
               },
@@ -223,7 +223,7 @@ json_object = """
                 "weight": "regular",
                 "size": "xxs",
                 "align": "center",
-                "wrap": True,
+                "wrap": true,
                 "offsetTop": "20px",
                 "contents": []
               }
@@ -246,7 +246,7 @@ json_object = """
                 "type": "text",
                 "text": "เพิ่มยอดขายด้วย การดึงดูดลูกค้าใหม่ คลิก",
                 "size": "xxs",
-                "wrap": True,
+                "wrap": true,
                 "action": {
                   "type": "uri",
                   "label": "คลิก",
@@ -290,7 +290,7 @@ json_object = """
                 "type": "text",
                 "text": "มอบ ส่วนลด เพื่อเพิ่มออเดอร์ซื้อได้ถึง 2 เท่า คลิก",
                 "size": "xxs",
-                "wrap": True,
+                "wrap": true,
                 "action": {
                   "type": "uri",
                   "label": "คลิก",
@@ -379,7 +379,7 @@ json_object = """
               {
                 "type": "text",
                 "text": "1. {top1_best_seller}",
-                "wrap": True,
+                "wrap": true,
                 "contents": [
                   {
                     "type": "span",
@@ -391,7 +391,7 @@ json_object = """
               {
                 "type": "text",
                 "text": "2. {top2_best_seller}",
-                "wrap": True,
+                "wrap": true,
                 "contents": [
                   {
                     "type": "span",
@@ -403,7 +403,7 @@ json_object = """
               {
                 "type": "text",
                 "text": "3. {top3_best_seller}",
-                "wrap": True,
+                "wrap": true,
                 "contents": [
                   {
                     "type": "span",
@@ -439,7 +439,7 @@ json_object = """
                 "color": "#FF2B85",
                 "align": "start",
                 "gravity": "center",
-                "wrap": True,
+                "wrap": true,
                 "offsetStart": "3px",
                 "offsetEnd": "3px",
                 "contents": []
@@ -484,7 +484,7 @@ json_object = """
                 "text": "ลดการปฏิเสธออเดอร์ โดยใช้งานเครื่องมือ รายงานผลประกอบการ",
                 "size": "xs",
                 "gravity": "center",
-                "wrap": True,
+                "wrap": true,
                 "action": {
                   "type": "uri",
                   "label": "รายงานผลประกอบการ",
@@ -537,7 +537,7 @@ json_object = """
                 "color": "#FF2B85FF",
                 "align": "start",
                 "gravity": "center",
-                "wrap": True,
+                "wrap": true,
                 "offsetStart": "3px",
                 "offsetEnd": "3px",
                 "contents": []
@@ -557,7 +557,7 @@ json_object = """
                 "size": "xs",
                 "align": "center",
                 "gravity": "center",
-                "wrap": True,
+                "wrap": true,
                 "offsetTop": "5px",
                 "offsetStart": "2px",
                 "offsetEnd": "2px",
@@ -577,7 +577,7 @@ json_object = """
                 "size": "xs",
                 "align": "start",
                 "gravity": "center",
-                "wrap": True,
+                "wrap": true,
                 "action": {
                   "type": "uri",
                   "label": "ที่นี่",
@@ -630,7 +630,7 @@ json_object = """
                 "color": "#FF2B85FF",
                 "align": "start",
                 "gravity": "center",
-                "wrap": True,
+                "wrap": true,
                 "offsetStart": "3px",
                 "offsetEnd": "3px",
                 "contents": []
@@ -650,7 +650,7 @@ json_object = """
                 "size": "xs",
                 "align": "center",
                 "gravity": "center",
-                "wrap": True,
+                "wrap": true,
                 "offsetStart": "2px",
                 "offsetEnd": "2px",
                 "contents": []
@@ -669,7 +669,7 @@ json_object = """
                 "size": "xs",
                 "align": "start",
                 "gravity": "center",
-                "wrap": True,
+                "wrap": true,
                 "action": {
                   "type": "uri",
                   "label": "ที่นี่",
@@ -721,7 +721,7 @@ json_object = """
                 "color": "#FF2B85FF",
                 "align": "start",
                 "gravity": "center",
-                "wrap": True,
+                "wrap": true,
                 "contents": []
               }
             ]
@@ -739,7 +739,7 @@ json_object = """
                 "size": "xs",
                 "align": "center",
                 "gravity": "center",
-                "wrap": True,
+                "wrap": true,
                 "offsetTop": "28px",
                 "offsetStart": "2px",
                 "offsetEnd": "2px",
@@ -759,7 +759,7 @@ json_object = """
                 "size": "xs",
                 "align": "start",
                 "gravity": "center",
-                "wrap": True,
+                "wrap": true,
                 "action": {
                   "type": "uri",
                   "label": "เคล็ดลับที่เป็นประโย",
@@ -805,7 +805,7 @@ json_object = """
                 "color": "#FF2B85FF",
                 "align": "start",
                 "gravity": "center",
-                "wrap": True,
+                "wrap": true,
                 "offsetStart": "3px",
                 "offsetEnd": "3px",
                 "contents": []
@@ -825,7 +825,7 @@ json_object = """
                 "size": "xs",
                 "align": "center",
                 "gravity": "center",
-                "wrap": True,
+                "wrap": true,
                 "offsetTop": "0px",
                 "offsetStart": "2px",
                 "offsetEnd": "2px",
@@ -845,7 +845,7 @@ json_object = """
                 "size": "xs",
                 "align": "start",
                 "gravity": "center",
-                "wrap": True,
+                "wrap": true,
                 "action": {
                   "type": "uri",
                   "label": "ที่นี่",

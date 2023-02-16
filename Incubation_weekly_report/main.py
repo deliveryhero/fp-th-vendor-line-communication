@@ -8,65 +8,62 @@ parentdir = os.path.dirname(currentdir)
 sys.path.insert(0, parentdir)
 sys.path.insert(0, parentdir + '/src')
 from bigquery_data import query_BQ_table, record_line_communication_logs
-from send_line_message import send_request_line_api, send_request_line_api_v2
+from send_line_message import send_request_line_api_v3
 from get_secrete_token import get_secret_data
 import datetime, pytz
 from template import json_object
 
-print(json_object)
 
 # Basic configuration tables
-# query_table = "foodpanda-th-bigquery.pandata_th.incubation_weekly_report_line_communication"
-# logs_table_id = "foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live"
+query_table = "foodpanda-th-bigquery.pandata_th.incubation_weekly_report_line_communication"
+logs_table_id = "foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live"
 
-# # Basic configuration parameters
-# Live = False
-# url = "https://api.line.me/v2/bot/message/push"
-# json_data = json_object
-# token = get_secret_data()
-# headers = {'Authorization': "Bearer {" + token + "}", 'Content-Type': 'application/json'}
-# tz = pytz.timezone('Asia/Bangkok')
-# now = datetime.datetime.now(tz).strftime("%Y-%m-%d %H:%M:%S")
+# Basic configuration parameters
+Live = False
+url = "https://api.line.me/v2/bot/message/push"
+json_data = json_object
+token = get_secret_data()
+headers = {'Authorization': "Bearer {" + token + "}", 'Content-Type': 'application/json'}
+tz = pytz.timezone('Asia/Bangkok')
+now = datetime.datetime.now(tz).strftime("%Y-%m-%d %H:%M:%S")
 
-# if Live == False:
-#     query = f"""
-#     SELECT 
-#       vendor_code,
-#       vendor_name,
-#       "U2b9495e231b925da2ed4163beeef6dad" AS line_user_id
-#     FROM `foodpanda-th-bigquery.pandata_th.incubation_weekly_report_line_communication` 
-#     """
+if Live == False:
+    query = f"""
+    SELECT * EXCEPT (LineUserID),
+    'U2b9495e231b925da2ed4163beeef6dad' AS LineUserID
+    FROM {query_table}
+    LIMIT 1 
+    """
 
-# if Live == True:
-#     query = f"""
-#     SELECT 
-#       vendor_code,
-#       vendor_name,
-#       LineUserID
-#     FROM `foodpanda-th-bigquery.pandata_th.incubation_weekly_report_line_communication` 
-#     """
+if Live == True:
+    query = f"""
+    SELECT * FROM {query_table} 
+    """
 
-# try: 
-#   dataframe = query_BQ_table(query)
-#   user_id_list = dataframe["line_user_id"].tolist()
-# except BaseException as e:
-#     logging.info('Failed to get data: ' + str(e))
+try: 
+  dataframe = query_BQ_table(query)
+except BaseException as e:
+    logging.info('Failed to get data: ' + str(e))
 
-# try:
-#   reponse_code_list, json_list = send_request_line_api_v2(url, headers, json_data, user_id_list)
-# except BaseException as e:
-#     logging.info('Failed send API request: ' + str(e))
+try:
+  reponse_code_list, json_list = send_request_line_api_v3(url = url, headers = headers, 
+                                                          json_object = json_object, 
+                                                          dataframe = dataframe)
+except BaseException as e:
+    logging.info('Failed send API request: ' + str(e))
 
-# dataframe["return_response"] = reponse_code_list
-# dataframe["msg_sent_date_time"] = now
-# dataframe["template_id_if_any"] = "Incubation_weekly_report"
-# dataframe["msg_url"] = url
-# dataframe["msg_content"] = json_list
-# df_records = dataframe.to_dict('records')
+dataframe = dataframe.filter(items=['vendor_code', 'LineUserID'])
+dataframe.rename(columns={'LineUserID': 'line_user_id'}, inplace=True)
+dataframe["return_response"] = reponse_code_list
+dataframe["msg_sent_date_time"] = now
+dataframe["template_id_if_any"] = "Incubation_weekly_report"
+dataframe["msg_url"] = url
+dataframe["msg_content"] = json_list
+df_records = dataframe.to_dict('records')
 
-# try:
-#   status = record_line_communication_logs(logs_table_id, df_records)
-# except BaseException as e:
-#     logging.info('Failed to record logs: ' + str(e))
+try:
+  status = record_line_communication_logs(logs_table_id, df_records)
+except BaseException as e:
+    logging.info('Failed to record logs: ' + str(e))
 
-# logging.info(status)
+logging.info(status)
