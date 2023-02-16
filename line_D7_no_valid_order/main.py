@@ -158,7 +158,7 @@ if Live == False:
     query = f"""
     SELECT 
         vendor_data.vendor_code AS vendor_code,
-        'U286c2f8087ad23f73d6ff3593e618181' AS line_user_id,
+        'U2b9495e231b925da2ed4163beeef6dad' AS line_user_id,
     FROM {query_table}  AS vendor_data
     INNER JOIN {line_data} AS line_data
             ON lower(line_data.VendorCode) = lower(vendor_data.vendor_code)
