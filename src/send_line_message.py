@@ -44,7 +44,7 @@ def send_request_line_api_v3(*args, **kwargs):
     headers = kwargs['headers']
     json_string = kwargs['json_object']
     df = kwargs['dataframe']
-    df.replace(to_replace=[None], value="No Value", inplace=True)
+    df.replace(to_replace=[None], value="--", inplace=True)
     df = df.reset_index() 
     for index, row in df.iterrows():
         json_data_v1 = json_string.replace('{LineUserID}', row['LineUserID']) \

@@ -30,8 +30,9 @@ now = datetime.datetime.now(tz).strftime("%Y-%m-%d %H:%M:%S")
 if Live == False:
     query = f"""
     SELECT * EXCEPT (LineUserID),
-    'U2b9495e231b925da2ed4163beeef6dad' AS LineUserID
+    'Uefed79ff4ec1d15e86fcbd0c59786c65' AS LineUserID
     FROM {query_table}
+    WHERE vendor_code != 'a0j1'
     LIMIT 1 
     """
 
