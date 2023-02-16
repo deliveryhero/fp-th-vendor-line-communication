@@ -17,7 +17,7 @@ def send_request_line_api(url, headers, json, list):
 
 def send_request_line_api_v2(url, headers, json_data, list):
     reponse_code_list = []
-    url_list = []
+    json_list = []
     for i in list:
         user_specific_url = url
         headers = headers
@@ -28,8 +28,9 @@ def send_request_line_api_v2(url, headers, json_data, list):
         reponse = r.json()
         print(reponse)
         reponse_code_list.append(reponse_code)
-        url_list.append(user_specific_url)
-    return reponse_code_list, url_list 
+        json_list_data = str(json)
+        json_list.append(json_list_data)
+    return reponse_code_list, json_list 
 
 
 

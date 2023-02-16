@@ -23,7 +23,7 @@ logs_table_id = "foodpanda-th-bigquery.pandata_th_external.line_communication_lo
 Live = False
 url = "https://api.line.me/v2/bot/message/push"
 json_data = {
-    "to": "line_user_id_variable",
+    "to": "lineuserid",
     "messages": [
         {
             "type": "flex",
@@ -34,7 +34,7 @@ json_data = {
   "size": "mega",
   "hero": {
     "type": "video",
-    "url": "https://drive.google.com/uc?export=view&id=13GbJUpnkDj32TnGwAOt_xUMZsb-GC6m-",
+    "url": "https://drive.google.com/uc?export=view&id=1DzWnB76ftyYOdlu6UxDMp2FY0TJvVEpa",
     "previewUrl": "https://drive.google.com/uc?export=view&id=1Jhx_bm8PZLnVBsWhkjyM55bKQKsk-Jom",
     "altContent": {
       "type": "image",
@@ -146,6 +146,7 @@ json_data = {
     }
   ]
 }
+
 json_string = str(json_data)
 
 token = get_secret_data()
@@ -157,7 +158,7 @@ if Live == False:
     query = f"""
     SELECT 
         vendor_data.vendor_code AS vendor_code,
-        'U2b9495e231b925da2ed4163beeef6dad' AS line_user_id,
+        'U286c2f8087ad23f73d6ff3593e618181' AS line_user_id,
     FROM {query_table}  AS vendor_data
     INNER JOIN {line_data} AS line_data
             ON lower(line_data.VendorCode) = lower(vendor_data.vendor_code)
@@ -181,15 +182,15 @@ except BaseException as e:
     logging.info('Failed to get data: ' + str(e))
 
 try:
-  reponse_code_list, url_list = send_request_line_api_v2(url, headers, json_data, user_id_list)
+  reponse_code_list, json_list = send_request_line_api_v2(url, headers, json_data, user_id_list)
 except BaseException as e:
     logging.info('Failed send API request: ' + str(e))
 
 dataframe["return_response"] = reponse_code_list
 dataframe["msg_sent_date_time"] = now
 dataframe["template_id_if_any"] = "Line_D7_no_valid_order"
-dataframe["msg_url"] = url_list
-dataframe["msg_content"] = json_string
+dataframe["msg_url"] = url
+dataframe["msg_content"] = json_list
 df_records = dataframe.to_dict('records')
 
 try:
