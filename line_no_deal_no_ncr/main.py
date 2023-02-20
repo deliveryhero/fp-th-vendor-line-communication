@@ -19,7 +19,7 @@ query_table = "fulfillment-dwh-production.pandata_report.country_TH_vendor_exper
 logs_table_id = "foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live"
 
 # Basic configuration parameters
-Live = False
+Live = True
 url = "https://api.line.me/v2/bot/message/push"
 json_data = {
     "to": "{{custom_attribute.${lineuserid}}}",
