@@ -67,13 +67,12 @@ tz = pytz.timezone('Asia/Bangkok')
 now = datetime.datetime.now(tz).strftime("%Y-%m-%d %H:%M:%S")
 
 if Live == False:
-    query = f"""
+  query = f"""
     SELECT
-        vendor_data.vendor_code AS vendor_code,
-        'U2b9495e231b925da2ed4163beeef6dad' AS line_user_id,
+      vendor_data.vendor_code AS vendor_code,
+      'U2b9495e231b925da2ed4163beeef6dad' AS line_user_id,
     FROM {query_table} AS vendor_data
     WHERE is_line_verified
-    LIMIT 1
     """
 
 if Live == True:

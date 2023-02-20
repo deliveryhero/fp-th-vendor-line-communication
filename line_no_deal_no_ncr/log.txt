@@ -11,3 +11,282 @@
 2023-02-20 06:59:12,365 https://api.line.me:443 "POST /v2/bot/message/push HTTP/1.1" 200 2
 2023-02-20 06:59:12,833 https://bigquery.googleapis.com:443 "POST /bigquery/v2/projects/foodpanda-th-bigquery/datasets/pandata_th_external/tables/line_communication_logs_live/insertAll?prettyPrint=false HTTP/1.1" 200 None
 2023-02-20 06:59:12,833 ['New rows have been added.']
+2023-02-20 07:13:21,226 This service is instrumented using OpenTelemetry. OpenTelemetry could not be imported; please add opentelemetry-api and opentelemetry-instrumentation packages in order to get BigQuery Tracing data.
+2023-02-20 07:13:21,226 Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+2023-02-20 07:13:21,258 Making request: POST https://oauth2.googleapis.com/token
+2023-02-20 07:13:21,273 Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2023-02-20 07:13:21,336 https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2023-02-20 07:13:21,336 Starting new HTTPS connection (1): bigquery.googleapis.com:443
+2023-02-20 07:13:21,476 https://bigquery.googleapis.com:443 "POST /bigquery/v2/projects/di-th-auto/jobs?prettyPrint=false HTTP/1.1" 200 None
+2023-02-20 07:13:21,476 Failed to get data: 400 Syntax error: Unclosed string literal at [1:1]
+
+(job ID: aa6955c4-668c-440a-bcd6-8a376bf522d6)
+
+                                              -----Query Job SQL Follows-----                                              
+
+    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |
+   1:"
+   2:    SELECT
+   3:      vendor_data.vendor_code AS vendor_code,
+   4:      'U9d1f00f6f00199356eee821cb2736ac2' AS line_user_id,
+   5:    FROM fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_sms_no_deal_no_ncr AS vendor_data
+   6:    WHERE is_line_verified
+   7:    LIMIT 1
+   8:
+   9:    UNION ALL
+  10:
+  11:    SELECT
+  12:        vendor_data.vendor_code AS vendor_code,
+  13:        'Uefed79ff4ec1d15e86fcbd0c59786c65' AS line_user_id,
+  14:    FROM fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_sms_no_deal_no_ncr AS vendor_data
+  15:    WHERE is_line_verified
+  16:    LIMIT 1
+  17:
+  18:    UNION ALL
+  19:
+  20:    SELECT
+  21:        vendor_data.vendor_code AS vendor_code,
+  22:        'U0276f51ba4f3f5f0e275ebcdbbc11b6d' AS line_user_id,
+  23:    FROM fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_sms_no_deal_no_ncr AS vendor_data
+  24:    WHERE is_line_verified
+  25:    LIMIT 1
+  26:
+  27:    UNION ALL
+  28:
+  29:    SELECT
+  30:        vendor_data.vendor_code AS vendor_code,
+  31:        'U592e83eced3872c667f8dbe4e7277b8a' AS line_user_id,
+  32:    FROM fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_sms_no_deal_no_ncr AS vendor_data
+  33:    WHERE is_line_verified
+  34:    LIMIT 1
+  35:
+  36:    UNION ALL
+  37:
+  38:    SELECT
+  39:        vendor_data.vendor_code AS vendor_code,
+  40:        'U5f25d7890e933d09ef30f8bcf98b8043' AS line_user_id,
+  41:    FROM fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_sms_no_deal_no_ncr AS vendor_data
+  42:    WHERE is_line_verified
+  43:    LIMIT 1
+  44:
+  45:    UNION ALL
+  46:
+  47:    SELECT
+  48:        vendor_data.vendor_code AS vendor_code,
+  49:        'U4b2ec72133f4eb87bf9db0ebaa441431' AS line_user_id,
+  50:    FROM fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_sms_no_deal_no_ncr AS vendor_data
+  51:    WHERE is_line_verified
+  52:    LIMIT 1
+  53:
+  54:    UNION ALL
+  55:
+  56:    SELECT
+  57:        vendor_data.vendor_code AS vendor_code,
+  58:        'U2b9495e231b925da2ed4163beeef6dad' AS line_user_id,
+  59:    FROM fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_sms_no_deal_no_ncr AS vendor_data
+  60:    WHERE is_line_verified
+  61:    LIMIT 1
+  62:
+  63:    UNION ALL
+  64:
+  65:    SELECT
+  66:        vendor_data.vendor_code AS vendor_code,
+  67:        'U41abb841b43a037ad6ff04c902f4c1d2' AS line_user_id,
+  68:    FROM fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_sms_no_deal_no_ncr AS vendor_data
+  69:    WHERE is_line_verified
+  70:    LIMIT 1
+  71:
+  72:    UNION ALL
+  73:
+  74:    SELECT
+  75:        vendor_data.vendor_code AS vendor_code,
+  76:        'U286c2f8087ad23f73d6ff3593e618181' AS line_user_id,
+  77:    FROM fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_sms_no_deal_no_ncr AS vendor_data
+  78:    WHERE is_line_verified
+  79:    LIMIT 1
+  80:    
+    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |
+2023-02-20 07:13:21,476 Failed send API request: name 'user_id_list' is not defined
+2023-02-20 07:15:44,141 This service is instrumented using OpenTelemetry. OpenTelemetry could not be imported; please add opentelemetry-api and opentelemetry-instrumentation packages in order to get BigQuery Tracing data.
+2023-02-20 07:15:44,141 Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+2023-02-20 07:15:44,188 Making request: POST https://oauth2.googleapis.com/token
+2023-02-20 07:15:44,188 Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2023-02-20 07:15:44,235 https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2023-02-20 07:15:44,235 Starting new HTTPS connection (1): bigquery.googleapis.com:443
+2023-02-20 07:15:44,376 https://bigquery.googleapis.com:443 "POST /bigquery/v2/projects/di-th-auto/jobs?prettyPrint=false HTTP/1.1" 200 None
+2023-02-20 07:15:44,376 Failed to get data: 400 Syntax error: Unclosed string literal at [1:1]
+
+(job ID: 3e4343d6-e010-4984-b71e-f6dfe244515b)
+
+                                              -----Query Job SQL Follows-----                                              
+
+    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |
+   1:"
+   2:    SELECT
+   3:      vendor_data.vendor_code AS vendor_code,
+   4:      'U9d1f00f6f00199356eee821cb2736ac2' AS line_user_id,
+   5:    FROM fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_sms_no_deal_no_ncr AS vendor_data
+   6:    WHERE is_line_verified
+   7:    LIMIT 1
+   8:
+   9:    UNION ALL
+  10:
+  11:    SELECT
+  12:        vendor_data.vendor_code AS vendor_code,
+  13:        'Uefed79ff4ec1d15e86fcbd0c59786c65' AS line_user_id,
+  14:    FROM fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_sms_no_deal_no_ncr AS vendor_data
+  15:    WHERE is_line_verified
+  16:    LIMIT 1
+  17:
+  18:    UNION ALL
+  19:
+  20:    SELECT
+  21:        vendor_data.vendor_code AS vendor_code,
+  22:        'U0276f51ba4f3f5f0e275ebcdbbc11b6d' AS line_user_id,
+  23:    FROM fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_sms_no_deal_no_ncr AS vendor_data
+  24:    WHERE is_line_verified
+  25:    LIMIT 1
+  26:
+  27:    UNION ALL
+  28:
+  29:    SELECT
+  30:        vendor_data.vendor_code AS vendor_code,
+  31:        'U592e83eced3872c667f8dbe4e7277b8a' AS line_user_id,
+  32:    FROM fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_sms_no_deal_no_ncr AS vendor_data
+  33:    WHERE is_line_verified
+  34:    LIMIT 1
+  35:
+  36:    UNION ALL
+  37:
+  38:    SELECT
+  39:        vendor_data.vendor_code AS vendor_code,
+  40:        'U5f25d7890e933d09ef30f8bcf98b8043' AS line_user_id,
+  41:    FROM fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_sms_no_deal_no_ncr AS vendor_data
+  42:    WHERE is_line_verified
+  43:    LIMIT 1
+  44:
+  45:    UNION ALL
+  46:
+  47:    SELECT
+  48:        vendor_data.vendor_code AS vendor_code,
+  49:        'U4b2ec72133f4eb87bf9db0ebaa441431' AS line_user_id,
+  50:    FROM fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_sms_no_deal_no_ncr AS vendor_data
+  51:    WHERE is_line_verified
+  52:    LIMIT 1
+  53:
+  54:    UNION ALL
+  55:
+  56:    SELECT
+  57:        vendor_data.vendor_code AS vendor_code,
+  58:        'U2b9495e231b925da2ed4163beeef6dad' AS line_user_id,
+  59:    FROM fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_sms_no_deal_no_ncr AS vendor_data
+  60:    WHERE is_line_verified
+  61:    LIMIT 1
+  62:
+  63:    UNION ALL
+  64:
+  65:    SELECT
+  66:        vendor_data.vendor_code AS vendor_code,
+  67:        'U41abb841b43a037ad6ff04c902f4c1d2' AS line_user_id,
+  68:    FROM fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_sms_no_deal_no_ncr AS vendor_data
+  69:    WHERE is_line_verified
+  70:    LIMIT 1
+  71:
+  72:    UNION ALL
+  73:
+  74:    SELECT
+  75:        vendor_data.vendor_code AS vendor_code,
+  76:        'U286c2f8087ad23f73d6ff3593e618181' AS line_user_id,
+  77:    FROM fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_sms_no_deal_no_ncr AS vendor_data
+  78:    WHERE is_line_verified
+  79:    LIMIT 1
+  80:    
+    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |
+2023-02-20 07:15:44,376 Failed send API request: name 'user_id_list' is not defined
+2023-02-20 07:19:38,989 This service is instrumented using OpenTelemetry. OpenTelemetry could not be imported; please add opentelemetry-api and opentelemetry-instrumentation packages in order to get BigQuery Tracing data.
+2023-02-20 07:19:38,989 Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+2023-02-20 07:19:39,020 Making request: POST https://oauth2.googleapis.com/token
+2023-02-20 07:19:39,036 Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2023-02-20 07:19:39,067 https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2023-02-20 07:19:39,067 Starting new HTTPS connection (1): bigquery.googleapis.com:443
+2023-02-20 07:19:39,223 https://bigquery.googleapis.com:443 "POST /bigquery/v2/projects/di-th-auto/jobs?prettyPrint=false HTTP/1.1" 200 None
+2023-02-20 07:19:39,239 Failed to get data: 400 Syntax error: Unclosed string literal at [1:1]
+
+(job ID: 8525f936-6e8c-4090-86f2-f2dc1c046dec)
+
+                                              -----Query Job SQL Follows-----                                              
+
+    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |
+   1:"
+   2:    SELECT
+   3:      vendor_data.vendor_code AS vendor_code,
+   4:      'U9d1f00f6f00199356eee821cb2736ac2' AS line_user_id,
+   5:    FROM fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_sms_no_deal_no_ncr AS vendor_data
+   6:    WHERE is_line_verified
+   7:
+   8:    UNION ALL
+   9:
+  10:    SELECT
+  11:        vendor_data.vendor_code AS vendor_code,
+  12:        'Uefed79ff4ec1d15e86fcbd0c59786c65' AS line_user_id,
+  13:    FROM fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_sms_no_deal_no_ncr AS vendor_data
+  14:    WHERE is_line_verified
+  15:
+  16:    UNION ALL
+  17:
+  18:    SELECT
+  19:        vendor_data.vendor_code AS vendor_code,
+  20:        'U0276f51ba4f3f5f0e275ebcdbbc11b6d' AS line_user_id,
+  21:    FROM fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_sms_no_deal_no_ncr AS vendor_data
+  22:    WHERE is_line_verified
+  23:
+  24:    UNION ALL
+  25:
+  26:    SELECT
+  27:        vendor_data.vendor_code AS vendor_code,
+  28:        'U592e83eced3872c667f8dbe4e7277b8a' AS line_user_id,
+  29:    FROM fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_sms_no_deal_no_ncr AS vendor_data
+  30:    WHERE is_line_verified
+  31:
+  32:    UNION ALL
+  33:
+  34:    SELECT
+  35:        vendor_data.vendor_code AS vendor_code,
+  36:        'U5f25d7890e933d09ef30f8bcf98b8043' AS line_user_id,
+  37:    FROM fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_sms_no_deal_no_ncr AS vendor_data
+  38:    WHERE is_line_verified
+  39:
+  40:    UNION ALL
+  41:
+  42:    SELECT
+  43:        vendor_data.vendor_code AS vendor_code,
+  44:        'U4b2ec72133f4eb87bf9db0ebaa441431' AS line_user_id,
+  45:    FROM fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_sms_no_deal_no_ncr AS vendor_data
+  46:    WHERE is_line_verified
+  47:
+  48:    UNION ALL
+  49:
+  50:    SELECT
+  51:        vendor_data.vendor_code AS vendor_code,
+  52:        'U2b9495e231b925da2ed4163beeef6dad' AS line_user_id,
+  53:    FROM fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_sms_no_deal_no_ncr AS vendor_data
+  54:    WHERE is_line_verified
+  55:
+  56:    UNION ALL
+  57:
+  58:    SELECT
+  59:        vendor_data.vendor_code AS vendor_code,
+  60:        'U41abb841b43a037ad6ff04c902f4c1d2' AS line_user_id,
+  61:    FROM fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_sms_no_deal_no_ncr AS vendor_data
+  62:    WHERE is_line_verified
+  63:
+  64:    UNION ALL
+  65:
+  66:    SELECT
+  67:        vendor_data.vendor_code AS vendor_code,
+  68:        'U286c2f8087ad23f73d6ff3593e618181' AS line_user_id,
+  69:    FROM fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_sms_no_deal_no_ncr AS vendor_data
+  70:    WHERE is_line_verified
+  71:    
+    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |    .    |
+2023-02-20 07:19:39,239 Failed send API request: name 'user_id_list' is not defined
