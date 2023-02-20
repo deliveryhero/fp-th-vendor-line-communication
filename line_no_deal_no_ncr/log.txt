@@ -1,0 +1,13 @@
+2023-02-20 06:59:10,546 This service is instrumented using OpenTelemetry. OpenTelemetry could not be imported; please add opentelemetry-api and opentelemetry-instrumentation packages in order to get BigQuery Tracing data.
+2023-02-20 06:59:10,546 Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+2023-02-20 06:59:10,608 Making request: POST https://oauth2.googleapis.com/token
+2023-02-20 06:59:10,624 Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2023-02-20 06:59:10,733 https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2023-02-20 06:59:10,749 Starting new HTTPS connection (1): bigquery.googleapis.com:443
+2023-02-20 06:59:11,233 https://bigquery.googleapis.com:443 "POST /bigquery/v2/projects/di-th-auto/jobs?prettyPrint=false HTTP/1.1" 200 None
+2023-02-20 06:59:11,424 https://bigquery.googleapis.com:443 "GET /bigquery/v2/projects/di-th-auto/queries/ce22fc06-d450-465e-a5ce-52b89fc83add?maxResults=0&location=US&prettyPrint=false HTTP/1.1" 200 None
+2023-02-20 06:59:11,627 https://bigquery.googleapis.com:443 "GET /bigquery/v2/projects/di-th-auto/queries/ce22fc06-d450-465e-a5ce-52b89fc83add?fields=jobReference%2CtotalRows%2CpageToken%2Crows&location=US&formatOptions.useInt64Timestamp=True&prettyPrint=false HTTP/1.1" 200 None
+2023-02-20 06:59:11,642 Starting new HTTPS connection (1): api.line.me:443
+2023-02-20 06:59:12,365 https://api.line.me:443 "POST /v2/bot/message/push HTTP/1.1" 200 2
+2023-02-20 06:59:12,833 https://bigquery.googleapis.com:443 "POST /bigquery/v2/projects/foodpanda-th-bigquery/datasets/pandata_th_external/tables/line_communication_logs_live/insertAll?prettyPrint=false HTTP/1.1" 200 None
+2023-02-20 06:59:12,833 ['New rows have been added.']
