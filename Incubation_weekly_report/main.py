@@ -19,7 +19,7 @@ query_table = "foodpanda-th-bigquery.pandata_th.incubation_weekly_report_line_co
 logs_table_id = "foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live"
 
 # Basic configuration parameters
-Live = False
+Live = True
 url = "https://api.line.me/v2/bot/message/push"
 json_data = json_object
 token = get_secret_data()
@@ -30,7 +30,7 @@ now = datetime.datetime.now(tz).strftime("%Y-%m-%d %H:%M:%S")
 if Live == False:
     query = f"""
     SELECT * EXCEPT (LineUserID),
-    'Uefed79ff4ec1d15e86fcbd0c59786c65' AS LineUserID
+    'U2b9495e231b925da2ed4163beeef6dad' AS LineUserID
     FROM {query_table}
     WHERE vendor_code != 'a0j1'
     LIMIT 1 
@@ -39,6 +39,8 @@ if Live == False:
 if Live == True:
     query = f"""
     SELECT * FROM {query_table} 
+    WHERE vendor_code IS NOT NULL
+    AND LineUserID IS NOT NULL
     """
 
 try: 

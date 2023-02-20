@@ -35,7 +35,7 @@ json_object = """
     "type": "box",
     "layout": "vertical",
     "position": "relative",
-    "height": "920px",
+    "height": "940px",
     "contents": [
       {
         "type": "text",
@@ -886,6 +886,46 @@ json_object = """
             "align": "end",
             "style": "italic",
             "contents": []
+          }
+        ]
+      },
+      {
+        "type": "box",
+        "layout": "vertical",
+        "offsetTop": "40px",
+        "contents": [
+          {
+            "type": "text",
+            "text": "หากคุณต้องการแจ้งปัญหาเกี่ยวกับรายงานฉบับนี้ คลิกที่นี่",
+            "size": "xs",
+            "wrap": true,
+            "action": {
+              "type": "uri",
+              "label": "คลิกที่นี่",
+              "uri": "https://docs.google.com/forms/d/e/1FAIpQLScC8VpIJ2lDJQH6fYNN_s_cxfCtv43TCBLLAGbwaQa28-yYoQ/viewform"
+            },
+            "contents": [
+              {
+                "type": "span",
+                "text": "หากคุณต้องการ"
+              },
+              {
+                "type": "span",
+                "text": "แจ้งปัญหา",
+                "color": "#FF2B85FF",
+                "weight": "bold"
+              },
+              {
+                "type": "span",
+                "text": "เกี่ยวกับรายงานฉบับนี้ คลิก"
+              },
+              {
+                "type": "span",
+                "text": "ที่นี่",
+                "color": "#FF2B85FF",
+                "weight": "bold"
+              }
+            ]
           }
         ]
       }
