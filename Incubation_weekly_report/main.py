@@ -12,6 +12,7 @@ from send_line_message import send_request_line_api_v3
 from get_secrete_token import get_secret_data
 import datetime, pytz
 from template import json_object
+import requests 
 
 
 # Basic configuration tables
@@ -46,6 +47,8 @@ if Live == True:
 try: 
   dataframe = query_BQ_table(query)
 except BaseException as e:
+    requests.post('https://hooks.slack.com/services/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',
+    json = {'text' : '*Incubation_weekly_report*: Failed to get data: ' + str(e)})
     logging.info('Failed to get data: ' + str(e))
 
 try:
@@ -53,6 +56,8 @@ try:
                                                           json_object = json_object, 
                                                           dataframe = dataframe)
 except BaseException as e:
+    requests.post('https://hooks.slack.com/services/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',
+    json = {'text' : '*Incubation_weekly_report*: Failed send API request: ' + str(e)})
     logging.info('Failed send API request: ' + str(e))
 
 dataframe = dataframe.filter(items=['vendor_code', 'LineUserID'])
@@ -67,6 +72,8 @@ df_records = dataframe.to_dict('records')
 try:
   status = record_line_communication_logs(logs_table_id, df_records)
 except BaseException as e:
+    requests.post('https://hooks.slack.com/services/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',
+    json = {'text' : '*Incubation_weekly_report*: Failed to record logs: ' + str(e)})
     logging.info('Failed to record logs: ' + str(e))
 
 logging.info(status)

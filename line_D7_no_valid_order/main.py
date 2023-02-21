@@ -11,7 +11,7 @@ from bigquery_data import query_BQ_table, record_line_communication_logs
 from send_line_message import send_request_line_api, send_request_line_api_v2
 from get_secrete_token import get_secret_data
 import datetime, pytz
-
+import requests 
 
 
 # Basic configuration tables
@@ -179,11 +179,15 @@ try:
   dataframe = query_BQ_table(query)
   user_id_list = dataframe["line_user_id"].tolist()
 except BaseException as e:
+    requests.post('https://hooks.slack.com/services/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',
+    json = {'text' : '*Line_D7_no_valid_order*: Failed to get data: ' + str(e)})
     logging.info('Failed to get data: ' + str(e))
 
 try:
   reponse_code_list, json_list = send_request_line_api_v2(url, headers, json_data, user_id_list)
 except BaseException as e:
+    requests.post('https://hooks.slack.com/services/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',
+    json = {'text' : '*Line_D7_no_valid_order*: Failed send API request: ' + str(e)})
     logging.info('Failed send API request: ' + str(e))
 
 dataframe["return_response"] = reponse_code_list
@@ -196,6 +200,8 @@ df_records = dataframe.to_dict('records')
 try:
   status = record_line_communication_logs(logs_table_id, df_records)
 except BaseException as e:
+    requests.post('https://hooks.slack.com/services/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',
+    json = {'text' : '*Line_D7_no_valid_order*: Failed to record logs: ' + str(e)})
     logging.info('Failed to record logs: ' + str(e))
 
 logging.info(status)
