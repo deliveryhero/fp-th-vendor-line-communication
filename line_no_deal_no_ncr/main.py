@@ -20,6 +20,7 @@ query_table = "fulfillment-dwh-production.pandata_report.country_TH_vendor_exper
 logs_table_id = "foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live"
 
 # Basic configuration parameters
+slack_webhook = os.getenv('slack_webhook')
 Live = True
 url = "https://api.line.me/v2/bot/message/push"
 json_data = {
@@ -89,14 +90,14 @@ try:
   dataframe = query_BQ_table(query)
   user_id_list = dataframe["line_user_id"].tolist()
 except BaseException as e:
-    requests.post('https://hooks.slack.com/services/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',
+    requests.post(slack_webhook,
     json = {'text' : '*line_no_deal_no_ncr*: Failed to get data: ' + str(e)})
     logging.info('Failed to get data: ' + str(e))
 
 try:
   reponse_code_list, json_list = send_request_line_api_v2(url, headers, json_data, user_id_list)
 except BaseException as e:
-    requests.post('https://hooks.slack.com/services/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',
+    requests.post(slack_webhook,
     json = {'text' : '*line_no_deal_no_ncr*: Failed send API request: ' + str(e)})
     logging.info('Failed send API request: ' + str(e))
 
@@ -110,7 +111,7 @@ df_records = dataframe.to_dict('records')
 try:
   status = record_line_communication_logs(logs_table_id, df_records)
 except BaseException as e:
-    requests.post('https://hooks.slack.com/services/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',
+    requests.post(slack_webhook,
     json = {'text' : '*line_no_deal_no_ncr*: Failed to record logs: ' + str(e)})
     logging.info('Failed to record logs: ' + str(e))
 

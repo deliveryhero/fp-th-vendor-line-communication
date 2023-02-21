@@ -16,6 +16,7 @@ import requests
 
 
 # Basic configuration tables
+slack_webhook = os.getenv('slack_webhook')
 query_table = "foodpanda-th-bigquery.pandata_th.incubation_weekly_report_line_communication"
 logs_table_id = "foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live"
 
@@ -47,7 +48,7 @@ if Live == True:
 try: 
   dataframe = query_BQ_table(query)
 except BaseException as e:
-    requests.post('https://hooks.slack.com/services/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',
+    requests.post(slack_webhook,
     json = {'text' : '*Incubation_weekly_report*: Failed to get data: ' + str(e)})
     logging.info('Failed to get data: ' + str(e))
 
@@ -56,7 +57,7 @@ try:
                                                           json_object = json_object, 
                                                           dataframe = dataframe)
 except BaseException as e:
-    requests.post('https://hooks.slack.com/services/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',
+    requests.post(slack_webhook,
     json = {'text' : '*Incubation_weekly_report*: Failed send API request: ' + str(e)})
     logging.info('Failed send API request: ' + str(e))
 
@@ -72,7 +73,7 @@ df_records = dataframe.to_dict('records')
 try:
   status = record_line_communication_logs(logs_table_id, df_records)
 except BaseException as e:
-    requests.post('https://hooks.slack.com/services/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',
+    requests.post(slack_webhook,
     json = {'text' : '*Incubation_weekly_report*: Failed to record logs: ' + str(e)})
     logging.info('Failed to record logs: ' + str(e))
 
