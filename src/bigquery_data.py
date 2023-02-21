@@ -21,7 +21,7 @@ def query_BQ_table(query):
 
 def record_line_communication_logs(table_id, rows_to_insert):
     status = []
-    for i in batch(rows_to_insert, 1000):
+    for i in batch(rows_to_insert, 100):
         errors = client.insert_rows_json(table_id, i)
         if errors == []:
             status.append("New rows have been added.")
