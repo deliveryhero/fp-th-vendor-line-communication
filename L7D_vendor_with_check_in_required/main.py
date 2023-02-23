@@ -20,7 +20,7 @@ logs_table_id = "foodpanda-th-bigquery.pandata_th_external.line_communication_lo
 
 # Basic configuration parameters
 slack_webhook = os.getenv('slack_webhook')
-Live = False
+Live = True
 url = "https://api.line.me/v2/bot/message/push"
 
 
@@ -33,7 +33,7 @@ if Live == False:
     query = f"""
     SELECT DISTINCT 
       vendor_code, 
-      'U5f25d7890e933d09ef30f8bcf98b8043' AS line_user_id, 
+      'U2b9495e231b925da2ed4163beeef6dad' AS line_user_id, 
       sum_check_in_required_mins
     FROM {query_table}
     WHERE line_user_id IS NOT NULL
