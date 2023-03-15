@@ -63,7 +63,7 @@ if Live == True:
         AND vendor_data.is_active
         AND NOT vendor_data.is_private
         AND NOT vendor_data.is_test
-        AND EXTRACT(DATE FROM Date) = CURRENT_DATE - 1
+        AND EXTRACT(DATE FROM Date) = CURRENT_DATE
         AND live.line_user_id IS NULL
     QUALIFY ROW_NUMBER() OVER (
       PARTITION BY
