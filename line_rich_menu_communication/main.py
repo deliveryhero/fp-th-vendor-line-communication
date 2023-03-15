@@ -16,7 +16,7 @@ import requests
 
 
 # Basic configuration tables
-query_table = "foodpanda-th-bigquery.pandata_th.vendor_experience_line_liff_user_data_backup"
+query_table = "foodpanda-th-bigquery.pandata_th_external.vendor_experience_line_liff_user_data"
 verification_table = "fulfillment-dwh-production.pandata_report.country_TH_general_pd_vendors"
 logs_table_id = "foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live"
 
@@ -55,6 +55,8 @@ if Live == True:
     FROM {query_table} AS line_data
     INNER JOIN {verification_table} AS vendor_data
             ON lower(line_data.VendorCode) = lower(vendor_data.vendor_code)
+    LEFT JOIN {logs_table_id}  AS live
+           ON line_data.LineUserID = live.line_user_id
     WHERE LineUserID IS NOT NULL
         AND VendorCode IS NOT NULL
         AND LOWER(VendorCode) NOT LIKE '%test%'
@@ -62,6 +64,7 @@ if Live == True:
         AND NOT vendor_data.is_private
         AND NOT vendor_data.is_test
         AND EXTRACT(DATE FROM Date) = CURRENT_DATE - 1
+        AND live.line_user_id IS NULL
     QUALIFY ROW_NUMBER() OVER (
       PARTITION BY
       line_data.LineUserID,
