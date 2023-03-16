@@ -63,7 +63,6 @@ if Live == True:
         AND vendor_data.is_active
         AND NOT vendor_data.is_private
         AND NOT vendor_data.is_test
-        AND EXTRACT(DATE FROM Date) = CURRENT_DATE
         AND live.line_user_id IS NULL
     QUALIFY ROW_NUMBER() OVER (
       PARTITION BY
@@ -72,7 +71,6 @@ if Live == True:
       ORDER BY
       line_data.Date DESC
     ) = 1
-    ORDER BY line_data.Date
     """
 
 try: 
