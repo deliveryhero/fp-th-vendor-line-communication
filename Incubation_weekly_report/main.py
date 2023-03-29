@@ -17,7 +17,7 @@ query_table = "foodpanda-th-bigquery.pandata_th.incubation_weekly_report_line_co
 logs_table_id = "foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live"
 
 # Basic configuration parameters
-Live = False
+Live = True
 url = "https://api.line.me/v2/bot/message/push"
 json_data = json_object
 token = get_secret_data()
