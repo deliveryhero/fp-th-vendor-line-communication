@@ -73,7 +73,28 @@ def send_request_line_api_v3(*args, **kwargs):
         r = requests.post(url, headers = headers, data = json_data_v1.encode('utf-8'))
         reponse_code = r.status_code
         reponse_code_list.append(reponse_code)
-        json_list.append(json_data_v1)
+        json_list.append('{'+'LineUserID: ' + row['LineUserID'] + ", " + 
+				        'vendor_name: ' + row['vendor_name'] + ", " +
+                        'vendor_code: '+ row['vendor_code'] + ", " +
+                        'ihs_score: '+ row['ihs_score'] + ", " +
+                        'customers: '+ row['customers'] + ", " +
+                        'perc_customer_growth: '+ row['perc_customer_growth'] + ", " +
+                        'valid_orders: '+ row['valid_orders'] + ", " +
+                        'perc_order_growth: '+ row['perc_order_growth'] + ", " +
+                        'top1_best_seller: '+ row['top1_best_seller'] + ", " +
+                        'top2_best_seller: '+ row['top2_best_seller'] + ", " +
+                        'top3_best_seller: '+ row['top3_best_seller'] + ", " +
+                        'failed_orders: '+ row['failed_orders'] + ", " +
+                        'improve_order: '+ row['improve_order'] + ", " +
+                        'top_failed_product: '+ row['top_failed_product'] + ", " +
+                        'improve_menu: '+ row['improve_menu'] + ", " +
+                        'top_failed_reason: '+ row['top_failed_reason'] + ", " +
+                        'improve_top_failed_reason: '+ row['improve_top_failed_reason'] + ", " +
+                        'perc_offline: '+ row['perc_offline'] + ", " +
+                        'top_offline_reason: '+ row['top_offline_reason'] + ", " +
+                        'improve_top_offline_reason: '+ row['improve_top_offline_reason'] + ", " +
+                        'first_date: '+ row['first_date'] + ", " +
+                        'last_date: '+ row['last_date']+'}')
     return reponse_code_list, json_list
 
 def send_request_line_api_v4(*args, **kwargs):

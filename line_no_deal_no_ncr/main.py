@@ -1,7 +1,3 @@
-import logging
-logging.basicConfig(filename="log.txt", level=logging.DEBUG,
-                    format="%(asctime)s %(message)s", filemode="a")
-
 import os,sys,inspect
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(currentdir)
@@ -92,20 +88,18 @@ try:
 except BaseException as e:
     requests.post(slack_webhook,
     json = {'text' : '*line_no_deal_no_ncr*: Failed to get data: ' + str(e)})
-    logging.info('Failed to get data: ' + str(e))
 
 try:
   reponse_code_list, json_list = send_request_line_api_v2(url, headers, json_data, user_id_list)
 except BaseException as e:
     requests.post(slack_webhook,
     json = {'text' : '*line_no_deal_no_ncr*: Failed send API request: ' + str(e)})
-    logging.info('Failed send API request: ' + str(e))
 
 dataframe["return_response"] = reponse_code_list
 dataframe["msg_sent_date_time"] = now
 dataframe["template_id_if_any"] = "line_no_deal_no_ncr"
 dataframe["msg_url"] = url
-dataframe["msg_content"] = json_list
+dataframe["msg_content"] = "line_no_deal_no_ncr_content"
 df_records = dataframe.to_dict('records')
 
 try:
@@ -113,6 +107,4 @@ try:
 except BaseException as e:
     requests.post(slack_webhook,
     json = {'text' : '*line_no_deal_no_ncr*: Failed to record logs: ' + str(e)})
-    logging.info('Failed to record logs: ' + str(e))
 
-logging.info(status)

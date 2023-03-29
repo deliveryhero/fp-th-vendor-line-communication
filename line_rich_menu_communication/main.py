@@ -1,7 +1,3 @@
-import logging
-logging.basicConfig(filename="log.txt", level=logging.DEBUG,
-                    format="%(asctime)s %(message)s", filemode="a")
-                    
 import os,sys,inspect
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(currentdir)
@@ -12,8 +8,6 @@ from send_line_message import send_request_line_api
 from get_secrete_token import get_secret_data
 import datetime, pytz
 import requests
-
-
 
 # Basic configuration tables
 query_table = "foodpanda-th-bigquery.pandata_th_external.vendor_experience_line_liff_user_data"
@@ -36,7 +30,7 @@ if Live == False:
       line_data.VendorCode AS vendor_code,
       line_data.LineUserID AS line_user_id,
     FROM {query_table} AS line_data
-    WHERE line_data.LineUserID IN ("U5f25d7890e933d09ef30f8bcf98b8043")
+    WHERE line_data.LineUserID IN ("U2b9495e231b925da2ed4163beeef6dad")
     QUALIFY ROW_NUMBER() OVER (
       PARTITION BY
       line_data.LineUserID,
@@ -79,14 +73,12 @@ try:
 except BaseException as e:
     requests.post(slack_webhook,
     json = {'text' : '*richmenu*: Failed to get data: ' + str(e)})
-    logging.info('Failed to get data: ' + str(e))
 
 try:
   reponse_code_list, url_list = send_request_line_api(url, headers, json, user_id_list)
 except BaseException as e:
     requests.post(slack_webhook,
     json = {'text' : '*richmenu*: Failed send API request: ' + str(e)})
-    logging.info('Failed send API request: ' + str(e))
 
 dataframe["return_response"] = reponse_code_list
 dataframe["msg_sent_date_time"] = now
@@ -100,6 +92,5 @@ try:
 except BaseException as e:
     requests.post(slack_webhook,
     json = {'text' : '*richmenu*: Failed to record logs: ' + str(e)})
-    logging.info('Failed to record logs: ' + str(e))
 
-logging.info(status)
+

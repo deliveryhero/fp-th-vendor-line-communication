@@ -1,7 +1,3 @@
-import logging
-logging.basicConfig(filename="log.txt", level=logging.DEBUG,
-                    format="%(asctime)s %(message)s", filemode="a")
-                    
 import os,sys,inspect
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(currentdir)
@@ -55,7 +51,6 @@ try:
 except BaseException as e:
     requests.post(slack_webhook,
     json = {'text' : '*L7D_vendor_with_check_in_required*: Failed to get data: ' + str(e)})
-    logging.info('Failed to get data: ' + str(e))
 
 try:
   reponse_code_list, json_list = send_request_line_api_v4(url = url, headers = headers, 
@@ -64,21 +59,17 @@ try:
 except BaseException as e:
     requests.post(slack_webhook,
     json = {'text' : '*L7D_vendor_with_check_in_required*: Failed send API request: ' + str(e)})
-    logging.info('Failed send API request: ' + str(e))
 
-dataframe = dataframe.filter(items=['vendor_code', 'line_user_id'])
-dataframe["return_response"] = reponse_code_list
-dataframe["msg_sent_date_time"] = now
-dataframe["template_id_if_any"] = "L7D_vendor_with_check_in_required"
-dataframe["msg_url"] = url
-dataframe["msg_content"] = json_list
-df_records = dataframe.to_dict('records')
+dataframe1 = dataframe.filter(items=['vendor_code', 'line_user_id'])
+dataframe1["return_response"] = reponse_code_list
+dataframe1["msg_sent_date_time"] = now
+dataframe1["template_id_if_any"] = "L7D_vendor_with_check_in_required"
+dataframe1["msg_url"] = url
+dataframe1["msg_content"] = 'content sum_check_in_required_mins: ' + dataframe['sum_check_in_required_mins']
+df_records = dataframe1.to_dict('records')
 
 try:
   status = record_line_communication_logs(logs_table_id, df_records)
 except BaseException as e:
     requests.post(slack_webhook,
     json = {'text' : '*L7D_vendor_with_check_in_required*: Failed to record logs: ' + str(e)})
-    logging.info('Failed to record logs: ' + str(e))
-
-logging.info(status)

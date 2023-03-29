@@ -1,7 +1,3 @@
-import logging
-logging.basicConfig(filename="log.txt", level=logging.DEBUG,
-                    format="%(asctime)s %(message)s", filemode="a")
-                    
 import os,sys,inspect
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(currentdir)
@@ -21,7 +17,7 @@ query_table = "foodpanda-th-bigquery.pandata_th.incubation_weekly_report_line_co
 logs_table_id = "foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live"
 
 # Basic configuration parameters
-Live = True
+Live = False
 url = "https://api.line.me/v2/bot/message/push"
 json_data = json_object
 token = get_secret_data()
@@ -44,13 +40,11 @@ if Live == True:
     WHERE vendor_code IS NOT NULL
     AND LineUserID IS NOT NULL
     """
-
 try: 
   dataframe = query_BQ_table(query)
 except BaseException as e:
     requests.post(slack_webhook,
     json = {'text' : '*Incubation_weekly_report*: Failed to get data: ' + str(e)})
-    logging.info('Failed to get data: ' + str(e))
 
 try:
   reponse_code_list, json_list = send_request_line_api_v3(url = url, headers = headers, 
@@ -59,7 +53,6 @@ try:
 except BaseException as e:
     requests.post(slack_webhook,
     json = {'text' : '*Incubation_weekly_report*: Failed send API request: ' + str(e)})
-    logging.info('Failed send API request: ' + str(e))
 
 dataframe = dataframe.filter(items=['vendor_code', 'LineUserID'])
 dataframe.rename(columns={'LineUserID': 'line_user_id'}, inplace=True)
@@ -75,6 +68,3 @@ try:
 except BaseException as e:
     requests.post(slack_webhook,
     json = {'text' : '*Incubation_weekly_report*: Failed to record logs: ' + str(e)})
-    logging.info('Failed to record logs: ' + str(e))
-
-logging.info(status)
