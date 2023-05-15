@@ -120,3 +120,31 @@ def send_request_line_api_v4(*args, **kwargs):
         json_list.append(json_data_v1)
     return reponse_code_list, json_list 
 
+def send_request_line_api_v5(*args, **kwargs):
+    # reponse collections lists
+    reponse_code_list = []
+    json_list = []
+    
+    # setting variables
+    url = kwargs['url']
+    headers = kwargs['headers']
+    json_string = kwargs['json_object']
+    df = kwargs['dataframe']
+    df.replace(to_replace=[None], value="--", inplace=True)
+    df = df.reset_index() 
+    for index, row in df.iterrows():
+        json_data_v1 = json_string.replace('{line_user_id}', row['line_user_id']) \
+                                .replace('{vendor_name}', row['vendor_name']) \
+                                .replace('{start_date}', row['start_date']) \
+                                .replace('{end_date}', row['end_date']) \
+                                .replace('{total_offline_hour}', row['total_offline_hour']) \
+                                .replace('{potential_order_loss}', row['potential_order_loss']) 
+
+        r = requests.post(url, headers = headers, data = json_data_v1.encode('utf-8'))
+        print(r.text)
+        reponse_code = r.status_code
+        reponse_code_list.append(reponse_code)
+        json_list.append(json_data_v1)
+    return reponse_code_list, json_list 
+
+
