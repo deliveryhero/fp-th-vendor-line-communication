@@ -7,7 +7,7 @@ from bigquery_data import query_BQ_table, record_line_communication_logs
 from send_line_message import send_request_line_api_v5
 from get_secrete_token import get_secret_data
 import datetime, pytz
-import requests 
+import requests
 from template import json_object
 
 # Basic configuration tables
@@ -32,7 +32,7 @@ if Live == False:
       vendor_name,
       start_date,
       end_date,
-      'U2b9495e231b925da2ed4163beeef6dad' AS line_user_id, 
+      'Ucd25fe3518e5cda83a0e704446b1ef08' AS line_user_id,
       total_offline_hour,
       potential_order_loss
     FROM {query_table}
@@ -42,27 +42,27 @@ if Live == False:
 
 if Live == True:
     query = f"""
-    SELECT DISTINCT 
+    SELECT DISTINCT
       vendor_code,
       vendor_name,
       start_date,
       end_date,
-      line_user_id, 
+      line_user_id,
       total_offline_hour,
       potential_order_loss
     FROM {query_table}
     WHERE line_user_id IS NOT NULL
     """
 
-try: 
+try:
   dataframe = query_BQ_table(query)
 except BaseException as e:
     requests.post(slack_webhook,
     json = {'text' : '*offline_notification_for_vendor_pm_longtail*: Failed to get data: ' + str(e)})
 
 try:
-  reponse_code_list, json_list = send_request_line_api_v5(url = url, headers = headers, 
-                                                          json_object = json_object, 
+  reponse_code_list, json_list = send_request_line_api_v5(url = url, headers = headers,
+                                                          json_object = json_object,
                                                           dataframe = dataframe)
 except BaseException as e:
     requests.post(slack_webhook,
@@ -77,7 +77,7 @@ dataframe1["msg_content"] = 'content vendor_name: ' + dataframe['vendor_name'] \
                             +','+'content start_date: ' + dataframe['start_date'] \
                             +','+'content end_date: ' + dataframe['end_date'] \
                             +','+'content total_offline_hour: ' + dataframe['total_offline_hour'] \
-                            +','+'content potential_order_loss: ' + dataframe['potential_order_loss'] 
+                            +','+'content potential_order_loss: ' + dataframe['potential_order_loss']
 df_records = dataframe1.to_dict('records')
 
 try:
