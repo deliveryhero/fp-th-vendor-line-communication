@@ -6,25 +6,24 @@ json_object = """
             "type": "flex",
             "altText": "ร้านของคุณปิด ทำให้มีเวลาออฟไลน์",
             "contents":
-    "type": "box",
-    "layout": "vertical",
-    "height": "380px",
-    "contents": [{
+{
   "type": "bubble",
   "direction": "ltr",
   "hero": {
     "type": "image",
-    "url": "https://drive.google.com/uc?export=view&id=1t-_pm0agkInZxubSfHTv_pCyRsGxKNkc",
+    "url": "https://drive.google.com/uc?export=view&id=1zIUw4Dylda6vO-Qn83-JdL3kN2wi5tOD",
     "size": "full",
-    "aspectRatio": "4:4",
+    "aspectRatio": "7.5:3",
     "aspectMode": "cover",
     "action": {
       "type": "uri",
-      "uri": "http://bit.ly/3RM70Ae"
+      "uri": "https://foodpanda.portal.restaurant/opening-times-pandora?int_ref=side-nav"
     }
   },
   "body": {
-
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
       {
         "type": "text",
         "text": "ทีม foodpanda ได้ทำการเฝ้าสังเกตใน 1 สัปดาห์ที่ผ่านมา และพบว่าร้าน {vendor_name} ได้มีการปิดในเวลาทำการดังต่อไปนี้",
@@ -37,7 +36,7 @@ json_object = """
           },
           {
             "type": "span",
-            "text": "ร้าน {vendor_name}",
+            "text": "ร้าน {vendor_name} ",
             "color": "#FF2B85",
             "weight": "bold"
           },
@@ -55,6 +54,7 @@ json_object = """
       {
         "type": "text",
         "text": "ข้อมูลวันที่ {start_date} ถึง {end_date}",
+        "weight": "bold",
         "wrap": true,
         "contents": [
           {
@@ -63,7 +63,7 @@ json_object = """
           },
           {
             "type": "span",
-            "text": "{start_date} ถึง {end_date}",
+            "text": " {start_date} ถึง {end_date}",
             "color": "#FF2B85FF",
             "weight": "bold"
           }
@@ -89,11 +89,12 @@ json_object = """
       },
       {
         "type": "separator",
-        "margin": "lg"
+        "margin": "lg",
+        "color": "#FFFFFFFF"
       },
       {
         "type": "text",
-        "text": "หากสาขาของท่านมีปัญหาเกี่ยวกับแท็บเล็ต หรือสัญญาณอินเตอร์เน็ตสามารถติดต่อได้ที่ Hotline 02-4606021",
+        "text": "หากสาขาของท่านมีปัญหาเกี่ยวกับแท็บเล็ต หรือสัญญาณอินเทอร์เน็ต สามารถติดต่อฝ่ายให้บริการร้านได้ทุกวัน ตั้งแต่เวลา 09:00 น. - 21:00 น.ได้ที่เบอร์: 02-460-6020",
         "wrap": true,
         "contents": []
       }
@@ -103,5 +104,6 @@ json_object = """
     }
   ]
 }
+
 
 """
