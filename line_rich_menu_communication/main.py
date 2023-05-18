@@ -46,16 +46,18 @@ if Live == True:
     SELECT 
       vendor_data.vendor_code AS vendor_code,
       line_data.LineUserID AS line_user_id
-    FROM foodpanda-th-bigquery.pandata_th_external.vendor_experience_line_liff_user_data AS line_data
-    INNER JOIN fulfillment-dwh-production.pandata_report.country_TH_general_pd_vendors AS vendor_data
+    FROM {query_table} AS line_data
+    INNER JOIN {verification_table} AS vendor_data
             ON lower(line_data.VendorCode) = lower(vendor_data.vendor_code)
+    LEFT JOIN {logs_table_id}  AS live
+           ON line_data.LineUserID = live.line_user_id
     WHERE LineUserID IS NOT NULL
         AND VendorCode IS NOT NULL
         AND LOWER(VendorCode) NOT LIKE '%test%'
         AND vendor_data.is_active
         AND NOT vendor_data.is_private
         AND NOT vendor_data.is_test
-        AND line_data.LineUserID IS NOT NULL
+        AND live.line_user_id IS NULL
     QUALIFY ROW_NUMBER() OVER (
       PARTITION BY
       line_data.LineUserID,
