@@ -32,7 +32,7 @@ if Live == False:
       vendor_name,
       start_date,
       end_date,
-      'Ucd25fe3518e5cda83a0e704446b1ef08' AS line_user_id,
+      'Uca11d4d4585c435204950dba18dafcd8' AS line_user_id,
       total_offline_hour,
       potential_order_loss
     FROM {query_table}

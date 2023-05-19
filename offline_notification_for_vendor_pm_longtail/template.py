@@ -65,7 +65,7 @@ json_object = """
           },
           {
             "type": "span",
-            "text": "{potential_order_loss}",
+            "text": "{potential_order_loss} ออเดอร์",
             "color": "#FF2B85FF",
             "weight": "bold"
           }
