@@ -27,31 +27,32 @@ now = datetime.datetime.now(tz).strftime("%Y-%m-%d %H:%M:%S")
 
 if Live == False:
     query = f"""
-    SELECT DISTINCT
-      vendor_code,
-      vendor_name,
-      start_date_in_thai,
-      end_date_in_thai,
-      'Uca11d4d4585c435204950dba18dafcd8' AS line_user_id,
-      total_offline_hours,
-      potential_order_loss
-    FROM {query_table}
-    WHERE line_user_id IS NOT NULL
-    LIMIT 1
+      SELECT DISTINCT
+        vendor_code,
+        vendor_name,
+        start_date_in_thai,
+        end_date_in_thai,
+        'Uca11d4d4585c435204950dba18dafcd8' AS line_user_id,
+        total_offline_hours,
+        potential_order_loss
+      FROM {query_table}
+      WHERE line_user_id IS NOT NULL
+      LIMIT 1
     """
 
 if Live == True:
     query = f"""
-    SELECT DISTINCT
-      vendor_code,
-      vendor_name,
-      start_date_in_thai,
-      end_date_in_thai,
-      line_user_id,
-      total_offline_hours,
-      potential_order_loss
-    FROM {query_table}
-    WHERE line_user_id IS NOT NULL
+      SELECT DISTINCT
+        vendor_code,
+        vendor_name,
+        start_date_in_thai,
+        end_date_in_thai,
+        line_user_id,
+        total_offline_hours,
+        potential_order_loss
+      FROM {query_table}
+      WHERE line_user_id IS NOT NULL
+        AND DATE(recorded_at_local) = CURRENT_DATE
     """
 
 try:
