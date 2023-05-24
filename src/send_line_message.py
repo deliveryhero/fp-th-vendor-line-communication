@@ -135,9 +135,9 @@ def send_request_line_api_v5(*args, **kwargs):
     for index, row in df.iterrows():
         json_data_v1 = json_string.replace('{line_user_id}', row['line_user_id']) \
                                 .replace('{vendor_name}', row['vendor_name']) \
-                                .replace('{start_date}', row['start_date']) \
-                                .replace('{end_date}', row['end_date']) \
-                                .replace('{total_offline_hour}', row['total_offline_hour']) \
+                                .replace('{start_date}', row['start_date_in_thai']) \
+                                .replace('{end_date}', row['end_date_in_thai']) \
+                                .replace('{total_offline_hour}', row['total_offline_hours']) \
                                 .replace('{potential_order_loss}', row['potential_order_loss'])
 
         r = requests.post(url, headers = headers, data = json_data_v1.encode('utf-8'))
@@ -162,9 +162,9 @@ def send_request_line_api_v6(*args, **kwargs):
     for index, row in df.iterrows():
         json_data_v1 = json_string.replace('{line_user_id}', row['line_user_id']) \
                                 .replace('{vendor_name}', row['vendor_name']) \
-                                .replace('{start_date}', row['start_date']) \
-                                .replace('{end_date}', row['end_date']) \
-                                .replace('{total_offline_hour}', row['total_offline_hour'])
+                                .replace('{start_date}', row['start_date_in_thai']) \
+                                .replace('{end_date}', row['end_date_in_thai']) \
+                                .replace('{total_offline_hour}', row['total_offline_hours'])
 
         r = requests.post(url, headers = headers, data = json_data_v1.encode('utf-8'))
         print(r.text)

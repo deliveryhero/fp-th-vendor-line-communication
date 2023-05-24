@@ -35,7 +35,7 @@ json_object = """
           },
           {
             "type": "span",
-            "text": " {start_date} ถึง {end_date} ",
+            "text": " {start_date_in_thai} ถึง {end_date_in_thai} ",
             "color": "#FF2B85FF",
             "weight": "bold"
           },
@@ -55,7 +55,7 @@ json_object = """
           },
           {
             "type": "span",
-            "text": "{total_offline_hour} ชั่วโมง ",
+            "text": "{total_offline_hours} ชั่วโมง ",
             "color": "#FF2B85FF",
             "weight": "bold"
           },

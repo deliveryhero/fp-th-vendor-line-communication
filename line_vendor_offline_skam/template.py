@@ -53,7 +53,7 @@ json_object = """
       },
       {
         "type": "text",
-        "text": "ข้อมูลวันที่ {start_date} ถึง {end_date}",
+        "text": "ข้อมูลวันที่ {start_date_in_thai} ถึง {end_date_in_thai}",
         "weight": "bold",
         "wrap": true,
         "contents": [
@@ -63,7 +63,7 @@ json_object = """
           },
           {
             "type": "span",
-            "text": " {start_date} ถึง {end_date}",
+            "text": " {start_date_in_thai} ถึง {end_date_in_thai}",
             "color": "#FF2B85FF",
             "weight": "bold"
           }
@@ -71,7 +71,7 @@ json_object = """
       },
       {
         "type": "text",
-        "text": "จำนวนชั่วโมงที่ปิดร้าน : {total_offline_hour} ชั่วโมง",
+        "text": "จำนวนชั่วโมงที่ปิดร้าน : {total_offline_hours} ชั่วโมง",
         "wrap": true,
         "contents": [
           {
@@ -81,7 +81,7 @@ json_object = """
           },
           {
             "type": "span",
-            "text": " {total_offline_hour} ชั่วโมง",
+            "text": " {total_offline_hours} ชั่วโมง",
             "color": "#FF2B85FF",
             "weight": "bold"
           }
