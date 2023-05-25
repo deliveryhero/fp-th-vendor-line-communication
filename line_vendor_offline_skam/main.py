@@ -55,17 +55,20 @@ if Live == True:
 
 try:
   dataframe = query_BQ_table(query)
+  print("Created dataframe successfully")
 except BaseException as e:
-    requests.post(slack_webhook,
-    json = {'text' : '*line_vendor_offline_skam*: Failed to get data: ' + str(e)})
+  requests.post(slack_webhook,
+  json = {'text' : '*line_vendor_offline_skam*: Failed to get data: ' + str(e)})
+  print("Cannot create dataframe")
 
 try:
-  reponse_code_list, json_list = send_request_line_api_v6(url = url, headers = headers,
+  reponse_code_list, json_list = send_request_line_api_v6(url = url, 
+                                                          headers = headers,
                                                           json_object = json_object,
                                                           dataframe = dataframe)
 except BaseException as e:
-    requests.post(slack_webhook,
-    json = {'text' : '*line_vendor_offline_skam*: Failed send API request: ' + str(e)})
+  requests.post(slack_webhook,
+  json = {'text' : '*line_vendor_offline_skam*: Failed send API request: ' + str(e)})
 
 dataframe = dataframe.filter(items=['vendor_code', 'line_user_id'])
 dataframe["return_response"] = reponse_code_list
@@ -81,5 +84,5 @@ df_records = dataframe.to_dict('records')
 try:
   status = record_line_communication_logs(logs_table_id, df_records)
 except BaseException as e:
-    requests.post(slack_webhook,
-    json = {'text' : '*line_vendor_offline_skam*: Failed to record logs: ' + str(e)})
+  requests.post(slack_webhook,
+  json = {'text' : '*line_vendor_offline_skam*: Failed to record logs: ' + str(e)})

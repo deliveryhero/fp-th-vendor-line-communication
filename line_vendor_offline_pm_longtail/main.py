@@ -57,32 +57,35 @@ if Live == True:
 
 try:
   dataframe = query_BQ_table(query)
+  print("Created dataframe successfully")
 except BaseException as e:
-    requests.post(slack_webhook,
-    json = {'text' : '*line_vendor_offline_pm_longtail*: Failed to get data: ' + str(e)})
+  requests.post(slack_webhook,
+  json = {'text' : '*line_vendor_offline_pm_longtail*: Failed to get data: ' + str(e)})
+  print("Cannot create dataframe")
 
 try:
-  reponse_code_list, json_list = send_request_line_api_v5(url = url, headers = headers,
+  reponse_code_list, json_list = send_request_line_api_v5(url = url, 
+                                                          headers = headers,
                                                           json_object = json_object,
                                                           dataframe = dataframe)
 except BaseException as e:
-    requests.post(slack_webhook,
-    json = {'text' : '*line_vendor_offline_pm_longtail*: Failed send API request: ' + str(e)})
+  requests.post(slack_webhook,
+  json = {'text' : '*line_vendor_offline_pm_longtail*: Failed send API request: ' + str(e)})
 
-dataframe1 = dataframe.filter(items=['vendor_code', 'line_user_id'])
-dataframe1["return_response"] = reponse_code_list
-dataframe1["msg_sent_date_time"] = now
-dataframe1["template_id_if_any"] = "line_vendor_offline_pm_longtail"
-dataframe1["msg_url"] = url
-dataframe1["msg_content"] = 'content vendor_name: ' + dataframe['vendor_name'] \
+dataframe = dataframe.filter(items=['vendor_code', 'line_user_id'])
+dataframe["return_response"] = reponse_code_list
+dataframe["msg_sent_date_time"] = now
+dataframe["template_id_if_any"] = "line_vendor_offline_pm_longtail"
+dataframe["msg_url"] = url
+dataframe["msg_content"] = 'content vendor_name: ' + dataframe['vendor_name'] \
                             +','+'content start_date_in_thai: ' + dataframe['start_date_in_thai'] \
                             +','+'content end_date_in_thai: ' + dataframe['end_date_in_thai'] \
                             +','+'content total_offline_hours: ' + dataframe['total_offline_hours'] \
                             +','+'content potential_order_loss: ' + dataframe['potential_order_loss']
-df_records = dataframe1.to_dict('records')
+df_records = dataframe.to_dict('records')
 
 try:
   status = record_line_communication_logs(logs_table_id, df_records)
 except BaseException as e:
-    requests.post(slack_webhook,
-    json = {'text' : '*line_vendor_offline_pm_longtail*: Failed to record logs: ' + str(e)})
+  requests.post(slack_webhook,
+  json = {'text' : '*line_vendor_offline_pm_longtail*: Failed to record logs: ' + str(e)})
