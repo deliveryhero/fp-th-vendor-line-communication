@@ -16,7 +16,7 @@ logs_table_id = "foodpanda-th-bigquery.pandata_th_external.line_communication_lo
 
 # Basic configuration parameters
 slack_webhook = os.getenv('slack_webhook')
-Live = True
+Live = False
 url = "https://api.line.me/v2/bot/message/push"
 
 
@@ -67,16 +67,16 @@ except BaseException as e:
     requests.post(slack_webhook,
     json = {'text' : '*line_vendor_offline_skam*: Failed send API request: ' + str(e)})
 
-dataframe1 = dataframe.filter(items=['vendor_code', 'line_user_id'])
-dataframe1["return_response"] = reponse_code_list
-dataframe1["msg_sent_date_time"] = now
-dataframe1["template_id_if_any"] = "line_vendor_offline_skam"
-dataframe1["msg_url"] = url
-dataframe1["msg_content"] = 'content vendor_name: ' + dataframe['vendor_name'] \
+dataframe = dataframe.filter(items=['vendor_code', 'line_user_id'])
+dataframe["return_response"] = reponse_code_list
+dataframe["msg_sent_date_time"] = now
+dataframe["template_id_if_any"] = "line_vendor_offline_skam"
+dataframe["msg_url"] = url
+dataframe["msg_content"] = 'content vendor_name: ' + dataframe['vendor_name'] \
                             +','+'content start_date_in_thai: ' + dataframe['start_date_in_thai'] \
                             +','+'content end_date_in_thai: ' + dataframe['end_date_in_thai'] \
                             +','+'content total_offline_hours: ' + dataframe['total_offline_hours']
-df_records = dataframe1.to_dict('records')
+df_records = dataframe.to_dict('records')
 
 try:
   status = record_line_communication_logs(logs_table_id, df_records)
