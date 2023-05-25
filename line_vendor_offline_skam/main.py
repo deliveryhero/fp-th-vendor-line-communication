@@ -32,7 +32,7 @@ if Live == False:
         vendor_name,
         start_date_in_thai,
         end_date_in_thai,
-        'Ucd25fe3518e5cda83a0e704446b1ef08' AS line_user_id,
+        'Uca11d4d4585c435204950dba18dafcd8' AS line_user_id,
         total_offline_hours
       FROM {query_table}
       WHERE line_user_id IS NOT NULL
