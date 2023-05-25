@@ -54,7 +54,6 @@ if Live == True:
       WHERE line_user_id IS NOT NULL
         AND DATE(recorded_at_local) = CURRENT_DATE
     """
-dataframe = query_BQ_table(query)
 
 try:
   dataframe = query_BQ_table(query)
