@@ -8,16 +8,16 @@ from send_line_message import send_request_line_api_v3
 from get_secrete_token import get_secret_data
 import datetime, pytz
 from template import json_object
-import requests 
+import requests
 
 
 # Basic configuration tables
 slack_webhook = os.getenv('slack_webhook')
-query_table = "foodpanda-th-bigquery.pandata_th.incubation_weekly_report_line_communication"
+query_table = "fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_incubation_weekly_report"
 logs_table_id = "foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live"
 
 # Basic configuration parameters
-Live = True
+Live = False
 url = "https://api.line.me/v2/bot/message/push"
 json_data = json_object
 token = get_secret_data()
@@ -27,28 +27,86 @@ now = datetime.datetime.now(tz).strftime("%Y-%m-%d %H:%M:%S")
 
 if Live == False:
     query = f"""
-    SELECT * EXCEPT (LineUserID),
-    'U2b9495e231b925da2ed4163beeef6dad' AS LineUserID
+    SELECT
+      vendor_code,
+      vendor_name,
+      'Uca11d4d4585c435204950dba18dafcd8' AS LineUserID,
+      CAST(ihs_score AS STRING) AS ihs_score,
+      CAST(customers AS STRING) AS customers,
+      IF(
+        perc_customer_growth > 0.00,
+        CONCAT("🔼", perc_customer_growth),
+        CONCAT("🔽", perc_customer_growth)
+      ) AS perc_customer_growth,
+      CAST(valid_orders AS STRING) AS valid_orders,
+      IF(
+        perc_order_growth > 0.00,
+        CONCAT("🔼", perc_order_growth),
+        CONCAT("🔽", perc_order_growth)
+      ) AS perc_order_growth,
+      top1_best_seller,
+      top2_best_seller,
+      top3_best_seller,
+      CAST(failed_orders AS STRING) AS failed_orders,
+      improve_order,
+      top_failed_product,
+      improve_menu,
+      top_failed_reason,
+      improve_top_failed_reason,
+      perc_offline,
+      top_offline_reason,
+      improve_top_offline_reason,
+      CAST(first_date AS STRING) AS first_date,
+      CAST(last_date AS STRING) AS last_date
     FROM {query_table}
     WHERE vendor_code != 'a0j1'
-    LIMIT 1 
+    LIMIT 1
     """
 
 if Live == True:
     query = f"""
-    SELECT * FROM {query_table} 
-    WHERE vendor_code IS NOT NULL
-    AND LineUserID IS NOT NULL
+      SELECT
+        vendor_code,
+        vendor_name,
+        line_user_id AS LineUserID,
+        CAST(ihs_score AS STRING) AS ihs_score,
+        CAST(customers AS STRING) AS customers,
+        IF(
+          perc_customer_growth > 0.00,
+          CONCAT("🔼", perc_customer_growth),
+          CONCAT("🔽", perc_customer_growth)
+        ) AS perc_customer_growth,
+        CAST(valid_orders AS STRING) AS valid_orders,
+        IF(
+          perc_order_growth > 0.00,
+          CONCAT("🔼", perc_order_growth),
+          CONCAT("🔽", perc_order_growth)
+        ) AS perc_order_growth,
+        top1_best_seller,
+        top2_best_seller,
+        top3_best_seller,
+        CAST(failed_orders AS STRING) AS failed_orders,
+        improve_order,
+        top_failed_product,
+        improve_menu,
+        top_failed_reason,
+        improve_top_failed_reason,
+        perc_offline,
+        top_offline_reason,
+        improve_top_offline_reason,
+        CAST(first_date AS STRING) AS first_date,
+        CAST(last_date AS STRING) AS last_date
+      FROM {query_table}
     """
-try: 
+try:
   dataframe = query_BQ_table(query)
 except BaseException as e:
     requests.post(slack_webhook,
     json = {'text' : '*Incubation_weekly_report*: Failed to get data: ' + str(e)})
 
 try:
-  reponse_code_list, json_list = send_request_line_api_v3(url = url, headers = headers, 
-                                                          json_object = json_object, 
+  reponse_code_list, json_list = send_request_line_api_v3(url = url, headers = headers,
+                                                          json_object = json_object,
                                                           dataframe = dataframe)
 except BaseException as e:
     requests.post(slack_webhook,
