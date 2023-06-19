@@ -16,8 +16,8 @@ logs_table_id = "foodpanda-th-bigquery.pandata_th_external.line_communication_lo
 
 # Basic configuration parameters
 slack_webhook = os.getenv('slack_webhook')
-Live = True
-url = "https://api.line.me/v2/bot/user/user_id_variable/richmenu/richmenu-6da47a1cac4c62cc569bf5efdef303eb"
+Live = False
+url = "https://api.line.me/v2/bot/user/user_id_variable/richmenu/richmenu-a3e0ae7dab2859fca478d67e7de2429c"
 json = {}
 token = get_secret_data()
 headers = {'Authorization': "Bearer {" + token + "}"}
@@ -30,7 +30,7 @@ if Live == False:
       line_data.VendorCode AS vendor_code,
       line_data.LineUserID AS line_user_id,
     FROM {query_table} AS line_data
-    WHERE line_data.LineUserID IN ("U5f25d7890e933d09ef30f8bcf98b8043")
+    WHERE line_data.LineUserID IN ("U0276f51ba4f3f5f0e275ebcdbbc11b6d")
     QUALIFY ROW_NUMBER() OVER (
       PARTITION BY
       line_data.LineUserID,
@@ -82,7 +82,7 @@ except BaseException as e:
 
 dataframe["return_response"] = reponse_code_list
 dataframe["msg_sent_date_time"] = now
-dataframe["template_id_if_any"] = "richmenu-6da47a1cac4c62cc569bf5efdef303eb"
+dataframe["template_id_if_any"] = "richmenu-a3e0ae7dab2859fca478d67e7de2429c"
 dataframe["msg_url"] = url_list
 dataframe["msg_content"] = "NA"
 df_records = dataframe.to_dict('records')
