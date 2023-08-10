@@ -206,7 +206,6 @@ if Live == True:
 
 try: 
   dataframe = query_BQ_table(query)
-  print(dataframe)
 except BaseException as e:
     requests.post(slack_webhook,
     json = {'text' : '*line_insight_report_top_3_and_ractors*: Failed to get data: ' + str(e)})

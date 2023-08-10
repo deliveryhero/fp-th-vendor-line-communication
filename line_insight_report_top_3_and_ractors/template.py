@@ -514,6 +514,20 @@ json_object = """
             "size": "xs",
             "margin": "sm",
             "wrap": true
+          },
+          {
+            "type": "text",
+            "text": "หากต้องการแจ้งปัญหาเกี่ยวกับรายงานฉบับนี้ คลิก ที่นี่!",
+            "size": "xs",
+            "margin": "none",
+            "wrap": true,
+            "color": "#FF2B85",
+            "adjustMode": "shrink-to-fit",
+            "action": {
+              "type": "uri",
+              "label": "action",
+              "uri": "https://forms.gle/mvui56d7yn53HfHy6"
+            }
           }
         ]
       }
@@ -521,20 +535,48 @@ json_object = """
   },
   "footer": {
     "type": "box",
-    "layout": "vertical",
+    "layout": "horizontal",
     "contents": [
       {
         "type": "button",
         "action": {
           "type": "uri",
-          "label": "จัดการร้านบนพอร์ทัลร้านอาหาร >",
+          "label": "อ่านทริคเพิ่มเติม>",
+          "uri": "https://bit.ly/45mWC7m"
+        },
+        "color": "#FF2B85",
+        "height": "sm",
+        "position": "relative",
+        "margin": "none",
+        "style": "primary",
+        "offsetTop": "xs",
+        "offsetBottom": "xs",
+        "offsetStart": "xs",
+        "offsetEnd": "xs"
+      },
+      {
+        "type": "button",
+        "action": {
+          "type": "uri",
+          "label": "จัดการร้านเลย >",
           "uri": "https://bit.ly/3pAh8Ce"
         },
-        "color": "#FFFFFF",
-         "height": "sm"
+        "color": "#FF2B85",
+        "height": "sm",
+        "position": "relative",
+        "margin": "sm",
+        "style": "primary",
+        "offsetTop": "xs",
+        "offsetBottom": "xs",
+        "offsetStart": "xs",
+        "offsetEnd": "xs"
       }
     ],
-    "backgroundColor": "#FF2B85"
+    "backgroundColor": "#FFFFFF",
+    "spacing": "none",
+    "margin": "none",
+    "borderColor": "#FFFFFF",
+    "borderWidth": "none"
   }
 }
 

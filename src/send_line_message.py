@@ -377,7 +377,6 @@ def send_request_line_api_insight_top_3_and_ractors(*args, **kwargs):
 
         r = requests.post(url, headers = headers, data = json_data_v1.encode('utf-8'))
         reponse_code = r.status_code
-        print(r.text)
         reponse_code_list.append(reponse_code)
         json_list.append('{'+'line_user_id: ' + row['line_user_id'] + ", " +
 				        'vendor_name: ' + row['vendor_name'] + ", " +

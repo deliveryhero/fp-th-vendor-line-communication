@@ -249,6 +249,32 @@ json_object = """
             ],
             "spacing": "lg",
             "margin": "lg"
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "หากต้องการแจ้งปัญหาเกี่ยวกับรายงานฉบับนี้ คลิก ที่นี่!",
+                "adjustMode": "shrink-to-fit",
+                "wrap": true,
+                "size": "xs",
+                "action": {
+                  "type": "uri",
+                  "label": "action",
+                  "uri": "https://forms.gle/mvui56d7yn53HfHy6"
+                },
+                "color": "#FF2B85"
+              }
+            ],
+            "spacing": "none",
+            "margin": "none",
+            "action": {
+              "type": "uri",
+              "label": "action",
+              "uri": "http://linecorp.com/"
+            }
           }
         ],
         "spacing": "lg",
@@ -261,22 +287,48 @@ json_object = """
   },
   "footer": {
     "type": "box",
-    "layout": "vertical",
+    "layout": "horizontal",
     "contents": [
       {
         "type": "button",
         "action": {
           "type": "uri",
-          "label": "ร้านไหนยังไม่มีเพิ่มเลย>",
+          "label": "อ่านทริคเพิ่มเติม>",
+          "uri": "https://bit.ly/47iZ7tn"
+        },
+        "color": "#FF2B85",
+        "height": "sm",
+        "position": "relative",
+        "margin": "none",
+        "style": "primary",
+        "offsetTop": "xs",
+        "offsetBottom": "xs",
+        "offsetStart": "xs",
+        "offsetEnd": "xs"
+      },
+      {
+        "type": "button",
+        "action": {
+          "type": "uri",
+          "label": "เพิ่มเมนูเลย>",
           "uri": "https://bit.ly/3pEyDBx"
         },
-        "color": "#FFFFFF",
-        "height": "sm"
+        "color": "#FF2B85",
+        "height": "sm",
+        "position": "relative",
+        "margin": "sm",
+        "style": "primary",
+        "offsetTop": "xs",
+        "offsetBottom": "xs",
+        "offsetStart": "xs",
+        "offsetEnd": "xs"
       }
     ],
-    "backgroundColor": "#FF2B85",
+    "backgroundColor": "#EFF2F4",
     "spacing": "none",
-    "margin": "none"
+    "margin": "none",
+    "borderColor": "#FFFFFF",
+    "cornerRadius": "none"
   },
   "styles": {
     "footer": {

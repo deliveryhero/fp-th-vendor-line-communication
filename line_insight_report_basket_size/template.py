@@ -294,25 +294,80 @@ json_object = """
           }
         ],
         "margin": "md"
+      },
+      {
+        "type": "box",
+        "layout": "horizontal",
+        "contents": [
+          {
+            "type": "text",
+            "text": "หากต้องการแจ้งปัญหาเกี่ยวกับรายงานฉบับนี้ คลิก ที่นี่!",
+            "action": {
+              "type": "uri",
+              "label": "action",
+              "uri": "https://forms.gle/mvui56d7yn53HfHy6"
+            },
+            "size": "xs",
+            "wrap": true,
+            "color": "#FF2B85"
+          }
+        ],
+        "margin": "none",
+        "spacing": "none",
+        "height": "20px",
+        "borderColor": "#FF2B85",
+        "justifyContent": "center",
+        "alignItems": "center"
       }
     ],
     "backgroundColor": "#EFF2F4"
   },
   "footer": {
     "type": "box",
-    "layout": "vertical",
+    "layout": "horizontal",
     "contents": [
       {
         "type": "button",
         "action": {
           "type": "uri",
-          "uri": "https://bit.ly/3NEh38E",
-          "label": "ปรับปรุงเมนูเพื่อเพิ่มปริมาณการสั่งซื้อเลย>"
+          "uri": "https://bit.ly/451LxJb",
+          "label": "อ่านทริคเพิ่มเติม>"
         },
-        "color": "#FFFFFF"
+        "color": "#FF2B85",
+        "offsetTop": "xs",
+        "offsetBottom": "xs",
+        "offsetStart": "xs",
+        "offsetEnd": "xs",
+        "height": "sm",
+        "margin": "none",
+        "position": "relative",
+        "style": "primary"
+      },
+      {
+        "type": "button",
+        "action": {
+          "type": "uri",
+          "uri": "https://bit.ly/3NEh38E",
+          "label": "ปรับปรุงเมนูเลย>"
+        },
+        "color": "#FF2B85",
+        "offsetTop": "xs",
+        "offsetBottom": "xs",
+        "offsetStart": "xs",
+        "offsetEnd": "xs",
+        "height": "sm",
+        "margin": "sm",
+        "position": "relative",
+        "style": "primary",
+        "gravity": "top",
+        "scaling": true,
+        "adjustMode": "shrink-to-fit"
       }
     ],
-    "backgroundColor": "#FF2B85"
+    "backgroundColor": "#EFF2F4",
+    "borderColor": "#FF2B85",
+    "margin": "none",
+    "spacing": "none"
   },
   "styles": {
     "header": {
