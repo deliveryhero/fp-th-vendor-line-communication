@@ -122,6 +122,7 @@ if Live == False:
             ON vendor_data.vendor_code = zone_data.vendor_code
     INNER JOIN line_data
             ON vendor_data.vendor_code = line_data.vendor_code
+    QUALIFY ROW_NUMBER() OVER (PARTITION BY vendor_data.vendor_code, line_data.line_user_id) = 1
     LIMIT 1
     """
 
@@ -219,6 +220,7 @@ if Live == True:
             ON vendor_data.vendor_code = zone_data.vendor_code
     INNER JOIN line_data
             ON vendor_data.vendor_code = line_data.vendor_code
+    QUALIFY ROW_NUMBER() OVER (PARTITION BY vendor_data.vendor_code, line_data.line_user_id) = 1
     """
 
 try: 

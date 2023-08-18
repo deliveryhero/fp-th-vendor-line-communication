@@ -80,7 +80,8 @@ if Live == False:
       FROM search_data
       INNER JOIN line_data
               ON search_data.vendor_code = line_data.vendor_code
-    LIMIT 1
+      QUALIFY ROW_NUMBER() OVER (PARTITION BY search_data.vendor_code, line_data.line_user_id) = 1
+      LIMIT 1
     """
 
 if Live == True:
@@ -136,6 +137,7 @@ if Live == True:
     FROM search_data
     INNER JOIN line_data
             ON search_data.vendor_code = line_data.vendor_code
+    QUALIFY ROW_NUMBER() OVER (PARTITION BY search_data.vendor_code, line_data.line_user_id) = 1
     """
 
 try: 

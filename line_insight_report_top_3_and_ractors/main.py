@@ -115,7 +115,7 @@ if Live == False:
             ON zone_data.vendor_code = line_data.vendor_code
     WHERE zone_perc_dld != 0 
       AND zone_perc_dlp != 0
-    QUALIFY ROW_NUMBER() OVER (PARTITION BY zone_data.vendor_code) = 1
+    QUALIFY ROW_NUMBER() OVER (PARTITION BY zone_data.vendor_code, line_data.line_user_id) = 1
     LIMIT 1
     """
 
@@ -205,7 +205,7 @@ if Live == True:
             ON zone_data.vendor_code = line_data.vendor_code
     WHERE zone_perc_dld != 0 
       AND zone_perc_dlp != 0
-    QUALIFY ROW_NUMBER() OVER (PARTITION BY zone_data.vendor_code) = 1
+    QUALIFY ROW_NUMBER() OVER (PARTITION BY zone_data.vendor_code, line_data.line_user_id) = 1
     """
 
 try: 
