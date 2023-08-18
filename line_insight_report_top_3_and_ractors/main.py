@@ -113,6 +113,8 @@ if Live == False:
             ON vendor_data.vendor_code = top_vendor.vendor_code
     INNER JOIN line_data
             ON zone_data.vendor_code = line_data.vendor_code
+    WHERE zone_perc_dld != 0 
+      AND zone_perc_dlp != 0
     QUALIFY ROW_NUMBER() OVER (PARTITION BY zone_data.vendor_code) = 1
     LIMIT 1
     """
@@ -201,6 +203,8 @@ if Live == True:
             ON vendor_data.vendor_code = top_vendor.vendor_code
     INNER JOIN line_data
             ON zone_data.vendor_code = line_data.vendor_code
+    WHERE zone_perc_dld != 0 
+      AND zone_perc_dlp != 0
     QUALIFY ROW_NUMBER() OVER (PARTITION BY zone_data.vendor_code) = 1
     """
 
