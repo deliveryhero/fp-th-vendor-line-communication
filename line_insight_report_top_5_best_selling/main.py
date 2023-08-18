@@ -54,7 +54,7 @@ if Live == False:
       search_data AS (
         SELECT 
           vendor_code,
-          vendor_name, 
+          vendor_name_thai AS vendor_name, 
           zone_name,
           MAX(IF(row_num = 1, title, NULL)) AS menu1,
           MAX(IF(row_num = 2, title, NULL)) AS menu2,
@@ -120,7 +120,7 @@ if Live == True:
       search_data AS (
         SELECT 
           vendor_code,
-          vendor_name, 
+          vendor_name_thai AS vendor_name, 
           zone_name,
           MAX(IF(row_num = 1, title, NULL)) AS menu1,
           MAX(IF(row_num = 2, title, NULL)) AS menu2,

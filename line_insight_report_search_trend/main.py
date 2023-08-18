@@ -54,7 +54,7 @@ if Live == False:
       search_data AS (
         SELECT 
           vendor_code,
-          vendor_name, 
+          vendor_name_thai AS vendor_name, 
           zone_name,
           MAX(IF(row_num = 1, search_term, NULL)) AS serch_term_1,
           MAX(IF(row_num = 2, search_term, NULL)) AS serch_term_2,
@@ -110,7 +110,7 @@ if Live == True:
     search_data AS (
       SELECT 
         vendor_code,
-        vendor_name, 
+        vendor_name_thai AS vendor_name, 
         zone_name,
         MAX(IF(row_num = 1, search_term, NULL)) AS serch_term_1,
         MAX(IF(row_num = 2, search_term, NULL)) AS serch_term_2,

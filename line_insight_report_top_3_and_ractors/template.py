@@ -289,7 +289,7 @@ json_object = """
           },
           {
             "type": "text",
-            "text": "{top_dld}",
+            "text": "{top_dld}%",
             "flex": 1,
             "align": "center",
             "gravity": "center",
@@ -299,7 +299,7 @@ json_object = """
           },
           {
             "type": "text",
-            "text": "{vd_dld}",
+            "text": "{vd_dld}%",
             "flex": 1,
             "align": "center",
             "gravity": "center",
@@ -337,7 +337,7 @@ json_object = """
           },
           {
             "type": "text",
-            "text": "{top_dlp}",
+            "text": "{top_dlp}%",
             "flex": 1,
             "align": "center",
             "gravity": "center",
@@ -347,7 +347,7 @@ json_object = """
           },
           {
             "type": "text",
-            "text": "{vd_dlp}",
+            "text": "{vd_dlp}%",
             "flex": 1,
             "align": "center",
             "gravity": "center",
@@ -385,7 +385,7 @@ json_object = """
           },
           {
             "type": "text",
-            "text": "{top_failed_rate}",
+            "text": "{top_failed_rate}%",
             "flex": 1,
             "align": "center",
             "gravity": "center",
@@ -395,7 +395,7 @@ json_object = """
           },
           {
             "type": "text",
-            "text": "{vd_failed_rate}",
+            "text": "{vd_failed_rate}%",
             "flex": 1,
             "align": "center",
             "gravity": "center",
@@ -433,7 +433,7 @@ json_object = """
           },
           {
             "type": "text",
-            "text": "{top_offline}",
+            "text": "{top_offline}%",
             "flex": 1,
             "align": "center",
             "gravity": "center",
@@ -443,7 +443,7 @@ json_object = """
           },
           {
             "type": "text",
-            "text": "{vd_offline}",
+            "text": "{vd_offline}%",
             "flex": 1,
             "align": "center",
             "gravity": "center",

@@ -80,7 +80,7 @@ if Live == False:
     vendor_base_data AS (
       SELECT 
         vendor_code,
-        vendor_name,
+        vendor_name_thai AS vendor_name,
         MAX(IF(range_gfv = "0-100 THB", perc, 0)) AS vendor_0_100,
         MAX(IF(range_gfv = "101-200 THB", perc, 0)) AS vendor_101_200,
         MAX(IF(range_gfv = "201-300 THB", perc, 0)) AS vendor_201_300,
@@ -177,7 +177,7 @@ if Live == True:
     vendor_base_data AS (
       SELECT 
         vendor_code,
-        vendor_name,
+        vendor_name_thai AS vendor_name,
         MAX(IF(range_gfv = "0-100 THB", perc, 0)) AS vendor_0_100,
         MAX(IF(range_gfv = "101-200 THB", perc, 0)) AS vendor_101_200,
         MAX(IF(range_gfv = "201-300 THB", perc, 0)) AS vendor_201_300,

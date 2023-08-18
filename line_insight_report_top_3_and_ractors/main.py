@@ -65,7 +65,7 @@ if Live == False:
     zone_data AS (
     SELECT  
       zone.vendor_code,
-      zone.vendor_name,
+      zone.vendor_name_thai	AS vendor_name,
       zone.cuisine_type,
       zone.zone_name,
       CAST(ROUND(zone.perc_dld*100,0) AS INT64) AS zone_perc_dld,
@@ -153,7 +153,7 @@ if Live == True:
     zone_data AS (
     SELECT  
       zone.vendor_code,
-      zone.vendor_name,
+      zone.vendor_name_thai	AS vendor_name,
       zone.cuisine_type,
       zone.zone_name,
       CAST(ROUND(zone.perc_dld*100,0) AS INT64) AS zone_perc_dld,

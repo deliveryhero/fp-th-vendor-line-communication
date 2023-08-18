@@ -80,7 +80,7 @@ if Live == False:
     vendor_base_data AS (
       SELECT
         vendor_code,
-        vendor_name,
+        vendor_name_thai AS vendor_name,
         MAX(IF(periods = "5AM  - 10AM (มื้อเช้า)", perc, 0)) AS vendor_5AM_10AM,
         MAX(IF(periods = "10AM  - 2PM (มื้อกลางวัน)", perc, 0)) AS vendor_10AM_2PM,
         MAX(IF(periods = "2PM  - 5PM (มื้อบ่าย)", perc, 0)) AS vendor_2PM_5PM,
@@ -107,16 +107,16 @@ if Live == False:
       'U2b9495e231b925da2ed4163beeef6dad' AS line_user_id, 
       vendor_data.vendor_name,
       zone_data.zone_name,
-      zone_data.zone_5AM_10AM,
-      zone_data.zone_10AM_2PM,
-      zone_data.zone_2PM_5PM,
-      zone_data.zone_5PM_10PM,
-      zone_data.zone_10PM_5AM,
-      vendor_data.vendor_5AM_10AM,
-      vendor_data.vendor_10AM_2PM,
-      vendor_data.vendor_2PM_5PM,
-      vendor_data.vendor_5PM_10PM,
-      vendor_data.vendor_10PM_5AM
+      zone_data.zone_5AM_10AM*3 AS zone_5AM_10AM,
+      zone_data.zone_10AM_2PM*3 AS zone_10AM_2PM,
+      zone_data.zone_2PM_5PM*3 AS zone_2PM_5PM,
+      zone_data.zone_5PM_10PM*3 AS zone_5PM_10PM,
+      zone_data.zone_10PM_5AM*3 AS zone_10PM_5AM,
+      vendor_data.vendor_5AM_10AM*3 AS vendor_5AM_10AM,
+      vendor_data.vendor_10AM_2PM*3 AS vendor_10AM_2PM,
+      vendor_data.vendor_2PM_5PM*3 AS vendor_2PM_5PM,
+      vendor_data.vendor_5PM_10PM*3 AS vendor_5PM_10PM,
+      vendor_data.vendor_10PM_5AM*3 AS vendor_10PM_5AM
     FROM zone_data
     INNER JOIN vendor_data
             ON zone_data.vendor_code = vendor_data.vendor_code 
@@ -177,7 +177,7 @@ if Live == True:
     vendor_base_data AS (
       SELECT
         vendor_code,
-        vendor_name,
+        vendor_name_thai AS vendor_name,
         MAX(IF(periods = "5AM  - 10AM (มื้อเช้า)", perc, 0)) AS vendor_5AM_10AM,
         MAX(IF(periods = "10AM  - 2PM (มื้อกลางวัน)", perc, 0)) AS vendor_10AM_2PM,
         MAX(IF(periods = "2PM  - 5PM (มื้อบ่าย)", perc, 0)) AS vendor_2PM_5PM,
@@ -204,16 +204,16 @@ if Live == True:
       line_data.line_user_id,
       vendor_data.vendor_name,
       zone_data.zone_name,
-      zone_data.zone_5AM_10AM,
-      zone_data.zone_10AM_2PM,
-      zone_data.zone_2PM_5PM,
-      zone_data.zone_5PM_10PM,
-      zone_data.zone_10PM_5AM,
-      vendor_data.vendor_5AM_10AM,
-      vendor_data.vendor_10AM_2PM,
-      vendor_data.vendor_2PM_5PM,
-      vendor_data.vendor_5PM_10PM,
-      vendor_data.vendor_10PM_5AM
+      zone_data.zone_5AM_10AM*3 AS zone_5AM_10AM,
+      zone_data.zone_10AM_2PM*3 AS zone_10AM_2PM,
+      zone_data.zone_2PM_5PM*3 AS zone_2PM_5PM,
+      zone_data.zone_5PM_10PM*3 AS zone_5PM_10PM,
+      zone_data.zone_10PM_5AM*3 AS zone_10PM_5AM,
+      vendor_data.vendor_5AM_10AM*3 AS vendor_5AM_10AM,
+      vendor_data.vendor_10AM_2PM*3 AS vendor_10AM_2PM,
+      vendor_data.vendor_2PM_5PM*3 AS vendor_2PM_5PM,
+      vendor_data.vendor_5PM_10PM*3 AS vendor_5PM_10PM,
+      vendor_data.vendor_10PM_5AM*3 AS vendor_10PM_5AM
     FROM zone_data
     INNER JOIN vendor_data
             ON zone_data.vendor_code = vendor_data.vendor_code 
