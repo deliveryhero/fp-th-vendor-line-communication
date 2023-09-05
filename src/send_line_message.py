@@ -396,3 +396,15 @@ def send_request_line_api_insight_top_3_and_ractors(*args, **kwargs):
                         'zone_rating: '+ str(row['zone_rating']) + ", " +
                         'vendor_rating: '+ str(row['vendor_rating']) + '}')
     return reponse_code_list, json_list
+
+def send_request_line_rich_menu_segment_messages(*args, **kwargs):
+    url_list = kwargs['url']
+    headers = kwargs['headers']
+    reponse_code_list = []
+    json = {}
+    for i in url_list:
+        print(i)
+        r = requests.post(i, headers = headers, json = json)
+        reponse_code = r.status_code
+        reponse_code_list.append(reponse_code)
+    return reponse_code_list
