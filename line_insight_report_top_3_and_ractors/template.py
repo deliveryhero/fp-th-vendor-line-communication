@@ -581,6 +581,9 @@ json_object = """
 }
 
     }
-  ]
+  ],
+    "customAggregationUnits": [
+        "InsightReportTop3AndFactors"
+    ]
 }
 """

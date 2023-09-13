@@ -30,7 +30,7 @@ if Live == False:
     SELECT
       vendor_code,
       vendor_name,
-      'Uca11d4d4585c435204950dba18dafcd8' AS LineUserID,
+      'U2b9495e231b925da2ed4163beeef6dad' AS LineUserID,
       CAST(ihs_score AS STRING) AS ihs_score,
       CAST(customers AS STRING) AS customers,
       IF(

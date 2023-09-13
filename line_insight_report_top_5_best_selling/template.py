@@ -337,6 +337,9 @@ json_object = """
   }
 }
     }
-  ]
+  ],
+    "customAggregationUnits": [
+        "InsightReportTop5BestSelling"
+    ]
 }
 """

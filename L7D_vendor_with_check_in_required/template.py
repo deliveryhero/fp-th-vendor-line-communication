@@ -94,6 +94,9 @@ json_object = """
   }
 }
     }
-  ]
+  ],
+    "customAggregationUnits": [
+        "L7DVendorWithCheckInRequired"
+    ]
 }
 """

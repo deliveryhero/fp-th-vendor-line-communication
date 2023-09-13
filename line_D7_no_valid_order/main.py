@@ -141,7 +141,10 @@ json_data = {
   }
 }
     }
-  ]
+  ],
+    "customAggregationUnits": [
+        "D7NoValidOrder"
+    ]
 }
 
 json_string = str(json_data)

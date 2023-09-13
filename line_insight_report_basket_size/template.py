@@ -376,6 +376,9 @@ json_object = """
   }
 }
     }
-  ]
+  ],
+    "customAggregationUnits": [
+        "InsightReportBasketSize"
+    ]
 }
 """

@@ -561,7 +561,10 @@ json_object = """
 }
 
     }
-  ]
+  ],
+    "customAggregationUnits": [
+        "InsightReportOpeningTime"
+    ]
 }
 """
 

@@ -53,7 +53,10 @@ json_data = {
   }
 }
     }
-  ]
+  ],
+    "customAggregationUnits": [
+        "NoDealNoNCR"
+    ]
 }
 
 
@@ -71,6 +74,7 @@ if Live == False:
       'U2b9495e231b925da2ed4163beeef6dad' AS line_user_id,
     FROM {query_table} AS vendor_data
     WHERE is_line_verified
+    LIMIT 1
     """
 
 if Live == True:

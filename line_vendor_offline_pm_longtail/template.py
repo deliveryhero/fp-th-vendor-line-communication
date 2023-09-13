@@ -103,7 +103,10 @@ json_object = """
   }
 }
     }
-  ]
+  ],
+    "customAggregationUnits": [
+        "OfflineNotificationForVendorPMLongtail"
+    ]
 }
 
 """

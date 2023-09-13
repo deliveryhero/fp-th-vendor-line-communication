@@ -260,6 +260,9 @@ json_object = """
 }
 
     }
-  ]
+  ],
+    "customAggregationUnits": [
+        "InsightReportSearchTrend"
+    ]
 }
 """

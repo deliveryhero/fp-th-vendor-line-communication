@@ -948,7 +948,10 @@ json_object = """
   }
 }
     }
-  ]
+  ],
+    "customAggregationUnits": [
+        "IncubationWeeklyReport"
+    ]
 }
 
 """
