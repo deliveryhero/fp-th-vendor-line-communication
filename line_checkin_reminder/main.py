@@ -4,7 +4,7 @@ parentdir = os.path.dirname(currentdir)
 sys.path.insert(0, parentdir)
 sys.path.insert(0, parentdir + '/src')
 from bigquery_data import query_BQ_table, record_line_communication_logs
-from send_line_message import send_request_line_api_v2
+from send_line_message import send_request_line_api_checkin_reminder
 from get_secrete_token import get_secret_data
 import datetime, pytz
 import requests
@@ -32,8 +32,8 @@ if Live == False:
       FROM {query_table}
       WHERE line_user_id IS NOT NULL
         AND DATE(recorded_at_local) = CURRENT_DATE("Asia/Bangkok")
-        AND opening_time >= TIME_SUB(TIME(CURRENT_DATETIME("Asia/Bangkok")), INTERVAL 30 MINUTE)
-        AND opening_time <= TIME(CURRENT_DATETIME("Asia/Bangkok"))
+        --AND opening_time >= TIME_SUB(TIME(CURRENT_DATETIME("Asia/Bangkok")), INTERVAL 30 MINUTE)
+        --AND opening_time <= TIME(CURRENT_DATETIME("Asia/Bangkok"))
       LIMIT 1
     """
 
@@ -59,7 +59,7 @@ except BaseException as e:
   # print(e)
 
 try:
-  reponse_code_list, json_list = send_request_line_api_v2(url = url,
+  reponse_code_list, json_list = send_request_line_api_checkin_reminder(url = url,
                                                           headers = headers,
                                                           json_object = json_object,
                                                           dataframe = dataframe)
