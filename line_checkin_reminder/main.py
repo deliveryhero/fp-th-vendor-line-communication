@@ -26,27 +26,73 @@ now = datetime.datetime.now(tz).strftime("%Y-%m-%d %H:%M:%S")
 
 if Live == False:
     query = f"""
-      SELECT DISTINCT
-        vendor_code,
-        "Uca11d4d4585c435204950dba18dafcd8" AS line_user_id
-      FROM {query_table}
-      WHERE line_user_id IS NOT NULL
-        AND DATE(recorded_at_local) = CURRENT_DATE("Asia/Bangkok")
-        --AND opening_time >= TIME_SUB(TIME(CURRENT_DATETIME("Asia/Bangkok")), INTERVAL 30 MINUTE)
-        --AND opening_time <= TIME(CURRENT_DATETIME("Asia/Bangkok"))
-      LIMIT 1
+      WITH vendor_agg_line_id AS (
+        SELECT DISTINCT
+          vendor_code,
+          "Uca11d4d4585c435204950dba18dafcd8" AS line_user_id,
+
+          CASE
+            # scenario #1 - where the vendors open at midnight
+            WHEN FORMAT_TIME("%H:%M", CURRENT_TIME("Asia/Bangkok")) = "00:00"
+            AND opening_time = "00:00:00"
+            THEN TRUE
+
+            # scenario #2 - where the vendors open after midnight
+            WHEN FORMAT_TIME("%H:%M", CURRENT_TIME("Asia/Bangkok")) != "00:00"
+            AND opening_time >= TIME_SUB(TIME(CURRENT_DATETIME("Asia/Bangkok")), INTERVAL 29 MINUTE)
+            AND opening_time <= TIME(CURRENT_DATETIME("Asia/Bangkok"))
+            THEN TRUE
+
+            # scenario #3 - where the vendors open between 23:31 to 23:59
+            -- WHEN FORMAT_TIME("%H:%M", CURRENT_TIME("Asia/Bangkok")) = "23:59"
+            --  AND opening_time BETWEEN "23:31:00" AND "23:59:00"
+            -- THEN TRUE
+          END AS is_selected
+        FROM {query_table}
+        WHERE line_user_id IS NOT NULL
+          AND DATE(recorded_at_local) = CURRENT_DATE("Asia/Bangkok")
+        LIMIT 1
+      )
+
+      SELECT
+        *
+      FROM vendor_agg_line_id
+      WHERE is_selected
     """
 
 if Live == True:
     query = f"""
-      SELECT DISTINCT
-        vendor_code,
-        line_user_id
-      FROM {query_table}
-      WHERE line_user_id IS NOT NULL
-        AND DATE(recorded_at_local) = CURRENT_DATE("Asia/Bangkok")
-        AND opening_time >= TIME_SUB(TIME(CURRENT_DATETIME("Asia/Bangkok")), INTERVAL 30 MINUTE)
-        AND opening_time <= TIME(CURRENT_DATETIME("Asia/Bangkok"))
+      WITH vendor_agg_line_id AS (
+        SELECT DISTINCT
+          vendor_code,
+          line_user_id,
+
+          CASE
+            # scenario #1 - where the vendors open at midnight
+            WHEN FORMAT_TIME("%H:%M", CURRENT_TIME("Asia/Bangkok")) = "00:00"
+            AND opening_time = "00:00:00"
+            THEN TRUE
+
+            # scenario #2 - where the vendors open after midnight
+            WHEN FORMAT_TIME("%H:%M", CURRENT_TIME("Asia/Bangkok")) != "00:00"
+            AND opening_time >= TIME_SUB(TIME(CURRENT_DATETIME("Asia/Bangkok")), INTERVAL 29 MINUTE)
+            AND opening_time <= TIME(CURRENT_DATETIME("Asia/Bangkok"))
+            THEN TRUE
+
+            # scenario #3 - where the vendors open between 23:31 to 23:59
+            -- WHEN FORMAT_TIME("%H:%M", CURRENT_TIME("Asia/Bangkok")) = "23:59"
+            --  AND opening_time BETWEEN "23:31:00" AND "23:59:00"
+            -- THEN TRUE
+          END AS is_selected
+        FROM {query_table}
+        WHERE line_user_id IS NOT NULL
+          AND DATE(recorded_at_local) = CURRENT_DATE("Asia/Bangkok")
+      )
+
+      SELECT
+        *
+      FROM vendor_agg_line_id
+      WHERE is_selected
     """
 
 try:
