@@ -30,23 +30,25 @@ if Live == False:
         SELECT DISTINCT
           vendor_code,
           "Uca11d4d4585c435204950dba18dafcd8" AS line_user_id,
-
           CASE
-            # scenario #1 - where the vendors open at midnight
-            WHEN FORMAT_TIME("%H:%M", CURRENT_TIME("Asia/Bangkok")) = "00:00"
-            AND opening_time = "00:00:00"
+            # scenario #1 - where the vendors open between 23:31 to 23:59 / separate task scheduler runs once at 23:59
+            WHEN FORMAT_TIME("%H:%M", CURRENT_TIME("Asia/Bangkok")) = "23:59"
+             AND opening_time BETWEEN "23:31:00" AND "23:59:00"
             THEN TRUE
 
-            # scenario #2 - where the vendors open after midnight
-            WHEN FORMAT_TIME("%H:%M", CURRENT_TIME("Asia/Bangkok")) != "00:00"
-            AND opening_time >= TIME_SUB(TIME(CURRENT_DATETIME("Asia/Bangkok")), INTERVAL 29 MINUTE)
-            AND opening_time <= TIME(CURRENT_DATETIME("Asia/Bangkok"))
+            # scenario #2 - where the vendors open at midnight
+            WHEN FORMAT_TIME("%H:%M", CURRENT_TIME("Asia/Bangkok")) = "00:01"
+             AND opening_time = "00:00:00"
             THEN TRUE
 
-            # scenario #3 - where the vendors open between 23:31 to 23:59
-            -- WHEN FORMAT_TIME("%H:%M", CURRENT_TIME("Asia/Bangkok")) = "23:59"
-            --  AND opening_time BETWEEN "23:31:00" AND "23:59:00"
-            -- THEN TRUE
+            # scenario #3 - where the vendors open after midnight
+            WHEN FORMAT_TIME("%H:%M", CURRENT_TIME("Asia/Bangkok")) != "23:59"
+             AND FORMAT_TIME("%H:%M", CURRENT_TIME("Asia/Bangkok")) != "00:01"
+             AND opening_time >= TIME_SUB(TIME(CURRENT_DATETIME("Asia/Bangkok")), INTERVAL 30 MINUTE)
+             AND opening_time <= TIME(CURRENT_DATETIME("Asia/Bangkok"))
+            THEN TRUE
+
+            ELSE FALSE
           END AS is_selected
         FROM {query_table}
         WHERE line_user_id IS NOT NULL
@@ -66,23 +68,25 @@ if Live == True:
         SELECT DISTINCT
           vendor_code,
           line_user_id,
-
           CASE
-            # scenario #1 - where the vendors open at midnight
-            WHEN FORMAT_TIME("%H:%M", CURRENT_TIME("Asia/Bangkok")) = "00:00"
-            AND opening_time = "00:00:00"
+            # scenario #1 - where the vendors open between 23:31 to 23:59 / separate task scheduler runs once at 23:59
+            WHEN FORMAT_TIME("%H:%M", CURRENT_TIME("Asia/Bangkok")) = "23:59"
+             AND opening_time BETWEEN "23:31:00" AND "23:59:00"
             THEN TRUE
 
-            # scenario #2 - where the vendors open after midnight
-            WHEN FORMAT_TIME("%H:%M", CURRENT_TIME("Asia/Bangkok")) != "00:00"
-            AND opening_time >= TIME_SUB(TIME(CURRENT_DATETIME("Asia/Bangkok")), INTERVAL 29 MINUTE)
-            AND opening_time <= TIME(CURRENT_DATETIME("Asia/Bangkok"))
+            # scenario #2 - where the vendors open at midnight
+            WHEN FORMAT_TIME("%H:%M", CURRENT_TIME("Asia/Bangkok")) = "00:01"
+             AND opening_time = "00:00:00"
             THEN TRUE
 
-            # scenario #3 - where the vendors open between 23:31 to 23:59
-            -- WHEN FORMAT_TIME("%H:%M", CURRENT_TIME("Asia/Bangkok")) = "23:59"
-            --  AND opening_time BETWEEN "23:31:00" AND "23:59:00"
-            -- THEN TRUE
+            # scenario #3 - where the vendors open after midnight
+            WHEN FORMAT_TIME("%H:%M", CURRENT_TIME("Asia/Bangkok")) != "23:59"
+             AND FORMAT_TIME("%H:%M", CURRENT_TIME("Asia/Bangkok")) != "00:01"
+             AND opening_time >= TIME_SUB(TIME(CURRENT_DATETIME("Asia/Bangkok")), INTERVAL 30 MINUTE)
+             AND opening_time <= TIME(CURRENT_DATETIME("Asia/Bangkok"))
+            THEN TRUE
+
+            ELSE FALSE
           END AS is_selected
         FROM {query_table}
         WHERE line_user_id IS NOT NULL
