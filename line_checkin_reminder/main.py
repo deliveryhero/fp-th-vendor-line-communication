@@ -51,13 +51,13 @@ if Live == False:
         FROM {query_table}
         WHERE line_user_id IS NOT NULL
           AND DATE(recorded_at_local) = CURRENT_DATE("Asia/Bangkok")
-        LIMIT 1
       )
 
       SELECT
         *
       FROM vendor_agg_line_id
       WHERE is_selected
+      LIMIT 1
     """
 
 if Live == True:
