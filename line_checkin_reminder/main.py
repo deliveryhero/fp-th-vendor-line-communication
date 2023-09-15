@@ -45,7 +45,7 @@ if Live == False:
             WHEN FORMAT_TIME("%H:%M", CURRENT_TIME("Asia/Bangkok")) != "23:59"
              AND FORMAT_TIME("%H:%M", CURRENT_TIME("Asia/Bangkok")) != "00:01"
              AND opening_time >= TIME_SUB(TIME(CURRENT_DATETIME("Asia/Bangkok")), INTERVAL 30 MINUTE)
-             AND opening_time <= TIME(CURRENT_DATETIME("Asia/Bangkok"))
+             AND opening_time <= TIME_SUB(TIME(CURRENT_DATETIME("Asia/Bangkok")), INTERVAL 1 MINUTE)
             THEN TRUE
 
             ELSE FALSE
@@ -83,7 +83,7 @@ if Live == True:
             WHEN FORMAT_TIME("%H:%M", CURRENT_TIME("Asia/Bangkok")) != "23:59"
              AND FORMAT_TIME("%H:%M", CURRENT_TIME("Asia/Bangkok")) != "00:01"
              AND opening_time >= TIME_SUB(TIME(CURRENT_DATETIME("Asia/Bangkok")), INTERVAL 30 MINUTE)
-             AND opening_time <= TIME(CURRENT_DATETIME("Asia/Bangkok"))
+             AND opening_time <= TIME_SUB(TIME(CURRENT_DATETIME("Asia/Bangkok")), INTERVAL 1 MINUTE)
             THEN TRUE
 
             ELSE FALSE
