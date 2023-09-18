@@ -170,6 +170,7 @@ if __name__ == "__main__":
                                 'url_5_uniqueClick': 'float',
                                 'url_5_uniqueClickOfRequest': 'float',})
     final_df.replace(np.nan,None,inplace=True) 
+    final_df = final_df.replace({np.NAN: None})
     data = final_df.to_dict('records')
     try:
       insert_line_statistical_data(data, "foodpanda-th-bigquery.pandata_th_external.line_statistical_data_vendors")
