@@ -30,7 +30,7 @@ def get_message_delivery_statistics(params):
         return delivery_data
     else:
         requests.post(slack_webhook,
-              json = {'text' : '*line_statistiacal_data_collection: Failed get line data: ' + f"Error: {response.status_code} - {response.text}"})
+              json = {'text' : '*line_statistiacal_data_collection: Failed get line data: ' + f"Error: {params['customAggregationUnits']} - {response.status_code} - {response.text}"})
         return None
 
 if __name__ == "__main__":
