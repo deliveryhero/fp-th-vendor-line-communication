@@ -141,7 +141,6 @@ if __name__ == "__main__":
             print("Failed to retrieve statistics.")
     final_df.fillna(value="None", inplace=True)
     final_df.replace("None",np.nan,inplace=True)  
-    final_df.to_csv("C:/Users/l.harchandani/Downloads/test_new_1.csv", index=False)
     final_df = final_df.astype({ 'record_date':"object", 'collection_date': "object",
                                 'customAggregationUnit':'object',    
                                 'uniqueImpression': 'float', 
