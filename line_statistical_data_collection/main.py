@@ -140,42 +140,13 @@ if __name__ == "__main__":
             final_df = pd.concat([final_df, app_df], ignore_index=True)
         else:
             print("Failed to retrieve statistics.")
-    final_df.fillna(value="None", inplace=True)
     final_df.replace("None",np.nan,inplace=True)  
-    final_df = final_df.astype({ 'record_date':"object", 'collection_date': "object",
-                                'customAggregationUnit':'object',    
-                                'uniqueImpression': 'float', 
-                                'uniqueClick': 'float',
-                                'uniqueMediaPlayed': 'float',
-                                'uniqueMediaPlayed100Percent': 'float',
-                                'impression': 'float',
-                                'mediaPlayed': 'float',
-                                'url_1':'object',
-                                'url_1_click': 'float',
-                                'url_1_uniqueClick': 'float',
-                                'url_1_uniqueClickOfRequest': 'float',
-                                'url_2':'object',
-                                'url_2_click': 'float',
-                                'url_2_uniqueClick': 'float',
-                                'url_2_uniqueClickOfRequest': 'float',
-                                'url_3':'object',
-                                'url_3_click': 'float',
-                                'url_3_uniqueClick': 'float',
-                                'url_3_uniqueClickOfRequest': 'float',
-                                'url_4':'object',
-                                'url_4_click': 'float',
-                                'url_4_uniqueClick': 'float',
-                                'url_4_uniqueClickOfRequest': 'float',
-                                'url_5':'object',
-                                'url_5_click': 'float',
-                                'url_5_uniqueClick': 'float',
-                                'url_5_uniqueClickOfRequest': 'float',})
-    final_df.replace(np.nan,None,inplace=True) 
     final_df = final_df.replace({np.NAN: None})
     data = final_df.to_dict('records')
     try:
       insert_line_statistical_data(data, "foodpanda-th-bigquery.pandata_th_external.line_statistical_data_vendors")
     except BaseException as e:
+      print(e)
       requests.post(slack_webhook,
       json = {'text' : '*line_statistiacal_data_collection*: Failed to record line statistical data: ' + str(e)})
 
