@@ -29,5 +29,8 @@ def record_line_communication_logs(table_id, rows_to_insert):
             status.append("Encountered errors while inserting rows: {}".format(errors))
     return status
 
+def insert_line_statistical_data(data, table):
+    return client.insert_rows_json(table, data)
+
 
     
