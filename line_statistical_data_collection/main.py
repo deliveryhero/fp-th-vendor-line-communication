@@ -19,7 +19,7 @@ def get_message_delivery_statistics(params):
     headers = {
         "Authorization": f"Bearer {CHANNEL_ACCESS_TOKEN}"
     }
-
+    value = params['customAggregationUnit']
     params = urllib.parse.urlencode(params)
     url = "https://api.line.me/v2/bot/insight/message/event/aggregation"
 
@@ -29,8 +29,9 @@ def get_message_delivery_statistics(params):
         delivery_data = response.json()
         return delivery_data
     else:
+        
         requests.post(slack_webhook,
-              json = {'text' : '*line_statistiacal_data_collection: Failed get line data: ' + f"Error: {params['customAggregationUnits']} - {response.status_code} - {response.text}"})
+              json = {'text' : '*line_statistiacal_data_collection: Failed get line data: ' + f"Error: {value} - {response.status_code} - {response.text}"})
         return None
 
 if __name__ == "__main__":
