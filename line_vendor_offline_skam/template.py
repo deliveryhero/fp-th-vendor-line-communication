@@ -104,7 +104,7 @@ json_object = """
     }
   ],
     "customAggregationUnits": [
-        "OfflineNotificationForVendorSKAM"
+        "OfflineNotiForVendorSKAM"
     ]
 }
 
