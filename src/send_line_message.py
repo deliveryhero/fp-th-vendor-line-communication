@@ -409,7 +409,7 @@ def send_request_line_rich_menu_segment_messages(*args, **kwargs):
         reponse_code_list.append(reponse_code)
     return reponse_code_list
 
-def send_request_line_api_checkin_reminder(*args, **kwargs):
+def send_request_line_api_generic_reminder(*args, **kwargs):
     # reponse collections lists
     reponse_code_list = []
     json_list = []

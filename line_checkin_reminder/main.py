@@ -4,7 +4,7 @@ parentdir = os.path.dirname(currentdir)
 sys.path.insert(0, parentdir)
 sys.path.insert(0, parentdir + '/src')
 from bigquery_data import query_BQ_table, record_line_communication_logs
-from send_line_message import send_request_line_api_checkin_reminder
+from send_line_message import send_request_line_api_generic_reminder
 from get_secrete_token import get_secret_data
 import datetime, pytz
 import requests
@@ -109,7 +109,7 @@ except BaseException as e:
   # print(e)
 
 try:
-  reponse_code_list, json_list = send_request_line_api_checkin_reminder(url = url,
+  reponse_code_list, json_list = send_request_line_api_generic_reminder(url = url,
                                                           headers = headers,
                                                           json_object = json_object,
                                                           dataframe = dataframe)
