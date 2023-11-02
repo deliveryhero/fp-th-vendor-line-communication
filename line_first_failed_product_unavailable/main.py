@@ -19,7 +19,7 @@ pipeline_name = "line_first_failed_product_unavailable"
 
 # Basic configuration parameters
 slack_webhook = os.getenv('slack_webhook')
-Live = False
+Live = True
 url = "https://api.line.me/v2/bot/message/push"
 
 token = get_secret_data()
