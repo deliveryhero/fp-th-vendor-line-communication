@@ -46,7 +46,6 @@ if Live == False:
       )
 
       SELECT DISTINCT
-        vendors.decline_reason,
         vendors.vendor_code,
         "Uca11d4d4585c435204950dba18dafcd8" AS line_user_id
       FROM `{query_table}` AS vendors
@@ -77,7 +76,6 @@ if Live == True:
       )
 
       SELECT DISTINCT
-        vendors.decline_reason,
         vendors.vendor_code,
         line_verification.line_user_id
       FROM `{query_table}` AS vendors
