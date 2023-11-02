@@ -104,7 +104,7 @@ try:
                                                           dataframe = dataframe)
 except BaseException as e:
   requests.post(slack_webhook,
-  json = {'text' : '*{msg_sent_date_time}*: Failed send API request: ' + str(e)})
+  json = {'text' : '*{pipeline_name}*: Failed send API request: ' + str(e)})
 
 df = dataframe.filter(items=['vendor_code', 'line_user_id'])
 df["return_response"] = reponse_code_list
