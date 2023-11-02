@@ -27,34 +27,41 @@ headers = {'Authorization': "Bearer {" + token + "}", 'Content-Type': 'applicati
 tz = pytz.timezone('Asia/Bangkok')
 now = datetime.datetime.now(tz).strftime("%Y-%m-%d %H:%M:%S")
 
+# if Live == False:
+#     query = f"""
+#       WITH line_verification AS (
+#         SELECT
+#           TRIM(LOWER(VendorCode)) AS vendor_code,
+#           LineUserID AS line_user_id
+#         FROM `{line_liff_table}`
+#         WHERE date IS NOT NULL
+#           AND LineUserID IS NOT NULL
+#         QUALIFY ROW_NUMBER() OVER (
+#           PARTITION BY
+#             vendor_code,
+#             line_user_id
+#           ORDER BY
+#             date DESC
+#         ) = 1
+#       )
+
+#       SELECT DISTINCT
+#         vendors.vendor_code,
+#         "Uca11d4d4585c435204950dba18dafcd8" AS line_user_id
+#       FROM `{query_table}` AS vendors
+#       LEFT JOIN line_verification
+#              ON line_verification.vendor_code = vendors.vendor_code
+#       WHERE vendors.record_created_date_local = CURRENT_DATE("Asia/Bangkok")
+#         AND vendors.decline_reason = "{targeted_failed_reasons}"
+#         AND line_verification.line_user_id IS NOT NULL
+#       LIMIT 1
+#     """
+
 if Live == False:
     query = f"""
-      WITH line_verification AS (
-        SELECT
-          TRIM(LOWER(VendorCode)) AS vendor_code,
-          LineUserID AS line_user_id
-        FROM `{line_liff_table}`
-        WHERE date IS NOT NULL
-          AND LineUserID IS NOT NULL
-        QUALIFY ROW_NUMBER() OVER (
-          PARTITION BY
-            vendor_code,
-            line_user_id
-          ORDER BY
-            date DESC
-        ) = 1
-      )
-
-      SELECT DISTINCT
-        vendors.vendor_code,
+      SELECT
+        "test" AS vendor_code,
         "Uca11d4d4585c435204950dba18dafcd8" AS line_user_id
-      FROM `{query_table}` AS vendors
-      LEFT JOIN line_verification
-             ON line_verification.vendor_code = vendors.vendor_code
-      WHERE vendors.record_created_date_local = CURRENT_DATE("Asia/Bangkok")
-        AND vendors.decline_reason = "{targeted_failed_reasons}"
-        AND line_verification.line_user_id IS NOT NULL
-      LIMIT 1
     """
 
 if Live == True:
