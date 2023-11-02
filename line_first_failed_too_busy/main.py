@@ -90,12 +90,12 @@ if Live == True:
 
 try:
   dataframe = query_BQ_table(query)
-  print("Created dataframe successfully")
+  # print("Created dataframe successfully")
 except BaseException as e:
   requests.post(slack_webhook,
   json = {'text' : '*{pipeline_name}*: Failed to get data: ' + str(e)})
-  print("Cannot create dataframe")
-  print(e)
+  # print("Cannot create dataframe")
+  # print(e)
 
 try:
   reponse_code_list, json_list = send_request_line_api_generic_reminder(url = url,
