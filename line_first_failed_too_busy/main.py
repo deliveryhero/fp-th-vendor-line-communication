@@ -12,7 +12,7 @@ from template import json_object
 
 # Basic configuration tables
 query_table = "fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_first_failed_orders_sms"
-line_liff_table = "fulfillment-dwh-production.pandata_report.country_TH_vendor_ops_line_liff_gsheet"
+line_liff_table = "foodpanda-th-bigquery.pandata_th_external.vendor_experience_line_liff_user_data"
 logs_table_id = "foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live"
 targeted_failed_reasons = "VENDOR_TOO_BUSY"
 pipeline_name = "line_first_failed_too_busy"
@@ -31,17 +31,17 @@ if Live == False:
     query = f"""
       WITH line_verification AS (
         SELECT
-          vendor_code,
-          line_user_id
-        FROM {line_liff_table}
-        WHERE submitted_at_local IS NOT NULL
-          AND line_user_id IS NOT NULL
+          TRIM(LOWER(VendorCode)) AS vendor_code,
+          LineUserID AS line_user_id
+        FROM `{line_liff_table}`
+        WHERE date IS NOT NULL
+          AND LineUserID IS NOT NULL
         QUALIFY ROW_NUMBER() OVER (
           PARTITION BY
             vendor_code,
             line_user_id
           ORDER BY
-            submitted_at_local DESC
+            date DESC
         ) = 1
       )
 
@@ -49,7 +49,7 @@ if Live == False:
         vendors.decline_reason,
         vendors.vendor_code,
         "Uca11d4d4585c435204950dba18dafcd8" AS line_user_id
-      FROM {query_table} AS vendors
+      FROM `{query_table}` AS vendors
       LEFT JOIN line_verification
              ON line_verification.vendor_code = vendors.vendor_code
       WHERE vendors.record_created_date_local = CURRENT_DATE("Asia/Bangkok")
@@ -62,17 +62,17 @@ if Live == True:
     query = f"""
       WITH line_verification AS (
         SELECT
-          vendor_code,
-          line_user_id
-        FROM {line_liff_table}
-        WHERE submitted_at_local IS NOT NULL
-          AND line_user_id IS NOT NULL
+          TRIM(LOWER(VendorCode)) AS vendor_code,
+          LineUserID AS line_user_id
+        FROM `{line_liff_table}`
+        WHERE date IS NOT NULL
+          AND LineUserID IS NOT NULL
         QUALIFY ROW_NUMBER() OVER (
           PARTITION BY
             vendor_code,
             line_user_id
           ORDER BY
-            submitted_at_local DESC
+            date DESC
         ) = 1
       )
 
@@ -80,7 +80,7 @@ if Live == True:
         vendors.decline_reason,
         vendors.vendor_code,
         line_verification.line_user_id
-      FROM {query_table} AS vendors
+      FROM `{query_table}` AS vendors
       LEFT JOIN line_verification
              ON line_verification.vendor_code = vendors.vendor_code
       WHERE vendors.record_created_date_local = CURRENT_DATE("Asia/Bangkok")
@@ -90,12 +90,12 @@ if Live == True:
 
 try:
   dataframe = query_BQ_table(query)
-  # print("Created dataframe successfully")
+  print("Created dataframe successfully")
 except BaseException as e:
   requests.post(slack_webhook,
   json = {'text' : '*{pipeline_name}*: Failed to get data: ' + str(e)})
-  # print("Cannot create dataframe")
-  # print(e)
+  print("Cannot create dataframe")
+  print(e)
 
 try:
   reponse_code_list, json_list = send_request_line_api_generic_reminder(url = url,
