@@ -429,3 +429,24 @@ def send_request_line_api_generic_reminder(*args, **kwargs):
         reponse_code_list.append(reponse_code)
         json_list.append(json_data_v1)
     return reponse_code_list, json_list
+
+def send_request_line_api_rider_late_communication(*args, **kwargs):
+    # reponse collections lists
+    reponse_code_list = []
+    json_list = []
+
+    # setting variables
+    url = kwargs['url']
+    headers = kwargs['headers']
+    json_string = kwargs['json_object']
+    df = kwargs['dataframe']
+    df.replace(to_replace=[None], value="--", inplace=True)
+    df = df.reset_index()
+    for index, row in df.iterrows():
+        json_data_v1 = json_string.replace('{line_user_id}', row['line_user_id'])
+        r = requests.post(url, headers = headers, data = json_data_v1.encode('utf-8'))
+        print(r.text)
+        reponse_code = r.status_code
+        reponse_code_list.append(reponse_code)
+        json_list.append(json_data_v1)
+    return reponse_code_list, json_list
