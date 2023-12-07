@@ -424,7 +424,7 @@ def send_request_line_api_generic_reminder(*args, **kwargs):
     for index, row in df.iterrows():
         json_data_v1 = json_string.replace('{line_user_id}', row['line_user_id'])
         r = requests.post(url, headers = headers, data = json_data_v1.encode('utf-8'))
-        print(r.text)
+        # print(r.text)
         reponse_code = r.status_code
         reponse_code_list.append(reponse_code)
         json_list.append(json_data_v1)
@@ -445,7 +445,7 @@ def send_request_line_api_rider_late_communication(*args, **kwargs):
     for index, row in df.iterrows():
         json_data_v1 = json_string.replace('{line_user_id}', row['line_user_id'])
         r = requests.post(url, headers = headers, data = json_data_v1.encode('utf-8'))
-        print(r.text)
+        # print(r.text)
         reponse_code = r.status_code
         reponse_code_list.append(reponse_code)
         json_list.append(json_data_v1)
@@ -466,7 +466,7 @@ def send_request_line_api_cancel_order_communication(*args, **kwargs):
     for index, row in df.iterrows():
         json_data_v1 = json_string.replace('{line_user_id}', row['line_user_id'])
         r = requests.post(url, headers = headers, data = json_data_v1.encode('utf-8'))
-        print(r.text)
+        # print(r.text)
         reponse_code = r.status_code
         reponse_code_list.append(reponse_code)
         json_list.append(json_data_v1)
