@@ -51,7 +51,7 @@ if Live == False:
       FROM `{query_table}` AS vendors
       LEFT JOIN line_verification
              ON line_verification.vendor_code = vendors.vendor_code
-      WHERE vendors.record_created_date_local = CURRENT_DATE("Asia/Bangkok")
+      WHERE DATE(vendors.report_datetime_local) = CURRENT_DATE("Asia/Bangkok")
         AND vendors.decline_reason = "{targeted_failed_reasons}"
         AND line_verification.line_user_id IS NOT NULL
       LIMIT 1
@@ -81,7 +81,7 @@ if Live == True:
       FROM `{query_table}` AS vendors
       LEFT JOIN line_verification
              ON line_verification.vendor_code = vendors.vendor_code
-      WHERE vendors.record_created_date_local = CURRENT_DATE("Asia/Bangkok")
+      WHERE DATE(vendors.report_datetime_local) = CURRENT_DATE("Asia/Bangkok")
         AND vendors.decline_reason = "{targeted_failed_reasons}"
         AND line_verification.line_user_id IS NOT NULL
     """

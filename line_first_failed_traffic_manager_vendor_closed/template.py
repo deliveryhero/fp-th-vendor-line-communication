@@ -40,7 +40,7 @@ json_object = """
     }
   ],
   "customAggregationUnits": [
-    "SMS"
+    "RiderCannotFind"
   ]
 }
 

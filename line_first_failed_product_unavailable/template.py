@@ -24,7 +24,7 @@ json_object = """
     }
   ],
   "customAggregationUnits": [
-    "SMS"
+    "MenuOutOfStock"
   ]
 }
 
