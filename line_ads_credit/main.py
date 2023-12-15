@@ -12,6 +12,7 @@ from template import json_object
 
 # Basic configuration tables
 query_table = "fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_insider_ads_credit_vendors"
+vendor_table = "fulfillment-dwh-production.pandata_report.country_TH_general_pd_vendors"
 line_liff_table = "foodpanda-th-bigquery.pandata_th_external.vendor_experience_line_liff_user_data"
 logs_table_id = "foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live"
 
@@ -44,13 +45,15 @@ if Live == False:
       )
 
       SELECT
-        vendors.vendor_code,
-        vendors.vendor_name,
-        CAST(vendors.recommended_budget AS STRING) AS recommended_budget,
+        target_vendors.vendor_code,
+        IFNULL(th_vendors.vendor_name_th, th_vendors.vendor_name_en) AS vendor_name,
+        CAST(FORMAT("%'d", CAST(target_vendors.recommended_budget AS INT)) AS STRING) AS recommended_budget,
         "Uca11d4d4585c435204950dba18dafcd8" AS line_user_id
-      FROM `{query_table}` AS vendors
+      FROM `{query_table}` AS target_vendors
+      INNER JOIN `{vendor_table}` AS th_vendors
+              ON th_vendors.vendor_code = target_vendors.vendor_code
       INNER JOIN line_verification
-              ON line_verification.vendor_code = vendors.vendor_code
+              ON line_verification.vendor_code = target_vendors.vendor_code
       LIMIT 1
     """
 
@@ -73,13 +76,15 @@ if Live == True:
       )
 
       SELECT
-        vendors.vendor_code,
-        vendors.vendor_name,
-        CAST(vendors.recommended_budget AS STRING) AS recommended_budget,
+        target_vendors.vendor_code,
+        IFNULL(th_vendors.vendor_name_th, th_vendors.vendor_name_en) AS vendor_name,
+        CAST(FORMAT("%'d", CAST(target_vendors.recommended_budget AS INT)) AS STRING) AS recommended_budget,
         line_verification.line_user_id
-      FROM `{query_table}` AS vendors
+      FROM `{query_table}` AS target_vendors
+      INNER JOIN `{vendor_table}` AS th_vendors
+              ON th_vendors.vendor_code = target_vendors.vendor_code
       INNER JOIN line_verification
-              ON line_verification.vendor_code = vendors.vendor_code
+              ON line_verification.vendor_code = target_vendors.vendor_code
     """
 
 try:
