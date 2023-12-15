@@ -35,6 +35,7 @@ if Live == False:
       FROM `{query_table}`
       WHERE line_user_id IS NOT NULL
         AND vendor_age = {vendor_age}
+        AND vertical = "Restaurant"
       LIMIT 1
     """
 
@@ -47,6 +48,7 @@ if Live == True:
       FROM `{query_table}`
       WHERE line_user_id IS NOT NULL
         AND vendor_age = {vendor_age}
+        AND vertical = "Restaurant"
     """
 
 try:
