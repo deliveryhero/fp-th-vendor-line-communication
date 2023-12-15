@@ -14,6 +14,7 @@ from template import json_object
 query_table = "fulfillment-dwh-production.pandata_report.country_TH_vendor_ops_incubation_line_verification"
 logs_table_id = "foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live"
 pipeline_name = "line_incubation_d1_first_day_checklist"
+vendor_age = 1
 
 # Basic configuration parameters
 slack_webhook = os.getenv('slack_webhook')
@@ -33,7 +34,7 @@ if Live == False:
         vendor_age
       FROM `{query_table}`
       WHERE line_user_id IS NOT NULL
-        AND vendor_age = 1
+        AND vendor_age = {vendor_age}
       LIMIT 1
     """
 
@@ -45,7 +46,7 @@ if Live == True:
         vendor_age
       FROM `{query_table}`
       WHERE line_user_id IS NOT NULL
-        AND vendor_age = 1
+        AND vendor_age = {vendor_age}
     """
 
 try:
