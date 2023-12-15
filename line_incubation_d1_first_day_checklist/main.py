@@ -11,7 +11,7 @@ import requests
 from template import json_object
 
 # Basic configuration tables
-query_table = "foodpanda-th-bigquery.pandata_th.country_TH_vendor_experience_line_unreachable_reminder"
+query_table = "fulfillment-dwh-production.pandata_report.country_TH_vendor_ops_incubation_line_verification"
 logs_table_id = "foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live"
 pipeline_name = "line_incubation_d1_first_day_checklist"
 
