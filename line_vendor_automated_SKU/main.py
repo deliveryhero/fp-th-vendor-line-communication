@@ -4,7 +4,7 @@ parentdir = os.path.dirname(currentdir)
 sys.path.insert(0, parentdir)
 sys.path.insert(0, parentdir + '/src')
 from bigquery_data import query_BQ_table, record_line_communication_logs
-from send_line_message import send_request_line_api_rider_late_communication
+from send_line_message import send_request_line_api_generic_reminder
 from get_secrete_token import get_secret_data
 import datetime, pytz
 import requests
@@ -53,30 +53,30 @@ try:
   # print("Created dataframe successfully")
 except BaseException as e:
   requests.post(slack_webhook,
-  json = {'text' : '*line_vendor_rider_late_communication*: Failed to get data: ' + str(e)})
+  json = {'text' : '*line_vendor_automated_SKU*: Failed to get data: ' + str(e)})
   # print("Cannot create dataframe")
   # print(e)
 
 try:
-  reponse_code_list, json_list = send_request_line_api_rider_late_communication(url = url,
+  reponse_code_list, json_list = send_request_line_api_generic_reminder(url = url,
                                                           headers = headers,
                                                           json_object = json_object,
                                                           dataframe = dataframe)
 except BaseException as e:
   requests.post(slack_webhook,
-  json = {'text' : '*line_vendor_rider_late_communication*: Failed send API request: ' + str(e)})
+  json = {'text' : '*line_vendor_automated_SKU*: Failed send API request: ' + str(e)})
 
 df = dataframe.filter(items=['vendor_code', 'line_user_id'])
 df["return_response"] = reponse_code_list
 df["msg_sent_date_time"] = now
-df["template_id_if_any"] = "line_vendor_rider_late_communication"
+df["template_id_if_any"] = "line_vendor_automated_SKU"
 df["msg_url"] = url
-df["msg_content"] = "line_vendor_rider_late_communication"
+df["msg_content"] = "line_vendor_automated_SKU"
 df_records = df.to_dict('records')
 
 try:
   status = record_line_communication_logs(logs_table_id, df_records)
 except BaseException as e:
   requests.post(slack_webhook,
-  json = {'text' : '*line_vendor_rider_late_communication*: Failed to record logs: ' + str(e)})
+  json = {'text' : '*line_vendor_automated_SKU*: Failed to record logs: ' + str(e)})
   # print(e)
