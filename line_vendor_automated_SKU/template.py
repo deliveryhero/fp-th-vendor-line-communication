@@ -1,24 +1,24 @@
 json_object = """
 
 {
-    "to": "{line_user_id}",
+     "to": "{line_user_id}",
     "messages": [
         {
             "type": "flex",
-            "altText": "ติดตามไรเดอร์ง่ายแค่นี้เองหรอ",
+            "altText": "ยอดขายปังแน่แค่ทำตามนี้!",
             "contents":
 {
   "type": "bubble",
-  "size": "giga",
   "hero": {
     "type": "image",
-    "url": "https://drive.google.com/uc?export=view&id=17LZ-7tgggU6HWP8zvZXPQ32iwK6XlmGr",
+    "url": "https://drive.google.com/uc?export=view&id=16OfsN7aivGj7Wg29Kvjmtr-WUznemue2",
     "size": "full",
-    "aspectRatio": "4:4",
+    "aspectRatio": "260:275",
     "aspectMode": "cover",
     "action": {
-      "type": "uri",
-      "uri": "https://bit.ly/3QMp9ir"
+      "type": "message",
+      "label": "action",
+      "text": "001"
     }
   }
 }
@@ -26,10 +26,7 @@ json_object = """
     }
   ],
     "customAggregationUnits": [
-        "RiderLate"
-    ]
-}'
+        "DLDandDLP"]
 }
-
 
 """

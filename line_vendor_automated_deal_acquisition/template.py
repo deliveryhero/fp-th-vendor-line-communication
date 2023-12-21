@@ -5,31 +5,28 @@ json_object = """
     "messages": [
         {
             "type": "flex",
-            "altText": "ติดตามไรเดอร์ง่ายแค่นี้เองหรอ",
+            "altText": "ร้านใหม่ ได้ออเดอร์แรกไม่ยาก! ลองเลย!",
             "contents":
 {
   "type": "bubble",
-  "size": "giga",
   "hero": {
     "type": "image",
-    "url": "https://drive.google.com/uc?export=view&id=17LZ-7tgggU6HWP8zvZXPQ32iwK6XlmGr",
+    "url": "https://drive.google.com/uc?export=view&id=1aBnq4E8rrGDp0OLIyudh2tJ5C1HCBhPA",
     "size": "full",
-    "aspectRatio": "4:4",
+    "aspectRatio": "260:423",
     "aspectMode": "cover",
     "action": {
       "type": "uri",
-      "uri": "https://bit.ly/3QMp9ir"
+      "uri": "https://bit.ly/3T5ypPZ"
     }
   }
 }
-
     }
   ],
     "customAggregationUnits": [
-        "RiderLate"
-    ]
-}'
+        "DealAcquisition"]
 }
 
 
 """
+
