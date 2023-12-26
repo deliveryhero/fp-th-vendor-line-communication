@@ -11,13 +11,13 @@ import requests
 from template import json_object
 
 # Basic configuration tables
-query_table = "fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_rider_late_communication"
+query_table = "fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_sku_dld_dlp_line_coummunication"
 line_data  = "foodpanda-th-bigquery.pandata_th.vendor_experience_line_liff_user_data_backup"
 logs_table_id = "foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live"
 
 # Basic configuration parameters
 slack_webhook = os.getenv('slack_webhook')
-Live = True
+Live = False
 url = "https://api.line.me/v2/bot/message/push"
 
 token = get_secret_data()
@@ -28,24 +28,26 @@ now = datetime.datetime.now(tz).strftime("%Y-%m-%d %H:%M:%S")
 if Live == False:
     query = f"""
     SELECT 
-      rider_late.vendor_code,
+      dld_dlp_line.vendor_code,
       "U2b9495e231b925da2ed4163beeef6dad" AS line_user_id
-    FROM `fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_rider_late_communication` AS rider_late
+    FROM `fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_sku_dld_dlp_line_coummunication` AS dld_dlp_line
     INNER JOIN `foodpanda-th-bigquery.pandata_th.vendor_experience_line_liff_user_data_backup` AS line_data
-            ON LOWER(rider_late.vendor_code) = LOWER(line_data.VendorCode)
-    QUALIFY ROW_NUMBER() OVER (PARTITION BY rider_late.vendor_code, line_data.LineUserID) = 1
+            ON LOWER(dld_dlp_line.vendor_code) = LOWER(line_data.VendorCode)
+    WHERE is_total_product_less_than_10
+    QUALIFY ROW_NUMBER() OVER (PARTITION BY dld_dlp_line.vendor_code, line_data.LineUserID) = 1
     LIMIT 1
     """
 
 if Live == True:
     query = f"""
-      SELECT 
-        rider_late.vendor_code,
-        line_data.LineUserID AS line_user_id
-      FROM `fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_rider_late_communication` AS rider_late
-      INNER JOIN `foodpanda-th-bigquery.pandata_th.vendor_experience_line_liff_user_data_backup` AS line_data
-              ON LOWER(rider_late.vendor_code) = LOWER(line_data.VendorCode)
-      QUALIFY ROW_NUMBER() OVER (PARTITION BY rider_late.vendor_code, line_data.LineUserID) = 1
+    SELECT 
+      dld_dlp_line.vendor_code,
+      line_data.LineUserID AS line_user_id
+    FROM `fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_sku_dld_dlp_line_coummunication` AS dld_dlp_line
+    INNER JOIN `foodpanda-th-bigquery.pandata_th.vendor_experience_line_liff_user_data_backup` AS line_data
+            ON LOWER(dld_dlp_line.vendor_code) = LOWER(line_data.VendorCode)
+    WHERE is_total_product_less_than_10
+    QUALIFY ROW_NUMBER() OVER (PARTITION BY dld_dlp_line.vendor_code, line_data.LineUserID) = 1
     """
 
 try:
