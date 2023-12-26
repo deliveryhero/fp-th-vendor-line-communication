@@ -49,6 +49,7 @@ if Live == True:
       WHERE line_user_id IS NOT NULL
         AND vendor_age = {vendor_age}
         AND vertical = "Restaurant"
+        AND DATE(recorded_at_local) = CURRENT_DATE("Asia/Bangkok")
     """
 
 try:
