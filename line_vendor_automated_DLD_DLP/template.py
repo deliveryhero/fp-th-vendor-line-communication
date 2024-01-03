@@ -1,7 +1,7 @@
 json_object = """
 
 {
-     "to": "{line_user_id}",
+    "to": "{line_user_id}",
     "messages": [
         {
             "type": "flex",
@@ -9,6 +9,7 @@ json_object = """
             "contents":
 {
   "type": "bubble",
+  "size": "giga",
   "hero": {
     "type": "image",
     "url": "https://drive.google.com/uc?export=view&id=16OfsN7aivGj7Wg29Kvjmtr-WUznemue2",
