@@ -32,7 +32,7 @@ json_object = """
               "type": "button",
               "action": {
                 "type": "uri",
-                "label": "ดูวิธีใช้เครื่องมือ",
+                "label": "ดูวิธีใช้เครื่องมือคะแนนและรีวิว",
                 "uri": "http://bit.ly/3nt9fgN"
               },
               "color": "#FF2B85FF",

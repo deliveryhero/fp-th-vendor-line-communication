@@ -1,6 +1,5 @@
 json_object = """
 
-
 {
   "to": "{line_user_id}",
   "messages": [
@@ -33,24 +32,26 @@ json_object = """
               "type": "button",
               "action": {
                 "type": "uri",
-                "label": "ลองเลย ",
-                "uri": "http://bit.ly/3FSFfRt"
-              },
-              "color": "#FF2B85FF",
-              "height": "sm",
-              "style": "primary",
-              "offsetEnd": "xs"
-            },
-            {
-              "type": "button",
-              "action": {
-                "type": "uri",
                 "label": "เรียนรู้การเงิน ",
                 "uri": "https://youtube.com/playlist?list=PLWLrh3ZaezZwdvA4NCuY9ecdzpDK_Y9zx&si=TH8OAYbIK33RQdaE"
               },
               "color": "#FF2B85FF",
               "height": "sm",
               "style": "primary",
+              "offsetStart": "none",
+              "offsetEnd": "xs"
+            },
+            {
+              "type": "button",
+              "action": {
+                "type": "uri",
+                "label": "ลองเลย ",
+                "uri": "http://bit.ly/3FSFfRt"
+              },
+              "color": "#FF2B85FF",
+              "height": "sm",
+              "style": "primary",
+              "offsetEnd": "none",
               "offsetStart": "xs"
             }
           ]

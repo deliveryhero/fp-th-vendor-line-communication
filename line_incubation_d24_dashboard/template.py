@@ -30,7 +30,7 @@ json_object = """
           "contents": [
             {
               "type": "text",
-              "text": "เรียนรู้วิธีการใช้เครื่องมือบน panda partner ทั้งหมด คลิก!",
+              "text": "ทบทวนวิธีการใช้เครื่องมือบน panda partner ทั้งหมด คลิก!",
               "size": "sm",
               "style": "italic",
               "align": "center",

@@ -17,7 +17,12 @@ json_object = """
           "gravity": "center",
           "size": "full",
           "aspectRatio": "100:100",
-          "aspectMode": "cover"
+          "aspectMode": "cover",
+          "action": {
+            "type": "message",
+            "label": "action",
+            "text": "213"
+          }
         }
       }
     }

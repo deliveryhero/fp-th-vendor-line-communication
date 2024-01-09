@@ -17,7 +17,12 @@ json_object = """
           "gravity": "center",
           "size": "full",
           "aspectRatio": "20:21",
-          "aspectMode": "cover"
+          "aspectMode": "cover",
+          "action": {
+            "type": "message",
+            "label": "action",
+            "text": "226"
+          }
         },
         "body": {
           "type": "box",
@@ -31,7 +36,7 @@ json_object = """
                 "label": "action",
                 "uri": "https://youtube.com/playlist?list=PLWLrh3ZaezZwvTBYF3oydRjYFQqALze4J&si=vDS7SmjpMUD1vVTT"
               },
-              "text": "ดูวิดีโอสำหรับมือใหม่เพื่อพร้อมเปิดร้านขาย  คลิก!",
+              "text": "ดูวิดีโอสำหรับมือใหม่เพื่อพร้อมเปิดร้านขายที่นี่ คลิก",
               "size": "sm",
               "align": "center",
               "style": "italic"
