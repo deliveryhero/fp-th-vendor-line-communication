@@ -12,7 +12,7 @@ json_object = """
         "direction": "ltr",
         "hero": {
           "type": "image",
-          "url": "https://drive.google.com/uc?export=view&id=1nGVUmRqaImrNGFbtocVCRm4s3X7akHSE",
+          "url": "https://drive.google.com/uc?export=view&id=1CFq8zH4ThLqDTOEmIcpvzbseB-HKlK72",
           "align": "center",
           "gravity": "center",
           "size": "full",
