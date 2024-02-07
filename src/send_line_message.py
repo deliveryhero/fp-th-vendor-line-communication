@@ -496,3 +496,57 @@ def send_request_line_api_ads_credit(*args, **kwargs):
         reponse_code_list.append(reponse_code)
         json_list.append(json_data_v1)
     return reponse_code_list, json_list
+
+def send_request_line_api_rich_menu_ssu_segmentation(rich_menu_urls, templates_list, headers, dataframe):
+    vendor_menu_new_url, vendor_menu_failed_url, vendor_lost_url, vendor_onboarding_url, vendor_active_url = rich_menu_urls
+    vendor_menu_new_template, vendor_menu_failed_template, vendor_lost_template, vendor_onboarding_template, vendor_active_template = templates_list
+    reponse_code_list = []
+    url_list = []
+    template_list = []
+    for index, row in dataframe.iterrows():
+        if row['ssu_vendor_status'] == "vendor_menu_new":
+            user_specific_url = vendor_menu_new_url.replace("user_id_variable", row['line_user_id'])
+            headers = headers
+            json = ""
+            r = requests.post(user_specific_url, headers = headers, json = json)
+            reponse_code = r.status_code
+            reponse_code_list.append(reponse_code)
+            url_list.append(user_specific_url)
+            template_list.append(vendor_menu_new_template)
+        if row['ssu_vendor_status'] == "vendor_menu_failed":
+            user_specific_url = vendor_menu_failed_url.replace("user_id_variable", row['line_user_id'])
+            headers = headers
+            json = ""
+            r = requests.post(user_specific_url, headers = headers, json = json)
+            reponse_code = r.status_code
+            reponse_code_list.append(reponse_code)
+            url_list.append(user_specific_url)
+            template_list.append(vendor_menu_failed_template)
+        if row['ssu_vendor_status'] == "vendor_lost":
+            user_specific_url = vendor_lost_url.replace("user_id_variable", row['line_user_id'])
+            headers = headers
+            json = ""
+            r = requests.post(user_specific_url, headers = headers, json = json)
+            reponse_code = r.status_code
+            reponse_code_list.append(reponse_code)
+            url_list.append(user_specific_url)
+            template_list.append(vendor_lost_template)
+        if row['ssu_vendor_status'] == "vendor_onboarding":
+            user_specific_url = vendor_onboarding_url.replace("user_id_variable", row['line_user_id'])
+            headers = headers
+            json = ""
+            r = requests.post(user_specific_url, headers = headers, json = json)
+            reponse_code = r.status_code
+            reponse_code_list.append(reponse_code)
+            url_list.append(user_specific_url)
+            template_list.append(vendor_onboarding_template)
+        if row['ssu_vendor_status'] == "vendor_active":
+            user_specific_url = vendor_active_url.replace("user_id_variable", row['line_user_id'])
+            headers = headers
+            json = ""
+            r = requests.post(user_specific_url, headers = headers, json = json)
+            reponse_code = r.status_code
+            reponse_code_list.append(reponse_code)
+            url_list.append(user_specific_url)
+            template_list.append(vendor_active_template)
+    return reponse_code_list, url_list, template_list
