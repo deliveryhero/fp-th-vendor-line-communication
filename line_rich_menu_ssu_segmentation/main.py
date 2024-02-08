@@ -10,15 +10,14 @@ import datetime, pytz
 import requests
 
 # Basic configuration tables
-query_table_vendor = "fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_insight_report_basket_size_vendor"
-query_table_zone = "fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_insight_report_basket_size_zone"
+query_table_vendor = "fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_ssu_vendor_segmentation"
 line_data  = "foodpanda-th-bigquery.pandata_th.vendor_experience_line_liff_user_data_backup"
 pii_data = "foodpanda-th-bigquery.pandata_th.sf_account_internal_non_pii"
 logs_table_id = "foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live"
 
 # Basic configuration parameters
 slack_webhook = os.getenv('slack_webhook')
-Live = False
+Live = True
 vendor_menu_new_url = "https://api.line.me/v2/bot/user/user_id_variable/richmenu/richmenu-0c474898e19216646ffdbb422e11e0d0"
 vendor_menu_failed_url = "https://api.line.me/v2/bot/user/user_id_variable/richmenu/richmenu-61a444a9532d9939bd6673ea83952993"
 vendor_lost_url = "https://api.line.me/v2/bot/user/user_id_variable/richmenu/richmenu-ba158eede83289e2274eb1d6043d91a5"
@@ -47,7 +46,7 @@ if Live == False:
       "vendor_active" AS ssu_vendor_status,
       "U2b9495e231b925da2ed4163beeef6dad" AS line_user_id
     FROM `fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_ssu_vendor_segmentation` AS segemnt
-    LEFT JOIN `foodpanda-th-bigquery.pandata_th_external.vendor_experience_line_liff_user_data` AS line_data
+    INNER JOIN `foodpanda-th-bigquery.pandata_th_external.vendor_experience_line_liff_user_data` AS line_data
            ON LOWER(segemnt.vendor_code) = LOWER(line_data.VendorCode)
     INNER JOIN `foodpanda-th-bigquery.pandata_th.sf_account_internal_non_pii` AS pii_data
             ON pii_data.vendor_code = segemnt.vendor_code
@@ -71,15 +70,15 @@ if Live == True:
       segemnt.vendor_code,
       segemnt.menu_case_number,
       segemnt.ssu_vendor_status,
-      line_data.line_user_id
+      line_data.LineUserID AS line_user_id
     FROM `fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_ssu_vendor_segmentation` AS segemnt
-    LEFT JOIN `foodpanda-th-bigquery.pandata_th_external.vendor_experience_line_liff_user_data` AS line_data
-          ON LOWER(segemnt.vendor_code) = LOWER(line_data.VendorCode)
+    INNER JOIN `foodpanda-th-bigquery.pandata_th_external.vendor_experience_line_liff_user_data` AS line_data
+           ON LOWER(segemnt.vendor_code) = LOWER(line_data.VendorCode)
     INNER JOIN `foodpanda-th-bigquery.pandata_th.sf_account_internal_non_pii` AS pii_data
             ON pii_data.vendor_code = segemnt.vendor_code
-            AND pii_data.account_phone = IF(LENGTH(line_data.vendor_mobile) = 9,
-                                            CONCAT("+66", line_data.vendor_mobile),
-                                            REGEXP_REPLACE(TRIM(LOWER(REPLACE(line_data.vendor_mobile, "-", ""))), r"^0+", "+66"))
+           AND pii_data.account_phone = IF(LENGTH(line_data.VendorMobile) = 9,
+                                            CONCAT("+66", line_data.VendorMobile),
+                                            REGEXP_REPLACE(TRIM(LOWER(REPLACE(line_data.VendorMobile, "-", ""))), r"^0+", "+66"))
     LEFT JOIN `foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live` AS logs
            ON logs.vendor_code = segemnt.vendor_code
           AND logs.line_user_id = line_data.LineUserID
