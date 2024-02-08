@@ -30,7 +30,7 @@ if Live == False:
       line_data.VendorCode AS vendor_code,
       line_data.LineUserID AS line_user_id,
     FROM {query_table} AS line_data
-    WHERE line_data.LineUserID IN ("U5f25d7890e933d09ef30f8bcf98b8043")
+    WHERE line_data.LineUserID IN ("U2b9495e231b925da2ed4163beeef6dad")
     QUALIFY ROW_NUMBER() OVER (
       PARTITION BY
       line_data.LineUserID,
