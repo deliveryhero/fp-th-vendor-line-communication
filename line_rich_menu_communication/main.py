@@ -27,10 +27,20 @@ now = datetime.datetime.now(tz).strftime("%Y-%m-%d %H:%M:%S")
 if Live == False:
     query = f"""
     SELECT 
-      line_data.VendorCode AS vendor_code,
-      line_data.LineUserID AS line_user_id,
+      vendor_data.vendor_code AS vendor_code,
+      "U2b9495e231b925da2ed4163beeef6dad" AS line_user_id
     FROM {query_table} AS line_data
-    WHERE line_data.LineUserID IN ("U2b9495e231b925da2ed4163beeef6dad")
+    INNER JOIN {verification_table} AS vendor_data
+            ON lower(line_data.VendorCode) = lower(vendor_data.vendor_code)
+    LEFT JOIN {logs_table_id}  AS live
+           ON line_data.LineUserID = live.line_user_id
+    WHERE LineUserID IS NOT NULL
+        AND VendorCode IS NOT NULL
+        AND LOWER(VendorCode) NOT LIKE '%test%'
+        AND vendor_data.is_active
+        AND NOT vendor_data.is_private
+        AND NOT vendor_data.is_test
+        AND live.line_user_id IS NULL
     QUALIFY ROW_NUMBER() OVER (
       PARTITION BY
       line_data.LineUserID,
@@ -38,7 +48,7 @@ if Live == False:
       ORDER BY
       line_data.Date DESC
     ) = 1
-    ORDER BY line_data.Date
+    LIMIT 1
     """
 
 if Live == True:
