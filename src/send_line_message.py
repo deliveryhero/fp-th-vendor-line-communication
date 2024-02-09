@@ -522,7 +522,7 @@ def send_request_line_api_rich_menu_ssu_segmentation(rich_menu_urls, templates_l
             reponse_code_list.append(reponse_code)
             url_list.append(user_specific_url)
             template_list.append(vendor_menu_failed_template)
-        if row['ssu_vendor_status'] == "vendor_lost":
+        if row['ssu_vendor_status'] == "vendor_lost" or row['ssu_vendor_status'] == "vendor_onboard_failed":
             user_specific_url = vendor_lost_url.replace("user_id_variable", row['line_user_id'])
             headers = headers
             json = ""
