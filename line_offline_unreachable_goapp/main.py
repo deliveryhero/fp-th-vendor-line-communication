@@ -18,7 +18,7 @@ pipeline_name = "line_offline_unreachable_goapp"
 
 # Basic configuration parameters
 slack_webhook = os.getenv('slack_webhook')
-Live = False
+Live = True
 url = "https://api.line.me/v2/bot/message/push"
 
 token = get_secret_data()
