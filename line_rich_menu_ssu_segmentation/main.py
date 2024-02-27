@@ -40,21 +40,29 @@ now = datetime.datetime.now(tz).strftime("%Y-%m-%d %H:%M:%S")
 
 if Live == False:
     query = f"""
+    WITH line_logs AS (
+      SELECT 
+        *
+      FROM `foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live` AS logs
+      WHERE CONTAINS_SUBSTR(logs.template_id_if_any, 'richmenu')
+      QUALIFY ROW_NUMBER() OVER(PARTITION BY vendor_code, line_user_id ORDER BY msg_sent_date_time DESC) = 1
+    )
+
     SELECT
-      "test" AS vendor_code,
+      segemnt.vendor_code,
       segemnt.menu_case_number,
-      "vendor_active" AS ssu_vendor_status,
+      segemnt.ssu_vendor_status,
       "U2b9495e231b925da2ed4163beeef6dad" AS line_user_id
     FROM `fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_ssu_vendor_segmentation` AS segemnt
     INNER JOIN `foodpanda-th-bigquery.pandata_th_external.vendor_experience_line_liff_user_data` AS line_data
-           ON LOWER(segemnt.vendor_code) = LOWER(line_data.VendorCode)
+            ON LOWER(segemnt.vendor_code) = LOWER(line_data.VendorCode)
     INNER JOIN `foodpanda-th-bigquery.pandata_th.sf_account_internal_non_pii` AS pii_data
             ON pii_data.vendor_code = segemnt.vendor_code
-           AND pii_data.account_phone = IF(LENGTH(line_data.VendorMobile) = 9,
+            AND pii_data.account_phone = IF(LENGTH(line_data.VendorMobile) = 9,
                                             CONCAT("+66", line_data.VendorMobile),
                                             REGEXP_REPLACE(TRIM(LOWER(REPLACE(line_data.VendorMobile, "-", ""))), r"^0+", "+66"))
-    LEFT JOIN `foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live` AS logs
-           ON logs.vendor_code = segemnt.vendor_code
+    LEFT JOIN line_logs AS logs
+            ON logs.vendor_code = segemnt.vendor_code
           AND logs.line_user_id = line_data.LineUserID
           AND CONTAINS_SUBSTR(logs.template_id_if_any, 'richmenu')
     WHERE line_data.LineUserID IS NOT NULL
@@ -66,6 +74,14 @@ if Live == False:
 
 if Live == True:
     query = f"""
+    WITH line_logs AS (
+    SELECT 
+      *
+    FROM `foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live` AS logs
+    WHERE CONTAINS_SUBSTR(logs.template_id_if_any, 'richmenu')
+    QUALIFY ROW_NUMBER() OVER(PARTITION BY vendor_code, line_user_id ORDER BY msg_sent_date_time DESC) = 1
+    )
+
     SELECT
       segemnt.vendor_code,
       segemnt.menu_case_number,
@@ -73,14 +89,14 @@ if Live == True:
       line_data.LineUserID AS line_user_id
     FROM `fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_ssu_vendor_segmentation` AS segemnt
     INNER JOIN `foodpanda-th-bigquery.pandata_th_external.vendor_experience_line_liff_user_data` AS line_data
-           ON LOWER(segemnt.vendor_code) = LOWER(line_data.VendorCode)
+            ON LOWER(segemnt.vendor_code) = LOWER(line_data.VendorCode)
     INNER JOIN `foodpanda-th-bigquery.pandata_th.sf_account_internal_non_pii` AS pii_data
             ON pii_data.vendor_code = segemnt.vendor_code
-           AND pii_data.account_phone = IF(LENGTH(line_data.VendorMobile) = 9,
+            AND pii_data.account_phone = IF(LENGTH(line_data.VendorMobile) = 9,
                                             CONCAT("+66", line_data.VendorMobile),
                                             REGEXP_REPLACE(TRIM(LOWER(REPLACE(line_data.VendorMobile, "-", ""))), r"^0+", "+66"))
-    LEFT JOIN `foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live` AS logs
-           ON logs.vendor_code = segemnt.vendor_code
+    LEFT JOIN line_logs AS logs
+            ON logs.vendor_code = segemnt.vendor_code
           AND logs.line_user_id = line_data.LineUserID
           AND CONTAINS_SUBSTR(logs.template_id_if_any, 'richmenu')
     WHERE line_data.LineUserID IS NOT NULL
