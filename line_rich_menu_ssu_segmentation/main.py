@@ -71,6 +71,7 @@ if Live == False:
     WHERE line_data.LineUserID IS NOT NULL
       AND (logs.template_id_if_any IS NULL OR logs2.template_id_if_any != "richmenu-6da47a1cac4c62cc569bf5efdef303eb")
       AND (logs.msg_content IS NULL OR  segemnt.ssu_vendor_status != logs.msg_content)
+      AND segemnt.ssu_vendor_status != "Undefined"
     QUALIFY ROW_NUMBER() OVER (PARTITION BY line_data.LineUserID ORDER BY segemnt.ssu_vendor_status) = 1
         LIMIT 1
     """
@@ -108,6 +109,7 @@ if Live == True:
     WHERE line_data.LineUserID IS NOT NULL
       AND (logs.template_id_if_any IS NULL OR logs2.template_id_if_any != "richmenu-6da47a1cac4c62cc569bf5efdef303eb")
       AND (logs.msg_content IS NULL OR  segemnt.ssu_vendor_status != logs.msg_content)
+      AND segemnt.ssu_vendor_status != "Undefined"
     QUALIFY ROW_NUMBER() OVER (PARTITION BY line_data.LineUserID ORDER BY segemnt.ssu_vendor_status) = 1
     """
 
