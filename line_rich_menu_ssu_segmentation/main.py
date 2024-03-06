@@ -41,11 +41,11 @@ now = datetime.datetime.now(tz).strftime("%Y-%m-%d %H:%M:%S")
 if Live == False:
     query = f"""
     WITH line_logs AS (
-      SELECT 
-        *
-      FROM `foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live` AS logs
-      WHERE CONTAINS_SUBSTR(logs.template_id_if_any, 'richmenu')
-      QUALIFY ROW_NUMBER() OVER(PARTITION BY vendor_code, line_user_id ORDER BY msg_sent_date_time DESC) = 1
+    SELECT 
+      *
+    FROM `foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live` AS logs
+    WHERE CONTAINS_SUBSTR(logs.template_id_if_any, 'richmenu')
+    QUALIFY ROW_NUMBER() OVER(PARTITION BY vendor_code, line_user_id ORDER BY msg_sent_date_time DESC) = 1
     )
 
     SELECT
@@ -65,11 +65,14 @@ if Live == False:
             ON logs.vendor_code = segemnt.vendor_code
           AND logs.line_user_id = line_data.LineUserID
           AND CONTAINS_SUBSTR(logs.template_id_if_any, 'richmenu')
+    LEFT JOIN line_logs AS logs2
+           ON logs2.line_user_id = line_data.LineUserID
+          AND CONTAINS_SUBSTR(logs2.template_id_if_any, 'richmenu')
     WHERE line_data.LineUserID IS NOT NULL
-      AND (logs.template_id_if_any IS NULL OR logs.template_id_if_any != "richmenu-6da47a1cac4c62cc569bf5efdef303eb")
+      AND (logs.template_id_if_any IS NULL OR logs2.template_id_if_any != "richmenu-6da47a1cac4c62cc569bf5efdef303eb")
       AND (logs.msg_content IS NULL OR  segemnt.ssu_vendor_status != logs.msg_content)
-    QUALIFY ROW_NUMBER() OVER (PARTITION BY segemnt.vendor_code, line_data.LineUserID) = 1
-    LIMIT 1
+    QUALIFY ROW_NUMBER() OVER (PARTITION BY line_data.LineUserID ORDER BY segemnt.ssu_vendor_status) = 1
+        LIMIT 1
     """
 
 if Live == True:
@@ -99,10 +102,13 @@ if Live == True:
             ON logs.vendor_code = segemnt.vendor_code
           AND logs.line_user_id = line_data.LineUserID
           AND CONTAINS_SUBSTR(logs.template_id_if_any, 'richmenu')
+    LEFT JOIN line_logs AS logs2
+           ON logs2.line_user_id = line_data.LineUserID
+          AND CONTAINS_SUBSTR(logs2.template_id_if_any, 'richmenu')
     WHERE line_data.LineUserID IS NOT NULL
-      AND (logs.template_id_if_any IS NULL OR logs.template_id_if_any != "richmenu-6da47a1cac4c62cc569bf5efdef303eb")
+      AND (logs.template_id_if_any IS NULL OR logs2.template_id_if_any != "richmenu-6da47a1cac4c62cc569bf5efdef303eb")
       AND (logs.msg_content IS NULL OR  segemnt.ssu_vendor_status != logs.msg_content)
-    QUALIFY ROW_NUMBER() OVER (PARTITION BY segemnt.vendor_code, line_data.LineUserID) = 1
+    QUALIFY ROW_NUMBER() OVER (PARTITION BY line_data.LineUserID ORDER BY segemnt.ssu_vendor_status) = 1
     """
 
 try: 
