@@ -105,17 +105,16 @@ except BaseException as e:
   json = {'text' : '*line_ads_credit*: Failed send API request: ' + str(e)})
   # print(e)
 
-df = dataframe.filter(items=['vendor_code', 'line_user_id'])
-df["return_response"] = reponse_code_list
-df["msg_sent_date_time"] = now
-df["template_id_if_any"] = "line_ads_credit"
-df["msg_url"] = url
-df["msg_content"] = 'content vendor_code: ' + dataframe['vendor_code'] \
-                    +','+'content vendor_name: ' + dataframe['vendor_name'] \
-                    +','+'content recommended_budget: ' + dataframe['recommended_budget']
-df_records = df.to_dict('records')
-
 try:
+  df = dataframe.filter(items=['vendor_code', 'line_user_id'])
+  df["return_response"] = reponse_code_list
+  df["msg_sent_date_time"] = now
+  df["template_id_if_any"] = "line_ads_credit"
+  df["msg_url"] = url
+  df["msg_content"] = 'content vendor_code: ' + dataframe['vendor_code'] \
+                      +','+'content vendor_name: ' + dataframe['vendor_name'] \
+                      +','+'content recommended_budget: ' + dataframe['recommended_budget']
+  df_records = df.to_dict('records')
   status = record_line_communication_logs(logs_table_id, df_records)
 except BaseException as e:
   requests.post(slack_webhook,

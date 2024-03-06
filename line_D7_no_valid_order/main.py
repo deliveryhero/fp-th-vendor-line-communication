@@ -188,14 +188,13 @@ except BaseException as e:
     requests.post(slack_webhook,
     json = {'text' : '*Line_D7_no_valid_order*: Failed send API request: ' + str(e)})
 
-dataframe["return_response"] = reponse_code_list
-dataframe["msg_sent_date_time"] = now
-dataframe["template_id_if_any"] = "Line_D7_no_valid_order"
-dataframe["msg_url"] = url
-dataframe["msg_content"] = "Line_D7_no_valid_order"
-df_records = dataframe.to_dict('records')
-
 try:
+  dataframe["return_response"] = reponse_code_list
+  dataframe["msg_sent_date_time"] = now
+  dataframe["template_id_if_any"] = "Line_D7_no_valid_order"
+  dataframe["msg_url"] = url
+  dataframe["msg_content"] = "Line_D7_no_valid_order"
+  df_records = dataframe.to_dict('records')
   status = record_line_communication_logs(logs_table_id, df_records)
 except BaseException as e:
     requests.post(slack_webhook,

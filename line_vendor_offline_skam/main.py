@@ -71,18 +71,17 @@ except BaseException as e:
   json = {'text' : '*line_vendor_offline_skam*: Failed send API request: ' + str(e)})
   # print(e)
 
-df = dataframe.filter(items=['vendor_code', 'line_user_id'])
-df["return_response"] = reponse_code_list
-df["msg_sent_date_time"] = now
-df["template_id_if_any"] = "line_vendor_offline_skam"
-df["msg_url"] = url
-df["msg_content"] = 'content vendor_name: ' + dataframe['vendor_name'] \
-                    +','+'content start_date_in_thai: ' + dataframe['start_date_in_thai'] \
-                    +','+'content end_date_in_thai: ' + dataframe['end_date_in_thai'] \
-                    +','+'content total_offline_hours: ' + dataframe['total_offline_hours']
-df_records = df.to_dict('records')
-
 try:
+  df = dataframe.filter(items=['vendor_code', 'line_user_id'])
+  df["return_response"] = reponse_code_list
+  df["msg_sent_date_time"] = now
+  df["template_id_if_any"] = "line_vendor_offline_skam"
+  df["msg_url"] = url
+  df["msg_content"] = 'content vendor_name: ' + dataframe['vendor_name'] \
+                      +','+'content start_date_in_thai: ' + dataframe['start_date_in_thai'] \
+                      +','+'content end_date_in_thai: ' + dataframe['end_date_in_thai'] \
+                      +','+'content total_offline_hours: ' + dataframe['total_offline_hours']
+  df_records = df.to_dict('records')
   status = record_line_communication_logs(logs_table_id, df_records)
 except BaseException as e:
   requests.post(slack_webhook,
