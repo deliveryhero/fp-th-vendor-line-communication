@@ -12,7 +12,7 @@ from template import json_object
 
 # Basic configuration tables
 query_table = "fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_auto_first_failed_orders_sms"
-line_liff_table = "foodpanda-th-bigquery.pandata_th_external.vendor_experience_line_liff_user_data"
+line_liff_table = "foodpanda-th-bigquery.pandata_th.vendor_experience_line_liff_user_data_backup"
 logs_table_id = "foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live"
 targeted_failed_reasons = "VENDOR_NOT_RESPONDING"
 pipeline_name = "line_first_failed_not_responding_godroid"
