@@ -550,3 +550,24 @@ def send_request_line_api_rich_menu_ssu_segmentation(rich_menu_urls, templates_l
             url_list.append(user_specific_url)
             template_list.append(vendor_active_template)
     return reponse_code_list, url_list, template_list
+
+
+def send_line_vendor_verification_status_communication(url, headers, json_object_success, json_object_not_success, dataframe):
+    reponse_code_list = []
+    msg_content = []
+    for index, row in dataframe.iterrows():
+        if row['verfication_status'] == "SuccessfulVerification":
+            json_verification_success = json_object_success.replace("line_user_id", row['line_user_id'])
+            headers = headers
+            r = requests.post(url, headers = headers, json = json_verification_success)
+            reponse_code = r.status_code
+            reponse_code_list.append(reponse_code)
+            msg_content.append(row['verfication_status'])
+        if row['verfication_status'] == "NotSuccessfulVerification":
+            json_verification_not_success = json_object_not_success.replace("line_user_id", row['line_user_id'])
+            headers = headers
+            r = requests.post(url, headers = headers, json = json_verification_not_success)
+            reponse_code = r.status_code
+            reponse_code_list.append(reponse_code)
+            msg_content.append(row['verfication_status'])
+    return reponse_code_list, msg_content
