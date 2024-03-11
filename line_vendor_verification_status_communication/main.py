@@ -67,7 +67,7 @@ if Live == False:
           AND processed_data.line_user_id = logs.line_user_id
           AND processed_data.verfication_status = logs.msg_content
     WHERE logs.vendor_code IS NULL
-      AND processed_data.line_user_id IN ("U9d1f00f6f00199356eee821cb2736ac2", "U0276f51ba4f3f5f0e275ebcdbbc11b6d","U5f25d7890e933d09ef30f8bcf98b8043","U2b9495e231b925da2ed4163beeef6dad")
+      AND processed_data.line_user_id IN ("U9d1f00f6f00199356eee821cb2736ac2", "U0276f51ba4f3f5f0e275ebcdbbc11b6d","U5f25d7890e933d09ef30f8bcf98b8043","U2b9495e231b925da2ed4163beeef6dad", "U592e83eced3872c667f8dbe4e7277b8a")
     """
 
 if Live == True:
