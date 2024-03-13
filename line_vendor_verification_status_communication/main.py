@@ -33,7 +33,7 @@ if Live == False:
         VendorMobile
       FROM `foodpanda-th-bigquery.pandata_th_external.vendor_experience_line_liff_user_data` 
       WHERE Date IS NOT NULL
-        AND Date > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 30 MINUTE)
+        AND Date > TIMESTAMP_ADD(TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 30 MINUTE), INTERVAL 7 HOUR)
         AND VendorCode IS NOT NULL
         AND VendorMobile IS NOT NULL
         AND LineUserID IS NOT NULL
@@ -49,7 +49,7 @@ if Live == False:
           ON processed_data.VendorCode = logs.vendor_code
           AND processed_data.LineUserID = logs.line_user_id
       WHERE Date IS NOT NULL
-        AND Date BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 2 HOUR) AND TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 30 MINUTE)
+        AND Date BETWEEN TIMESTAMP_ADD(TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 2 HOUR), INTERVAL 7 HOUR) AND TIMESTAMP_ADD(TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 30 MINUTE), INTERVAL 7 HOUR)
         AND VendorCode IS NOT NULL
         AND VendorMobile IS NOT NULL
         AND LineUserID IS NOT NULL
@@ -106,7 +106,7 @@ if Live == True:
         VendorMobile
       FROM `foodpanda-th-bigquery.pandata_th_external.vendor_experience_line_liff_user_data` 
       WHERE Date IS NOT NULL
-        AND Date > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 30 MINUTE)
+        AND Date > TIMESTAMP_ADD(TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 30 MINUTE), INTERVAL 7 HOUR)
         AND VendorCode IS NOT NULL
         AND VendorMobile IS NOT NULL
         AND LineUserID IS NOT NULL
@@ -122,7 +122,7 @@ if Live == True:
           ON processed_data.VendorCode = logs.vendor_code
           AND processed_data.LineUserID = logs.line_user_id
       WHERE Date IS NOT NULL
-        AND Date BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 2 HOUR) AND TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 30 MINUTE)
+        AND Date BETWEEN TIMESTAMP_ADD(TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 2 HOUR), INTERVAL 7 HOUR) AND TIMESTAMP_ADD(TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 30 MINUTE), INTERVAL 7 HOUR)
         AND VendorCode IS NOT NULL
         AND VendorMobile IS NOT NULL
         AND LineUserID IS NOT NULL
