@@ -26,17 +26,48 @@ now = datetime.datetime.now(tz).strftime("%Y-%m-%d %H:%M:%S")
 
 if Live == False:
     query = f"""
-    WITH base_data AS (
+    WITH base_data_1 AS (
       SELECT 
         VendorCode,
         LineUserID,
         VendorMobile
       FROM `foodpanda-th-bigquery.pandata_th_external.vendor_experience_line_liff_user_data` 
       WHERE Date IS NOT NULL
-        AND Date > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 2 HOUR)
+        AND Date > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 30 MINUTE)
         AND VendorCode IS NOT NULL
         AND VendorMobile IS NOT NULL
         AND LineUserID IS NOT NULL
+    ),
+
+    base_data_2 AS (
+      SELECT 
+        VendorCode,
+        LineUserID,
+        VendorMobile
+      FROM `foodpanda-th-bigquery.pandata_th_external.vendor_experience_line_liff_user_data` AS processed_data
+      LEFT JOIN `foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live` AS logs
+          ON processed_data.VendorCode = logs.vendor_code
+          AND processed_data.LineUserID = logs.line_user_id
+      WHERE Date IS NOT NULL
+        AND Date BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 2 HOUR) AND TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 30 MINUTE)
+        AND VendorCode IS NOT NULL
+        AND VendorMobile IS NOT NULL
+        AND LineUserID IS NOT NULL
+        AND logs.vendor_code IS NULL
+    ),
+
+    base_data AS (
+      SELECT 
+        VendorCode,
+        LineUserID,
+        VendorMobile
+      FROM base_data_1
+      UNION DISTINCT
+      SELECT 
+        VendorCode,
+        LineUserID,
+        VendorMobile
+      FROM base_data_2
     ),
 
     processed_data AS (
@@ -47,7 +78,8 @@ if Live == False:
           WHEN pii_data.vendor_code IS NULL
             THEN "NotSuccessfulVerification"
             ELSE "SuccessfulVerification"
-          END as verfication_status
+          END as verfication_status,
+          VendorMobile
       FROM base_data
       LEFT JOIN `foodpanda-th-bigquery.pandata_th.sf_account_internal_non_pii` AS pii_data
             ON LOWER(base_data.VendorCode) = LOWER(pii_data.vendor_code)
@@ -62,27 +94,53 @@ if Live == False:
       processed_data.line_user_id,
       processed_data.verfication_status
     FROM processed_data
-    LEFT JOIN `foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live` AS logs
-          ON processed_data.vendor_code = logs.vendor_code
-          AND processed_data.line_user_id = logs.line_user_id
-          AND processed_data.verfication_status = logs.msg_content
-    WHERE logs.vendor_code IS NULL
-      AND processed_data.line_user_id IN ("U9d1f00f6f00199356eee821cb2736ac2", "U0276f51ba4f3f5f0e275ebcdbbc11b6d","U5f25d7890e933d09ef30f8bcf98b8043","U2b9495e231b925da2ed4163beeef6dad", "U592e83eced3872c667f8dbe4e7277b8a")
+    WHERE processed_data.line_user_id IN ("U9d1f00f6f00199356eee821cb2736ac2", "U0276f51ba4f3f5f0e275ebcdbbc11b6d","U5f25d7890e933d09ef30f8bcf98b8043","U2b9495e231b925da2ed4163beeef6dad", "U592e83eced3872c667f8dbe4e7277b8a")
     """
 
 if Live == True:
     query = f"""
-    WITH base_data AS (
+    WITH base_data_1 AS (
       SELECT 
         VendorCode,
         LineUserID,
         VendorMobile
       FROM `foodpanda-th-bigquery.pandata_th_external.vendor_experience_line_liff_user_data` 
       WHERE Date IS NOT NULL
-        AND Date > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 2 HOUR)
+        AND Date > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 30 MINUTE)
         AND VendorCode IS NOT NULL
         AND VendorMobile IS NOT NULL
         AND LineUserID IS NOT NULL
+    ),
+
+    base_data_2 AS (
+      SELECT 
+        VendorCode,
+        LineUserID,
+        VendorMobile
+      FROM `foodpanda-th-bigquery.pandata_th_external.vendor_experience_line_liff_user_data` AS processed_data
+      LEFT JOIN `foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live` AS logs
+          ON processed_data.VendorCode = logs.vendor_code
+          AND processed_data.LineUserID = logs.line_user_id
+      WHERE Date IS NOT NULL
+        AND Date BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 2 HOUR) AND TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 30 MINUTE)
+        AND VendorCode IS NOT NULL
+        AND VendorMobile IS NOT NULL
+        AND LineUserID IS NOT NULL
+        AND logs.vendor_code IS NULL
+    ),
+
+    base_data AS (
+      SELECT 
+        VendorCode,
+        LineUserID,
+        VendorMobile
+      FROM base_data_1
+      UNION DISTINCT
+      SELECT 
+        VendorCode,
+        LineUserID,
+        VendorMobile
+      FROM base_data_2
     ),
 
     processed_data AS (
@@ -93,7 +151,8 @@ if Live == True:
           WHEN pii_data.vendor_code IS NULL
             THEN "NotSuccessfulVerification"
             ELSE "SuccessfulVerification"
-          END as verfication_status
+          END as verfication_status,
+          VendorMobile
       FROM base_data
       LEFT JOIN `foodpanda-th-bigquery.pandata_th.sf_account_internal_non_pii` AS pii_data
             ON LOWER(base_data.VendorCode) = LOWER(pii_data.vendor_code)
@@ -108,11 +167,6 @@ if Live == True:
       processed_data.line_user_id,
       processed_data.verfication_status
     FROM processed_data
-    LEFT JOIN `foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live` AS logs
-          ON processed_data.vendor_code = logs.vendor_code
-          AND processed_data.line_user_id = logs.line_user_id
-          AND processed_data.verfication_status = logs.msg_content
-    WHERE logs.vendor_code IS NULL
     """
 
 try:

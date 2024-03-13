@@ -558,14 +558,16 @@ def send_line_vendor_verification_status_communication(url, headers, json_object
     for index, row in dataframe.iterrows():
         if row['verfication_status'] == "SuccessfulVerification":
             # json_data_v1 = json_string.replace('{lineuserid}', row['line_user_id'])
-            json_verification_success = json_object_success.replace("line_user_id", row['line_user_id'])
+            json_verification_success = json_object_success.replace("line_user_id", row['line_user_id']) \
+                                                            .replace('vendor_code', row['vendor_code'])
             headers = headers
             r = requests.post(url, headers = headers, data = json_verification_success.encode('utf-8'))
             reponse_code = r.status_code
             reponse_code_list.append(reponse_code)
             msg_content.append(row['verfication_status'])
         if row['verfication_status'] == "NotSuccessfulVerification":
-            json_verification_not_success = json_object_not_success.replace("line_user_id", row['line_user_id'])
+            json_verification_not_success = json_object_not_success.replace("line_user_id", row['line_user_id']) \
+                                                                    .replace('vendor_code', row['vendor_code'])
             headers = headers
             r = requests.post(url, headers = headers, data = json_verification_not_success.encode('utf-8'))
             reponse_code = r.status_code
