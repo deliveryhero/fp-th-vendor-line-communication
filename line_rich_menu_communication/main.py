@@ -16,8 +16,8 @@ logs_table_id = "foodpanda-th-bigquery.pandata_th_external.line_communication_lo
 
 # Basic configuration parameters
 slack_webhook = os.getenv('slack_webhook')
-Live = True
-url = "https://api.line.me/v2/bot/user/user_id_variable/richmenu/richmenu-6da47a1cac4c62cc569bf5efdef303eb"
+Live = False
+url = "https://api.line.me/v2/bot/user/user_id_variable/richmenu/richmenu-508759517fcd4c522f5f1b8842bfb91c"
 json = {}
 token = get_secret_data()
 headers = {'Authorization': "Bearer {" + token + "}"}
@@ -29,11 +29,12 @@ if Live == False:
     SELECT 
       vendor_data.vendor_code AS vendor_code,
       "U2b9495e231b925da2ed4163beeef6dad" AS line_user_id
-    FROM {query_table} AS line_data
-    INNER JOIN {verification_table} AS vendor_data
+    FROM foodpanda-th-bigquery.pandata_th_external.vendor_experience_line_liff_user_data AS line_data
+    INNER JOIN fulfillment-dwh-production.pandata_report.country_TH_general_pd_vendors AS vendor_data
             ON lower(line_data.VendorCode) = lower(vendor_data.vendor_code)
-    LEFT JOIN {logs_table_id}  AS live
+    LEFT JOIN foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live  AS live
            ON line_data.LineUserID = live.line_user_id
+          AND live.template_id_if_any = "richmenu-508759517fcd4c522f5f1b8842bfb91c"
     WHERE LineUserID IS NOT NULL
         AND VendorCode IS NOT NULL
         AND LOWER(VendorCode) NOT LIKE '%test%'
@@ -56,11 +57,12 @@ if Live == True:
     SELECT 
       vendor_data.vendor_code AS vendor_code,
       line_data.LineUserID AS line_user_id
-    FROM {query_table} AS line_data
-    INNER JOIN {verification_table} AS vendor_data
+    FROM foodpanda-th-bigquery.pandata_th_external.vendor_experience_line_liff_user_data AS line_data
+    INNER JOIN fulfillment-dwh-production.pandata_report.country_TH_general_pd_vendors AS vendor_data
             ON lower(line_data.VendorCode) = lower(vendor_data.vendor_code)
-    LEFT JOIN {logs_table_id}  AS live
+    LEFT JOIN foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live  AS live
            ON line_data.LineUserID = live.line_user_id
+          AND live.template_id_if_any = "richmenu-508759517fcd4c522f5f1b8842bfb91c"
     WHERE LineUserID IS NOT NULL
         AND VendorCode IS NOT NULL
         AND LOWER(VendorCode) NOT LIKE '%test%'
