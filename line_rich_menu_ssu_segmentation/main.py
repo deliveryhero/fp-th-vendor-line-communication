@@ -22,12 +22,12 @@ vendor_menu_new_url = "https://api.line.me/v2/bot/user/user_id_variable/richmenu
 vendor_menu_failed_url = "https://api.line.me/v2/bot/user/user_id_variable/richmenu/richmenu-61a444a9532d9939bd6673ea83952993"
 vendor_lost_url = "https://api.line.me/v2/bot/user/user_id_variable/richmenu/richmenu-ba158eede83289e2274eb1d6043d91a5"
 vendor_onboarding_url = "https://api.line.me/v2/bot/user/user_id_variable/richmenu/richmenu-e5cab4c05afdac4981cd7315bb80b598"
-vendor_active_url = "https://api.line.me/v2/bot/user/user_id_variable/richmenu/richmenu-6da47a1cac4c62cc569bf5efdef303eb"
+vendor_active_url = "https://api.line.me/v2/bot/user/user_id_variable/richmenu/richmenu-508759517fcd4c522f5f1b8842bfb91c"
 vendor_menu_new_template = "richmenu-0c474898e19216646ffdbb422e11e0d0"
 vendor_menu_failed_template = "richmenu-61a444a9532d9939bd6673ea83952993"
 vendor_lost_template = "richmenu-ba158eede83289e2274eb1d6043d91a5"
 vendor_onboarding_template = "richmenu-e5cab4c05afdac4981cd7315bb80b598"
-vendor_active_template = "richmenu-6da47a1cac4c62cc569bf5efdef303eb"
+vendor_active_template = "richmenu-508759517fcd4c522f5f1b8842bfb91c"
 
 rich_menu_urls = [vendor_menu_new_url, vendor_menu_failed_url, vendor_lost_url, vendor_onboarding_url, vendor_active_url]
 templates_list = [vendor_menu_new_template, vendor_menu_failed_template, vendor_lost_template, vendor_onboarding_template, vendor_active_template]
@@ -69,7 +69,7 @@ if Live == False:
            ON logs2.line_user_id = line_data.LineUserID
           AND CONTAINS_SUBSTR(logs2.template_id_if_any, 'richmenu')
     WHERE line_data.LineUserID IS NOT NULL
-      AND (logs.template_id_if_any IS NULL OR logs2.template_id_if_any != "richmenu-6da47a1cac4c62cc569bf5efdef303eb")
+      AND (logs.template_id_if_any IS NULL OR logs2.template_id_if_any != "richmenu-508759517fcd4c522f5f1b8842bfb91c")
       AND (logs.msg_content IS NULL OR  segemnt.ssu_vendor_status != logs.msg_content)
       AND segemnt.ssu_vendor_status != "Undefined"
     QUALIFY ROW_NUMBER() OVER (PARTITION BY line_data.LineUserID ORDER BY segemnt.ssu_vendor_status) = 1
@@ -107,7 +107,7 @@ if Live == True:
            ON logs2.line_user_id = line_data.LineUserID
           AND CONTAINS_SUBSTR(logs2.template_id_if_any, 'richmenu')
     WHERE line_data.LineUserID IS NOT NULL
-      AND (logs.template_id_if_any IS NULL OR logs2.template_id_if_any != "richmenu-6da47a1cac4c62cc569bf5efdef303eb")
+      AND (logs.template_id_if_any IS NULL OR logs2.template_id_if_any != "richmenu-508759517fcd4c522f5f1b8842bfb91c")
       AND (logs.msg_content IS NULL OR  segemnt.ssu_vendor_status != logs.msg_content)
       AND segemnt.ssu_vendor_status != "Undefined"
     QUALIFY ROW_NUMBER() OVER (PARTITION BY line_data.LineUserID ORDER BY segemnt.ssu_vendor_status) = 1
