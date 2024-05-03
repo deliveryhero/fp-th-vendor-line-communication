@@ -95,7 +95,7 @@ except BaseException as e:
 try:
   dataframe["return_response"] = reponse_code_list
   dataframe["msg_sent_date_time"] = now
-  dataframe["template_id_if_any"] = "richmenu-6da47a1cac4c62cc569bf5efdef303eb"
+  dataframe["template_id_if_any"] = "richmenu-508759517fcd4c522f5f1b8842bfb91c"
   dataframe["msg_url"] = url_list
   dataframe["msg_content"] = "NA"
   df_records = dataframe.to_dict('records')
