@@ -11,7 +11,7 @@ import requests
 
 # Basic configuration tables
 query_table = "foodpanda-th-bigquery.pandata_th_external.vendor_experience_line_liff_user_data"
-verification_table = "fulfillment-dwh-production.pandata_report.country_TH_general_pd_vendors"
+verification_table = "foodpanda-th-bigquery.snapshots.country_TH_general_pd_vendors"
 logs_table_id = "foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live"
 
 # Basic configuration parameters
@@ -30,7 +30,7 @@ if Live == False:
       vendor_data.vendor_code AS vendor_code,
       "U2b9495e231b925da2ed4163beeef6dad" AS line_user_id
     FROM foodpanda-th-bigquery.pandata_th_external.vendor_experience_line_liff_user_data AS line_data
-    INNER JOIN fulfillment-dwh-production.pandata_report.country_TH_general_pd_vendors AS vendor_data
+    INNER JOIN foodpanda-th-bigquery.snapshots.country_TH_general_pd_vendors AS vendor_data
             ON lower(line_data.VendorCode) = lower(vendor_data.vendor_code)
     LEFT JOIN foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live  AS live
            ON line_data.LineUserID = live.line_user_id
@@ -58,7 +58,7 @@ if Live == True:
       vendor_data.vendor_code AS vendor_code,
       line_data.LineUserID AS line_user_id
     FROM foodpanda-th-bigquery.pandata_th_external.vendor_experience_line_liff_user_data AS line_data
-    INNER JOIN fulfillment-dwh-production.pandata_report.country_TH_general_pd_vendors AS vendor_data
+    INNER JOIN foodpanda-th-bigquery.snapshots.country_TH_general_pd_vendors AS vendor_data
             ON lower(line_data.VendorCode) = lower(vendor_data.vendor_code)
     LEFT JOIN foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live  AS live
            ON line_data.LineUserID = live.line_user_id
