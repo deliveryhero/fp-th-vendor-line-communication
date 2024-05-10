@@ -10,7 +10,7 @@ import datetime, pytz
 import requests
 
 # Basic configuration tables
-query_table_vendor = "foodpanda-th-bigquery.snapshots.country_TH_vendor_experience_ssu_vendor_segmentation"
+query_table_vendor = "fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_ssu_vendor_segmentation"
 line_data  = "foodpanda-th-bigquery.pandata_th.vendor_experience_line_liff_user_data_backup"
 pii_data = "foodpanda-th-bigquery.pandata_th.sf_account_internal_non_pii"
 logs_table_id = "foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live"
@@ -53,7 +53,7 @@ if Live == False:
       segemnt.menu_case_number,
       segemnt.ssu_vendor_status,
       "U2b9495e231b925da2ed4163beeef6dad" AS line_user_id
-    FROM `foodpanda-th-bigquery.snapshots.country_TH_vendor_experience_ssu_vendor_segmentation` AS segemnt
+    FROM `fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_ssu_vendor_segmentation` AS segemnt
     INNER JOIN `foodpanda-th-bigquery.pandata_th_external.vendor_experience_line_liff_user_data` AS line_data
             ON LOWER(segemnt.vendor_code) = LOWER(line_data.VendorCode)
     INNER JOIN `foodpanda-th-bigquery.pandata_th.sf_account_internal_non_pii` AS pii_data
@@ -91,7 +91,7 @@ if Live == True:
       segemnt.menu_case_number,
       segemnt.ssu_vendor_status,
       line_data.LineUserID AS line_user_id
-    FROM `foodpanda-th-bigquery.snapshots.country_TH_vendor_experience_ssu_vendor_segmentation` AS segemnt
+    FROM `fulfillment-dwh-production.pandata_report.country_TH_vendor_experience_ssu_vendor_segmentation` AS segemnt
     INNER JOIN `foodpanda-th-bigquery.pandata_th_external.vendor_experience_line_liff_user_data` AS line_data
             ON LOWER(segemnt.vendor_code) = LOWER(line_data.VendorCode)
     INNER JOIN `foodpanda-th-bigquery.pandata_th.sf_account_internal_non_pii` AS pii_data
