@@ -11,7 +11,7 @@ json_object = """
         "size": "giga",
         "hero": {
           "type": "image",
-          "url": "https://drive.google.com/uc?export=view&id=1_QIYRnle9G2LTusWtTrdeWeNqsmC1s3x",
+          "url": "https://bucket.ex10.tech/images/8bb98a34-2258-11ef-a8d5-0242ac120003/originalContentUrl.jpg",
           "size": "full",
           "aspectRatio": "4:4",
           "aspectMode": "cover",
@@ -29,7 +29,7 @@ json_object = """
               "action": {
                 "type": "uri",
                 "label": "เพิ่มวันหยุดเลย คลิก",
-                "uri": "https://bit.ly/3Qutbuz"
+                "uri": "https://tinyurl.com/AutoCommsOPTimess"
               },
               "style": "primary",
               "color": "#FF2B85"

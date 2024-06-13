@@ -11,13 +11,13 @@ json_object = """
         "size": "giga",
         "hero": {
           "type": "image",
-          "url": "https://drive.google.com/uc?export=view&id=1kFaxiqQeC5aPD8mjDIdw6J4nQqnQy0oj",
+          "url": "https://bucket.ex10.tech/images/f0fa557d-2258-11ef-a8d5-0242ac120003/originalContentUrl.jpg",
           "size": "full",
           "aspectRatio": "260:287",
           "aspectMode": "cover",
           "action": {
             "type": "uri",
-            "uri": "https://bit.ly/3ScTSq3"
+            "uri": "https://tinyurl.com/AutoCommsytHTfgdga"
           }
         }
       }

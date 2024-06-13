@@ -16,7 +16,7 @@ json_object = """
           "aspectMode": "cover",
           "action": {
             "type": "uri",
-            "uri": "https://foodpanda.portal.restaurant/opening-times-pandora"
+            "uri": "https://tinyurl.com/AutoCommsOPTimess"
           },
           "url": "https://bucket.ex10.tech/images/50e27b29-c5a7-11ee-97d4-0242ac12000b/originalContentUrl.jpg"
         }

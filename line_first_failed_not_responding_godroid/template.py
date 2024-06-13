@@ -11,7 +11,7 @@ json_object = """
         "size": "giga",
         "hero": {
           "type": "image",
-          "url": "https://drive.google.com/uc?export=view&id=1E6xdsVcdazH00ufswFjTfoAHYy1Mt4Td",
+          "url": "https://bucket.ex10.tech/images/0938c7e6-2259-11ef-a8d5-0242ac120003/originalContentUrl.jpg",
           "size": "full",
           "aspectRatio": "4:4",
           "aspectMode": "cover",
