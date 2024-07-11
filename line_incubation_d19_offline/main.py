@@ -8,7 +8,7 @@ from send_line_message import send_request_line_api_generic_reminder
 from get_secrete_token import get_secret_data
 import datetime, pytz
 import requests
-from template import json_object
+from template_v2 import json_object
 
 # Basic configuration tables
 query_table = "fulfillment-dwh-production.pandata_report.country_TH_vendor_ops_incubation_line_verification"
