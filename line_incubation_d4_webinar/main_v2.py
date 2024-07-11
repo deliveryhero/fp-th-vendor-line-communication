@@ -13,8 +13,8 @@ from template_v2 import json_object
 # Basic configuration tables
 query_table = "fulfillment-dwh-production.pandata_report.country_TH_vendor_ops_incubation_line_verification"
 logs_table_id = "foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live"
-pipeline_name = "line_incubation_d2_live_orders"
-vendor_age = 2
+pipeline_name = "line_incubation_d4_webinar"
+vendor_age = 4
 
 # Basic configuration parameters
 slack_webhook = os.getenv('slack_webhook')
@@ -71,6 +71,7 @@ try:
 except BaseException as e:
   requests.post(slack_webhook,
   json = {'text' : '*{pipeline_name}*: Failed send API request: ' + str(e)})
+
 
 try:
   df = dataframe.filter(items=['vendor_code', 'line_user_id'])

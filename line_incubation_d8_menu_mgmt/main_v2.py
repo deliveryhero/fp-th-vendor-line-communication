@@ -13,8 +13,8 @@ from template_v2 import json_object
 # Basic configuration tables
 query_table = "fulfillment-dwh-production.pandata_report.country_TH_vendor_ops_incubation_line_verification"
 logs_table_id = "foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live"
-pipeline_name = "line_incubation_d2_live_orders"
-vendor_age = 2
+pipeline_name = "line_incubation_d8_menu_mgmt"
+vendor_age = 8
 
 # Basic configuration parameters
 slack_webhook = os.getenv('slack_webhook')
