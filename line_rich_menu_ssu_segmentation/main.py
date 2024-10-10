@@ -42,7 +42,10 @@ if Live == False:
     query = f"""
     WITH line_logs AS (
     SELECT 
-      *
+      logs.vendor_code,
+      logs.line_user_id,
+      logs.template_id_if_any,
+      logs.msg_content
     FROM `foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live` AS logs
     WHERE CONTAINS_SUBSTR(logs.template_id_if_any, 'richmenu')
     QUALIFY ROW_NUMBER() OVER(PARTITION BY vendor_code, line_user_id ORDER BY msg_sent_date_time DESC) = 1
@@ -80,7 +83,10 @@ if Live == True:
     query = f"""
     WITH line_logs AS (
     SELECT 
-      *
+      logs.vendor_code,
+      logs.line_user_id,
+      logs.template_id_if_any,
+      logs.msg_content
     FROM `foodpanda-th-bigquery.pandata_th_external.line_communication_logs_live` AS logs
     WHERE CONTAINS_SUBSTR(logs.template_id_if_any, 'richmenu')
     QUALIFY ROW_NUMBER() OVER(PARTITION BY vendor_code, line_user_id ORDER BY msg_sent_date_time DESC) = 1
